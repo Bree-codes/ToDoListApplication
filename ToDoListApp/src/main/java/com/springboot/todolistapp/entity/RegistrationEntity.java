@@ -19,8 +19,8 @@ public class RegistrationEntity {
     @Column(nullable = true)
     private String username;
 
-    @Column(nullable = true)
-    private String phoneNumber;
+   /* @Column(nullable = true)
+    private String phoneNumber;*/
 
     @Column(nullable = false)
     private String password;
