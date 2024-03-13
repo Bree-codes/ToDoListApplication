@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.service;
 
+import com.springboot.todolistapp.CustomeExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.entity.RegistrationEntity;
 import com.springboot.todolistapp.repository.RegistrationRepository;
 import com.springboot.todolistapp.request.RegistrationRequest;
@@ -25,6 +26,13 @@ public class RegistrationService {
         registration.setEmail(registrationRequest.getEmail());
         registration.setPassword(registrationRequest.getPassword());
 
+        /*before saving lets confirm the user does not exist.*/
+
+        registrationRepository.findByEmail(registrationRequest.getEmail()).ifPresent(
+                (registrationEntity) -> {
+                    throw new UserAlreadyExistException("The Email Your Entered Already Exist");
+                }
+        );
         registrationRepository.save(registration);
     }
 }

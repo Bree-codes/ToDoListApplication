@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.controllerAdvice;
 
+import com.springboot.todolistapp.CustomeExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.Model.ExceptionModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,18 @@ public class ExceptionHandling {
         exceptionModel.setMessage("The Value You Entered Is Too Long");
         exceptionModel.setStatus(HttpStatus.BAD_REQUEST);
 
-
-
-
-
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<ExceptionModel> handleUserAlreadyExistException(UserAlreadyExistException exception){
+        log.error("User Already ExistException occurred ");
+
+        exceptionModel.setStatus(HttpStatus.FORBIDDEN);
+        exceptionModel.setMessage(exception.getMessage());
+        exceptionModel.setDate(new Date());
+
+        return  new ResponseEntity<>(exceptionModel,HttpStatus.FORBIDDEN);
     }
 
 }
