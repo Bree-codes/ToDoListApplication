@@ -1,10 +1,15 @@
 package com.springboot.todolistapp.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Table(name = "UserRegistrationDetails")
 public class RegistrationEntity {
 
@@ -21,6 +26,5 @@ public class RegistrationEntity {
 
     @Column(nullable = false)
     private String password;
-
 
 }
