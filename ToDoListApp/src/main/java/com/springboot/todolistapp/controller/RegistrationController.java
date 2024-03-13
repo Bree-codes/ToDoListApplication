@@ -17,18 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class RegistrationController {
 
-    @Autowired
-    private RegistrationRepository registrationRepository;
-
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody RegistrationRequest registrationRequest){
         log.info("Register Request" + registrationRequest);
-
-        RegistrationEntity registration = new RegistrationEntity();
-        registration.setUsername(registrationRequest.getUsername());
-        registration.setEmail(registrationRequest.getEmail());
-        registration.setPassword(registrationRequest.getPassword());
-        registrationRepository.save(registration);
 
         String username = registrationRequest.getUsername();
         String responseMessage = "User " + username + " created successfully";
@@ -37,7 +28,5 @@ public class RegistrationController {
 
         return ResponseEntity.ok(response);
     }
-
-
 
 }
