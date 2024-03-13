@@ -25,9 +25,9 @@ public class RegistrationController {
         log.info("Register Request" + registrationRequest);
 
         RegistrationEntity registration = new RegistrationEntity();
-        registration.getUsername();
-        registration.getEmail();
-        registration.getPassword();
+        registration.setUsername(registrationRequest.getUsername());
+        registration.setEmail(registrationRequest.getEmail());
+        registration.setPassword(registrationRequest.getPassword());
         registrationRepository.save(registration);
 
         String username = registrationRequest.getUsername();
