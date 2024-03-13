@@ -1,9 +1,8 @@
 package com.springboot.todolistapp.controller;
 
-import com.springboot.todolistapp.entity.RegistrationEntity;
-import com.springboot.todolistapp.repository.RegistrationRepository;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.RegistrationResponse;
+import com.springboot.todolistapp.service.RegistrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class RegistrationController {
 
+    private final RegistrationService registrationService;
+
+    @Autowired
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody RegistrationRequest registrationRequest){
         log.info("Register Request" + registrationRequest);
+
+
+        registrationService.registerUser(registrationRequest);
 
         String username = registrationRequest.getUsername();
         String responseMessage = "User " + username + " created successfully";
