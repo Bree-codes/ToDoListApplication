@@ -36,3 +36,10 @@
     <li>Custom Notification API</li>
     <li>Summary API</li>
 </ul>
+
+<h3>Operations</h3>
+<p>
+    During login (post mapping) fetch the username, userId, jwt, status, message.
+</p>
+
+
