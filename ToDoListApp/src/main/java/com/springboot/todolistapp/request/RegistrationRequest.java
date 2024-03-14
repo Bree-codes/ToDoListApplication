@@ -16,4 +16,5 @@ public class RegistrationRequest {
 
     private String password;
 
+
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class RegistrationResponse {
 
-    private Long id;
+    //private Long id;
     private String status;
     private String message;
 
