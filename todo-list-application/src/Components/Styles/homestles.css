@@ -1,0 +1,7 @@
+
+.home{
+    background-image: url('./../images/home.svg');
+    width: auto;
+    height: 1041px;
+    background-size: cover;
+}

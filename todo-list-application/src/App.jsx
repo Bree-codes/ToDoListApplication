@@ -1,8 +1,11 @@
+import Home from "./Components/RoutedPages/Home.jsx";
+import {Container} from "react-bootstrap";
+
 function App() {
     return (
-        <div>
-            <h1>Hello there</h1>
-        </div>
+        <Container fluid={'lg'}>
+            <Home></Home>
+        </Container>
     );
 }
 
