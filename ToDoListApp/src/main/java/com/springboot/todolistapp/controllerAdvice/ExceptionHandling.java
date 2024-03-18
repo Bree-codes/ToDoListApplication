@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -48,6 +49,17 @@ public class ExceptionHandling {
         exceptionModel.setDate(new Date());
 
         return  new ResponseEntity<>(exceptionModel,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ExceptionModel> handleUsernameNotFoundException(UsernameNotFoundException notFoundException){
+        log.error("Username not found exception occurred");
+
+        exceptionModel.setDate(new Date());
+        exceptionModel.setStatus(HttpStatus.NOT_FOUND);
+        exceptionModel.setMessage(notFoundException.getMessage());
+
+        return new ResponseEntity<>(exceptionModel,HttpStatus.NOT_FOUND);
     }
 
 }

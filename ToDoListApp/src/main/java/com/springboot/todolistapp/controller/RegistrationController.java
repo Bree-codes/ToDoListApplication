@@ -1,7 +1,8 @@
 package com.springboot.todolistapp.controller;
 
+import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
-import com.springboot.todolistapp.response.RegistrationResponse;
+import com.springboot.todolistapp.response.AuthorizationResponse;
 import com.springboot.todolistapp.service.RegistrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,17 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody RegistrationRequest registrationRequest){
-        log.info("Register Request" + registrationRequest);
+    public ResponseEntity<AuthorizationResponse> registerUser(@RequestBody RegistrationRequest registrationRequest){
+        log.info("Registration Request");
 
+        return  registrationService.registerUser(registrationRequest);
+    }
 
-        registrationService.registerUser(registrationRequest);
+    @PostMapping("/login")
+    public ResponseEntity<AuthorizationResponse> login(@RequestBody LoginRequest loginRequest){
 
-        String username = registrationRequest.getUsername();
-        String responseMessage = "User " + username + " created successfully";
+        return null;
 
-        RegistrationResponse response = new RegistrationResponse("success",responseMessage);
-
-        return ResponseEntity.ok(response);
     }
 
 }

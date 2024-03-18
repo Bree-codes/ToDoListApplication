@@ -1,14 +1,16 @@
 package com.springboot.todolistapp.repository;
 
-import com.springboot.todolistapp.entity.RegistrationEntity;
+import com.springboot.todolistapp.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface RegistrationRepository extends JpaRepository<RegistrationEntity,Long> {
+public interface RegistrationRepository extends JpaRepository<User,Long> {
 
-    Optional<RegistrationEntity> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
+    Optional<UserDetails> findByUsername(String username);
 }

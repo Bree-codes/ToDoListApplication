@@ -1,16 +1,14 @@
-package com.springboot.todolistapp.entity;
+package com.springboot.todolistapp.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-public class Login {
-
-    private String email;
+public class LoginRequest {
+    private String username;
     private String password;
-
 }
