@@ -63,4 +63,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @PrePersist
+    public void setDefaultRole(){
+        this.role = Role.User;
+    }
 }

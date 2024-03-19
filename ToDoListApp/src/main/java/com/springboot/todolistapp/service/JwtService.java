@@ -29,7 +29,7 @@ public class JwtService {
 
     @Value("${service.secretKey}")
     private String secretKey;
-    public String generateToken(User user){
+    public String generateToken(UserDetails user){
 
         return Jwts.builder()
                 .subject(user.getUsername())

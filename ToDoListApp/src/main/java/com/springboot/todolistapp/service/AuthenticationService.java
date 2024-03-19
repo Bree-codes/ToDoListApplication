@@ -12,24 +12,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
 public class AuthenticationService{
 
-    private final UserRepository registrationRepository;
+    private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
 
     @Autowired
-    public AuthenticationService(UserRepository registrationRepository, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenRepository tokenRepository) {
-        this.registrationRepository = registrationRepository;
+    public AuthenticationService(UserRepository userRepository, JwtService jwtService,
+                                 PasswordEncoder passwordEncoder,
+                                 AuthenticationManager authenticationManager,
+                                 TokenRepository tokenRepository) {
+        this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
@@ -41,16 +47,15 @@ public class AuthenticationService{
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
         user.setEmail(registrationRequest.getEmail());
-        user.setPassword(registrationRequest.getPassword());
-        user.setRole(registrationRequest.getRole());
+        user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
 
         /*before saving lets confirm the user does not exist.*/
-        registrationRepository.findByEmail(registrationRequest.getEmail()).ifPresent(
+        userRepository.findByEmail(registrationRequest.getEmail()).ifPresent(
                 (user1) -> {
                     throw new UserAlreadyExistException("The Email Your Entered Already Exist");
                 }
         );
-        registrationRepository.save(user);
+        userRepository.save(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
         authorizationResponse.setJwt(jwtService.generateToken(user));
@@ -58,6 +63,8 @@ public class AuthenticationService{
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
+
+        saveToken(user, authorizationResponse.getJwt());
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
@@ -73,9 +80,47 @@ public class AuthenticationService{
         tokenRepository.saveAll(validTokenListByUser);
     }
 
-    public AuthorizationResponse authenticate(LoginRequest loginRequest) {
+    public AuthorizationResponse authenticate( LoginRequest loginRequest) {
 
-        return null;
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+        User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
+
+        AuthorizationResponse authorizationResponse = new AuthorizationResponse();
+        authorizationResponse.setUsername(user.getUsername());
+        authorizationResponse.setJwt(jwtService.generateToken(user));
+        authorizationResponse.setMessage("Login successful");
+        authorizationResponse.setStatus(HttpStatus.OK);
+        authorizationResponse.setId(user.getId());
+
+
+        revokeAllTokenByUser(user);
+        saveToken(user, authorizationResponse.getJwt());
+
+
+
+        return authorizationResponse;
+    }
+
+    private void saveToken(User user, String jwt) {
+        Token token = new Token();
+
+        token.setToken(jwt);
+        token.setUser(user);
+        token.setIsLoggedOut(false);
+
+        tokenRepository.save(token);
+    }
+
+    public void logout(Long id) {
+
+        User user = userRepository.findById(id).orElseThrow();
+        revokeAllTokenByUser(user);
     }
 }
 
