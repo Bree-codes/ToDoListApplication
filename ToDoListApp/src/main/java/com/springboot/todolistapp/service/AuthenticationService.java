@@ -74,6 +74,7 @@ public class AuthenticationService{
     }
 
     public AuthorizationResponse authenticate(LoginRequest loginRequest) {
+
         return null;
     }
 }
