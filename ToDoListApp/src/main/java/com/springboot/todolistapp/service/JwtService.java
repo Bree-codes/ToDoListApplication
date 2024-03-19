@@ -1,22 +1,31 @@
 package com.springboot.todolistapp.service;
 
 import com.springboot.todolistapp.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.function.Function;
 
 @Component
 public class JwtService {
 
+    private final UserDetailsService userDetailsService;
+    @Autowired
+    public JwtService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Value("${service.secretKey}")
     private String secretKey;
-
-
-
-
     public String generateToken(User user){
 
         return Jwts.builder()
@@ -27,7 +36,46 @@ public class JwtService {
                 .compact();
     }
 
-    private Key getSigninKey() {
-return null;
+    private SecretKey getSigninKey() {
+        byte[] keyBytes = Decoders.BASE64URL.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    private Claims extractAllClaims(String jwt){
+        return Jwts
+                .parser()
+                .verifyWith(getSigninKey())
+                .build()
+                 .parseSignedClaims(jwt)
+                .getPayload();
+    }
+
+    private String extractUserName(String jwt){
+        return extractClaim(Claims::getSubject, jwt);
+    }
+
+    private Date extractExpirationDate(String jwt){
+        return extractClaim(Claims::getExpiration, jwt);
+    }
+
+    private <T> T extractClaim(Function<Claims, T> claimExtractor, String jwt){
+        Claims claims = extractAllClaims(jwt);
+        return claimExtractor.apply(claims);
+    }
+
+    private Boolean isExpired(String jwt){
+        return extractExpirationDate(jwt).after(new Date());
+
+    }
+
+    public Boolean isValid(String jwt, UserDetails userDetails){
+
+        return userDetailsService.loadUserByUsername(extractUserName(jwt))
+                .getUsername()
+                .equals(userDetails
+                        .getUsername())
+                && isExpired(jwt);
     }
 }
+
+

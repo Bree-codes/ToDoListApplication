@@ -3,7 +3,7 @@ package com.springboot.todolistapp.controller;
 import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
-import com.springboot.todolistapp.service.RegistrationService;
+import com.springboot.todolistapp.service.AuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 @Slf4j
-public class RegistrationController {
+public class AuthenticationController {
 
-    private final RegistrationService registrationService;
+    private final AuthenticationService registrationService;
 
     @Autowired
-    public RegistrationController(RegistrationService registrationService) {
+    public AuthenticationController(AuthenticationService registrationService) {
         this.registrationService = registrationService;
     }
 

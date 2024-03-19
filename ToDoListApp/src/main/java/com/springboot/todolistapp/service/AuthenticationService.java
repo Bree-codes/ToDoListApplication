@@ -2,26 +2,24 @@ package com.springboot.todolistapp.service;
 
 import com.springboot.todolistapp.CustomeExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.entity.User;
-import com.springboot.todolistapp.repository.RegistrationRepository;
+import com.springboot.todolistapp.repository.UserRepository;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-//@RequiredArgsConstructor
-public class RegistrationService implements UserDetailsService {
+public class AuthenticationService {
 
-    private final RegistrationRepository registrationRepository;
+    private final UserRepository registrationRepository;
+    private final JwtService jwtService;
 
     @Autowired
-    public RegistrationService(RegistrationRepository registrationRepository) {
+    public AuthenticationService(UserRepository registrationRepository, JwtService jwtService) {
         this.registrationRepository = registrationRepository;
+        this.jwtService = jwtService;
     }
 
     public ResponseEntity<AuthorizationResponse> registerUser(RegistrationRequest registrationRequest) {
@@ -41,7 +39,7 @@ public class RegistrationService implements UserDetailsService {
         registrationRepository.save(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
-        //authorizationResponse.setJwt();
+        authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
@@ -50,12 +48,6 @@ public class RegistrationService implements UserDetailsService {
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        return  registrationRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Username not found")
-                );
-    }
 }
 
 
