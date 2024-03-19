@@ -1,6 +1,7 @@
 package com.springboot.todolistapp.service;
 
 import com.springboot.todolistapp.entity.User;
+import com.springboot.todolistapp.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -18,10 +19,12 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
-    private final UserDetailsService userDetailsService;
+    private final TokenRepository tokenRepository;
+
     @Autowired
-    public JwtService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public JwtService( TokenRepository tokenRepository) {
+
+        this.tokenRepository = tokenRepository;
     }
 
     @Value("${service.secretKey}")
@@ -69,13 +72,12 @@ public class JwtService {
     }
 
     public Boolean isValid(String jwt, UserDetails userDetails){
-
-        return userDetailsService.loadUserByUsername(extractUserName(jwt))
-                .getUsername()
-                .equals(userDetails
-                        .getUsername())
-                && isExpired(jwt);
+        String username = (extractUserName(jwt));
+        boolean isTokenValid = tokenRepository.findByToken(jwt).
+                map(t -> !t.getIsLoggedOut()).orElse(false);
+        return (username.equals(userDetails.getUsername()) && !isExpired(jwt)) && isTokenValid;
     }
+
 }
 
 

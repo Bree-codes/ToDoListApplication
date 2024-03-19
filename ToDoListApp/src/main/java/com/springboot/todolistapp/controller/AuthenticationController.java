@@ -17,25 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthenticationController {
 
-    private final AuthenticationService registrationService;
-
+    private final AuthenticationService authenticationService;
     @Autowired
-    public AuthenticationController(AuthenticationService registrationService) {
-        this.registrationService = registrationService;
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<AuthorizationResponse> registerUser(@RequestBody RegistrationRequest registrationRequest){
         log.info("Registration Request");
-
-        return  registrationService.registerUser(registrationRequest);
+        return authenticationService.registerUser(registrationRequest);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthorizationResponse> login(@RequestBody LoginRequest loginRequest){
-
-        return null;
-
+        return ResponseEntity.ok(authenticationService.authenticate(loginRequest));
     }
 
 }
