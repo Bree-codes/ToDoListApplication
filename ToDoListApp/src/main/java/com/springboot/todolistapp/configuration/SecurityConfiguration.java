@@ -1,8 +1,10 @@
 package com.springboot.todolistapp.configuration;
 
-import com.springboot.todolistapp.service.AuthenticationService;
+import com.springboot.todolistapp.Filter.JwtAuthenticationFilter;
+import com.springboot.todolistapp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,18 +14,21 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @EnableWebSecurity
 @Component
 public class SecurityConfiguration {
 
-    private final AuthenticationService registrationService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
-    public SecurityConfiguration(AuthenticationService registrationService) {
-        this.registrationService = registrationService;
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsServiceImpl, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
@@ -36,7 +41,12 @@ public class SecurityConfiguration {
                                 .authenticated()
                 )
                 .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .userDetailsService(registrationService)
+                .userDetailsService(userDetailsServiceImpl)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(
+                        e -> e.accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(403))
+                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                )
                 .build();
 
     }

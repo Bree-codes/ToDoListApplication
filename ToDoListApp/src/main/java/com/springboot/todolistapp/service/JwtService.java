@@ -50,7 +50,7 @@ public class JwtService {
                 .getPayload();
     }
 
-    private String extractUserName(String jwt){
+    public String extractUserName(String jwt){
         return extractClaim(Claims::getSubject, jwt);
     }
 
