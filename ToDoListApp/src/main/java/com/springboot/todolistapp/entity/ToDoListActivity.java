@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -18,9 +19,9 @@ public class ToDoListActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date startTime;
+    private Time startTime;
 
-    private Date endTime;
+    private Time endTime;
 
     private String activityName;
 
@@ -28,16 +29,13 @@ public class ToDoListActivity {
     private String status;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_fk")
-    private User users;
+    @JoinColumn(name = "user_fk")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "date_fk")
     private ToDoListDate toDoListDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_fk")
-    private User user;
 
 
     @PrePersist

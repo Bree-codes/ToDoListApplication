@@ -39,9 +39,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Token> tokens;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List<ToDoListActivity> toDoLists;
-
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<ToDoListActivity> toDoListActivities;
 

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Data
@@ -17,9 +18,9 @@ public class ToDoListRequest {
 
     private String activityName;
 
-    private Date startTime;
+    private Time startTime;
 
-    private Date endTime;
+    private Time endTime;
 
     @JsonIgnore
     private Date date;

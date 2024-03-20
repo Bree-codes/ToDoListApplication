@@ -18,6 +18,7 @@ public class ToDoListDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date date;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "toDoListDate")
