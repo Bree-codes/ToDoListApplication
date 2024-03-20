@@ -2,31 +2,33 @@ package com.springboot.todolistapp.controller;
 
 import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.request.ToDoListRequest;
+import com.springboot.todolistapp.response.ModelResponse;
 import com.springboot.todolistapp.service.ToDoListService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/ToDoList")
+@RequiredArgsConstructor
 public class ToDoListController {
 
     private final ToDoListService toDoListService;
 
-    @Autowired
-    public ToDoListController(ToDoListService toDoListService) {
-        this.toDoListService = toDoListService;
-    }
+    @PostMapping("/create/{user_id}")
+    public ResponseEntity<ModelResponse> createToDoList(
+            @PathVariable Long user_id,
+            @RequestBody List<ToDoListRequest> toDoListRequest) {
 
-    @PostMapping("/create")
-    public ResponseEntity<String> createToDoList(@RequestBody ToDoListRequest toDoListRequest) {
-        //return toDoListService.createToDoList(toDoListRequest);
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body("ToDo List Created Successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create ToDo List");
-        }
+        log.info("user created a todo list");
+
+       return toDoListService.createToDoList(toDoListRequest,user_id);
     }
 
     @PostMapping("/update")
