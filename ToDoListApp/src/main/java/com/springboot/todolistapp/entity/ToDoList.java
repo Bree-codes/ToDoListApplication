@@ -20,6 +20,7 @@ public class ToDoList {
     private Date startTime;
     private Date endTime;
     private String activityName;
+
     private String status;
 
     @PrePersist
