@@ -28,7 +28,7 @@ public class ToDoListActivity {
     //@JsonIgnore
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_fk")
     private User user;
 

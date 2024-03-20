@@ -1,13 +1,10 @@
 package com.springboot.todolistapp.controller;
 
-import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
 import com.springboot.todolistapp.service.ToDoListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +28,7 @@ public class ToDoListController {
        return toDoListService.createToDoList(toDoListRequest,user_id);
     }
 
-    @PostMapping("/update")
+    /*@PostMapping("/update")
     public ResponseEntity<String> updateToDoList(@RequestBody ToDoListActivity toDoList){
         try {
             ToDoListActivity updatedToDoList = toDoListService.updateToDoList(toDoList);
@@ -48,6 +45,6 @@ public class ToDoListController {
             return ResponseEntity.ok("ToDo List Deleted Successfully!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete ToDo List");
-        }
+
+        }*/
     }
-}
