@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "todolist")
 public class ToDoList {
 
     @Id
