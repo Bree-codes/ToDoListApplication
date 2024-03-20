@@ -19,10 +19,9 @@ public class ToDoListDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date date;
+    private String date;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "toDoListDate")
     private List<ToDoListActivity> toDoListActivity;
-
 
 }

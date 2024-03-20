@@ -8,8 +8,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
+import java.io.FileNotFoundException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Formatter;
 
 
 @Data
@@ -25,11 +29,14 @@ public class ToDoListRequest {
     private Time endTime;
 
     @JsonIgnore
-    private Date date;
+    private String date = date();
 
-    @PostConstruct
-    private void setDate(){
-        this.date = new Date();
+    private String date() {
+        LocalDate time = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
+
+        return time.format(formatter);
     }
 
 }
