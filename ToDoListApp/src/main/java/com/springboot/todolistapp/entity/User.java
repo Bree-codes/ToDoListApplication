@@ -36,8 +36,14 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Token> tokens;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<ToDoListActivity> toDoLists;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<ToDoListActivity> toDoListActivities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

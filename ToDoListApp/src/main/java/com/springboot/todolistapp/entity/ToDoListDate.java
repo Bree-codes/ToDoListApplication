@@ -6,28 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "todolist")
-public class ToDoList {
+@Table(name = "date")
+public class ToDoListDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date startTime;
-    private Date endTime;
-    private String activityName;
+    private Date date;
 
-    private String status;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toDoListDate")
+    private List<ToDoListActivity> toDoListActivity;
 
-    @PrePersist
-    public void setDefaultStatus() {
-        if (status == null || status.isEmpty()) {
-            status = "pending";
-        }
-    }
 
 }
