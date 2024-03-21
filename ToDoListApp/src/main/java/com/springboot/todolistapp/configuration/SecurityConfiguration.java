@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
-@EnableWebSecurity
 @Component
+@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
@@ -39,13 +39,14 @@ public class SecurityConfiguration {
         return httpSecurity.
                 csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/api/v1/register/**","/api/v1/login/**", "api/v1/logout/**","/**")
+                        req -> req.requestMatchers("/api/v1/register/**","/api/v1/login/**", "api/v1/logout/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
                 .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsServiceImpl)
+                .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(
                         e -> e.accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(403))
