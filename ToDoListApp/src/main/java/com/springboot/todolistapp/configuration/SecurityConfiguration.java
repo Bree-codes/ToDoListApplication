@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 public class SecurityConfiguration {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
@@ -39,15 +39,15 @@ public class SecurityConfiguration {
         return httpSecurity.
                 csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/api/v1/register/**","/api/v1/login/**", "api/v1/logout/**")
+                        req -> req.requestMatchers("/api/v1/register/**","/api/v1/login/**", "api/v1/logout/**", "/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
                 .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsServiceImpl)
-                .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(
                         e -> e.accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(403))
                                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))

@@ -61,12 +61,6 @@ public class ToDoListService {
 
         return new ResponseEntity<>(modelResponse, HttpStatus.CREATED);
     }
-    /*public ToDoListActivity updateToDoList(ToDoListActivity toDoList) {
-        return toDoListRepository.save(toDoList);
-    }
 
-    public void deleteToDoList(Long id) {
-        toDoListRepository.deleteById(id);
-    }*/
 
 }

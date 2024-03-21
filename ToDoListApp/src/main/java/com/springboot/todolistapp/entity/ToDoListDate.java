@@ -19,6 +19,7 @@ public class ToDoListDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String date;
 
     @OneToMany(mappedBy = "toDoListDate")
