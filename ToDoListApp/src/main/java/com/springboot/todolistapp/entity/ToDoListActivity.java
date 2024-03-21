@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
-import java.util.Date;
 
 @Entity
 @Data
@@ -32,7 +31,7 @@ public class ToDoListActivity {
     @JoinColumn(name = "user_fk")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "date_fk")
     private ToDoListDate toDoListDate;
 

@@ -53,9 +53,9 @@ public class ToDoListService {
           toDoListActivityList.add(toDoListActivity);
                });
 
-
-        toDoListRepository.saveAll(toDoListActivityList);
         dateRepository.save(date);
+        toDoListRepository.saveAll(toDoListActivityList);
+
 
         ModelResponse modelResponse = new ModelResponse();
 

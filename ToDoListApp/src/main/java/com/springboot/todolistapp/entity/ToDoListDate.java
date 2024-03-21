@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
-@Entity
+
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "date")
@@ -21,7 +21,7 @@ public class ToDoListDate {
 
     private String date;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toDoListDate")
+    @OneToMany(mappedBy = "toDoListDate")
     private List<ToDoListActivity> toDoListActivity;
 
 }

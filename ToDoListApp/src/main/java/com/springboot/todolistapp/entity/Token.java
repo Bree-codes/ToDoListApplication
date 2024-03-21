@@ -15,7 +15,7 @@ public class Token {
     private String token;
     private Boolean isLoggedOut;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }

@@ -28,23 +28,5 @@ public class ToDoListController {
        return toDoListService.createToDoList(toDoListRequest,user_id);
     }
 
-    /*@PostMapping("/update")
-    public ResponseEntity<String> updateToDoList(@RequestBody ToDoListActivity toDoList){
-        try {
-            ToDoListActivity updatedToDoList = toDoListService.updateToDoList(toDoList);
-            return ResponseEntity.ok("ToDo List Updated Successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update ToDo List");
-        }
-    }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteToDoList(@PathVariable Long id) {
-        try {
-            toDoListService.deleteToDoList(id);
-            return ResponseEntity.ok("ToDo List Deleted Successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete ToDo List");
-
-        }*/
     }
