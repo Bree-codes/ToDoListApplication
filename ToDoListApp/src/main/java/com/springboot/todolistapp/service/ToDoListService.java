@@ -101,5 +101,32 @@ public class ToDoListService {
         return new ResponseEntity<>(modelResponse, HttpStatus.OK);
     }
 
+    public ResponseEntity<ModelResponse> deleteToDoListActivity(Long userId,Long activityId){
+
+        //retrieve the user
+        userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " Not Found!"));
+
+        // Retrieve the todo list activity to be deleted
+        ToDoListActivity todoActivity = toDoListRepository.findById(activityId)
+                .orElseThrow(() -> new ActivityNotFoundException("Todo list activity not found!"));
+
+        // Check if the todo list activity belongs to the user
+        if (!todoActivity.getUser().getId().equals(userId)) {
+            throw new AccessDeniedException("You are not authorized to update this todo list activity!");
+        }
+
+        //delete the activity
+        toDoListRepository.delete(todoActivity);
+
+        ModelResponse modelResponse = new ModelResponse();
+        modelResponse.setDate(new Date());
+        modelResponse.setStatus(HttpStatus.OK);
+        modelResponse.setMessage("Activity Deleted Successfully!");
+
+        return new ResponseEntity<>(modelResponse,HttpStatus.OK);
+
+    }
+
 }
 
