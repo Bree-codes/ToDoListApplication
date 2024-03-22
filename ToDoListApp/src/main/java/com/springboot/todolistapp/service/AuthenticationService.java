@@ -1,6 +1,6 @@
 package com.springboot.todolistapp.service;
 
-import com.springboot.todolistapp.CustomeExceptions.UserAlreadyExistException;
+import com.springboot.todolistapp.CustomExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.entity.Token;
 import com.springboot.todolistapp.entity.User;
 import com.springboot.todolistapp.repository.TokenRepository;
@@ -13,11 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

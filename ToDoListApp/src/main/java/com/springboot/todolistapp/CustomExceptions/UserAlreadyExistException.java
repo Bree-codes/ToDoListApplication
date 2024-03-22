@@ -1,4 +1,4 @@
-package com.springboot.todolistapp.CustomeExceptions;
+package com.springboot.todolistapp.CustomExceptions;
 
 public class UserAlreadyExistException extends RuntimeException {
 

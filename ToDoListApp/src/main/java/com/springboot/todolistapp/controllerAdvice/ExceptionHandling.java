@@ -1,6 +1,6 @@
 package com.springboot.todolistapp.controllerAdvice;
 
-import com.springboot.todolistapp.CustomeExceptions.UserAlreadyExistException;
+import com.springboot.todolistapp.CustomExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.Model.ExceptionModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

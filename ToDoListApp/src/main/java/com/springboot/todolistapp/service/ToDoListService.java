@@ -1,7 +1,7 @@
 package com.springboot.todolistapp.service;
 
-import com.springboot.todolistapp.CustomeExceptions.ActivityNotFoundException;
-import com.springboot.todolistapp.CustomeExceptions.UserNotFoundException;
+import com.springboot.todolistapp.CustomExceptions.ActivityNotFoundException;
+import com.springboot.todolistapp.CustomExceptions.UserNotFoundException;
 import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.entity.ToDoListDate;
 import com.springboot.todolistapp.entity.User;
@@ -15,11 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ToDoListService {

@@ -1,4 +1,4 @@
-package com.springboot.todolistapp.CustomeExceptions;
+package com.springboot.todolistapp.CustomExceptions;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String message) {

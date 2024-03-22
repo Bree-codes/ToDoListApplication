@@ -35,8 +35,6 @@ public class ToDoListActivity {
     @JoinColumn(name = "date_fk")
     private ToDoListDate toDoListDate;
 
-
-
     @PrePersist
     public void setDefaultStatus() {
         if (status == null || status.isEmpty()) {
