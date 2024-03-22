@@ -16,8 +16,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByUsername(String username);
 
-    @Query("SELECT u FROM User u JOIN FETCH u.tokens WHERE u.id = :userId")
-    User findByIdWithTokens(@Param("userId") Long userId);
 
 }
 
