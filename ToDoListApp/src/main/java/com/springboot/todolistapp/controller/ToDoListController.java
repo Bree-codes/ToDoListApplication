@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.controller;
 
+import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
 import com.springboot.todolistapp.service.ToDoListService;
@@ -43,6 +44,12 @@ public class ToDoListController {
     {
         log.info("User deleting item from the List");
         return toDoListService.deleteToDoListActivity(userId, activityId);
+    }
+
+    @GetMapping("{userId}")
+    public ResponseEntity<List<ToDoListActivity>> getToDoListActivitiesByUserId(@PathVariable Long userId) {
+        List<ToDoListActivity> activities = toDoListService.getToDoListActivitiesByUserId(userId);
+        return ResponseEntity.ok(activities);
     }
 
 }

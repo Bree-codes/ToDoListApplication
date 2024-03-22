@@ -128,5 +128,9 @@ public class ToDoListService {
 
     }
 
+    public List<ToDoListActivity> getToDoListActivitiesByUserId(Long userId) {
+        return toDoListRepository.findByUserId(userId);
+    }
+
 }
 
