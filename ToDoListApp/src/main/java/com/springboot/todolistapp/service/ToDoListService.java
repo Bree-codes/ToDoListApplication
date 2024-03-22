@@ -67,7 +67,7 @@ public class ToDoListService {
     }
 
 
-    public void updateToDoListActivity(Long userId, Long activityId, ToDoListRequest updatedToDoList) {
+    public ResponseEntity<ModelResponse> updateToDoListActivity(Long userId, Long activityId, ToDoListRequest updatedToDoList) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " Not Found!"));
 
@@ -77,21 +77,22 @@ public class ToDoListService {
 
         // Check if the todo list activity belongs to the user
         if (!todoActivity.getUser().getId().equals(userId)) {
-            throw new AccessDeniedException("You are not authorized to update this todo list activity");
+            throw new AccessDeniedException("You are not authorized to update this todo list activity!");
         }
 
         // Update the fields of the todo list activity
-        todoActivity.setActivityName(updatedActivity.getActivityName());
-        todoActivity.setStartTime(updatedActivity.getStartTime());
-        todoActivity.setEndTime(updatedActivity.getEndTime());
+        todoActivity.setActivityName(updatedToDoList.getActivityName());
+        todoActivity.setStartTime(updatedToDoList.getStartTime());
+        todoActivity.setEndTime(updatedToDoList.getEndTime());
 
         // Save the updated todo list activity
         toDoListRepository.save(todoActivity);
+
+        ModelResponse modelResponse = new ModelResponse();
+
+        return new ResponseEntity<>(modelResponse, HttpStatus.OK);
     }
 
-    public void updateToDoListActivities(Long userId, List<ToDoListRequest> updatedActivities) {
-        for (ToDoListRequest updatedActivity : updatedActivities) {
-            updateToDoListActivity(userId, updatedActivity.getId(), updatedActivity);
-        }
+
     }
 }
