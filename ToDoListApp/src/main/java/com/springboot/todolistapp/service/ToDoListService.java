@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.service;
 
+import com.springboot.todolistapp.CustomeExceptions.ActivityNotFoundException;
 import com.springboot.todolistapp.CustomeExceptions.UserNotFoundException;
 import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.entity.ToDoListDate;
@@ -12,7 +13,9 @@ import com.springboot.todolistapp.response.ModelResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +73,7 @@ public class ToDoListService {
 
         // Retrieve the todo list activity to be updated
         ToDoListActivity todoActivity = toDoListRepository.findById(activityId)
-                .orElseThrow(() -> new ResourceNotFoundException("Todo list activity not found with id " + activityId));
+                .orElseThrow(() -> new ActivityNotFoundException("Todo list activity not found!"));
 
         // Check if the todo list activity belongs to the user
         if (!todoActivity.getUser().getId().equals(userId)) {
