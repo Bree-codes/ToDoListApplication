@@ -23,34 +23,19 @@ public class ToDoListController {
             @PathVariable Long user_id,
             @RequestBody List<ToDoListRequest> toDoListRequest) {
 
-        log.info("user created a todo list");
+        log.info("User created a TODO List");
 
        return toDoListService.createToDoList(toDoListRequest,user_id);
     }
 
+    @PutMapping("update/{userId}/{activityId}")
+    public ResponseEntity<ModelResponse> updateToDoListActivity(
+            @PathVariable Long userId, @PathVariable Long activityId,
+            @RequestBody ToDoListRequest updatedActivity) {
 
-    /*@PutMapping("/{id}")
-    public Todo updateTodo(@PathVariable Long id, @RequestBody Todo updatedTodo) {
-        Todo existingTodo = todoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id " + id));
-
-        existingTodo.setActivityName(updatedTodo.getActivityName());
-        existingTodo.setDescription(updatedTodo.getDescription());
-        existingTodo.setDueDate(updatedTodo.getDueDate());
-
-        return todoRepository.save(existingTodo);
-    }*/
-
-    @PutMapping("update/{id}")
-    public ResponseEntity<ModelResponse> updateToDoList(
-            @PathVariable Long id, @RequestBody List<ToDoListRequest> toDoListRequests)
-    {
-        //ToDoListRequest existingToDoList = todo
-
-        //log.info("User updated thier todo list");
-        return null;
+        log.info("User updated TODO List");
+       return toDoListService.updateToDoListActivity(userId, activityId, updatedActivity);
     }
 
+}
 
-
-    }

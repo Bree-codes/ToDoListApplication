@@ -17,6 +17,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -61,12 +62,17 @@ public class ToDoListService {
 
         ModelResponse modelResponse = new ModelResponse();
 
+        modelResponse.setDate(new Date());
+        modelResponse.setStatus(HttpStatus.CREATED);
+        modelResponse.setMessage("Your TODO List has been Created Successfully!");
+
         return new ResponseEntity<>(modelResponse, HttpStatus.CREATED);
     }
 
 
-    public ResponseEntity<ModelResponse> updateToDoListActivity(Long userId, Long activityId, ToDoListRequest updatedToDoList) {
-        User user = userRepository.findById(userId)
+    public ResponseEntity<ModelResponse> updateToDoListActivity(Long userId, Long activityId, ToDoListRequest updatedToDoList)
+    {
+        userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " Not Found!"));
 
         // Retrieve the todo list activity to be updated
@@ -88,9 +94,12 @@ public class ToDoListService {
 
         ModelResponse modelResponse = new ModelResponse();
 
+        modelResponse.setDate(new Date());
+        modelResponse.setStatus(HttpStatus.OK);
+        modelResponse.setMessage("Your TODO List has been Updated Successfully!");
+
         return new ResponseEntity<>(modelResponse, HttpStatus.OK);
     }
 
-
-
 }
+
