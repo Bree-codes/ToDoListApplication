@@ -29,4 +29,28 @@ public class ToDoListController {
     }
 
 
+    /*@PutMapping("/{id}")
+    public Todo updateTodo(@PathVariable Long id, @RequestBody Todo updatedTodo) {
+        Todo existingTodo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id " + id));
+
+        existingTodo.setActivityName(updatedTodo.getActivityName());
+        existingTodo.setDescription(updatedTodo.getDescription());
+        existingTodo.setDueDate(updatedTodo.getDueDate());
+
+        return todoRepository.save(existingTodo);
+    }*/
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<ModelResponse> updateToDoList(
+            @PathVariable Long id, @RequestBody List<ToDoListRequest> toDoListRequests)
+    {
+        //ToDoListRequest existingToDoList = todo
+
+        //log.info("User updated thier todo list");
+        return null;
+    }
+
+
+
     }

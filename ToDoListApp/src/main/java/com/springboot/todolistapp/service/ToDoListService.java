@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.service;
 
+import com.springboot.todolistapp.CustomeExceptions.UserNotFoundException;
 import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.entity.ToDoListDate;
 import com.springboot.todolistapp.entity.User;
@@ -63,4 +64,31 @@ public class ToDoListService {
     }
 
 
+    public void updateToDoListActivity(Long userId, Long activityId, ToDoListRequest updatedToDoList) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " Not Found!"));
+
+        // Retrieve the todo list activity to be updated
+        ToDoListActivity todoActivity = toDoListRepository.findById(activityId)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo list activity not found with id " + activityId));
+
+        // Check if the todo list activity belongs to the user
+        if (!todoActivity.getUser().getId().equals(userId)) {
+            throw new AccessDeniedException("You are not authorized to update this todo list activity");
+        }
+
+        // Update the fields of the todo list activity
+        todoActivity.setActivityName(updatedActivity.getActivityName());
+        todoActivity.setStartTime(updatedActivity.getStartTime());
+        todoActivity.setEndTime(updatedActivity.getEndTime());
+
+        // Save the updated todo list activity
+        toDoListRepository.save(todoActivity);
+    }
+
+    public void updateToDoListActivities(Long userId, List<ToDoListRequest> updatedActivities) {
+        for (ToDoListRequest updatedActivity : updatedActivities) {
+            updateToDoListActivity(userId, updatedActivity.getId(), updatedActivity);
+        }
+    }
 }
