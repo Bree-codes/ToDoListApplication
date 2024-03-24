@@ -51,6 +51,5 @@ public class ToDoListController {
         List<ToDoListActivity> activities = toDoListService.getToDoListActivitiesByUserId(userId);
         return ResponseEntity.ok(activities);
     }
-
 }
 
