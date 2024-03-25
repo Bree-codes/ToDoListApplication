@@ -49,8 +49,8 @@ public class ToDoListController {
     @GetMapping("{userId}")
     public ResponseEntity<List<ToDoListActivity>> getToDoListActivitiesByUserId(@PathVariable Long userId) {
         log.info("Requesting to get the user activities");
-        List<ToDoListActivity> activities = toDoListService.getToDoListActivitiesByUserId(userId);
-        return ResponseEntity.ok(activities);
+
+        return ResponseEntity.ok(toDoListService.getToDoListActivitiesByUserId(userId));
     }
 
 }
