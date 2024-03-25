@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface ToDoListRepository extends JpaRepository<ToDoListActivity,Long> {
 
-    List<ToDoListActivity> findByUserId(Long userId);
+    //List<ToDoListActivity> findByUserId(Long userId);
+
+    List<ToDoListActivity> findByUser(Long userId);
 
 }
