@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +29,12 @@ public class ToDoListActivity {
 
     @ManyToOne()
     @JoinColumn(name = "user_fk")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "date_fk")
+    @JsonIgnore
     private ToDoListDate toDoListDate;
 
     @PrePersist
