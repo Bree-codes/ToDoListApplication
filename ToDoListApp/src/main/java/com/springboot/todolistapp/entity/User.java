@@ -45,7 +45,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<ToDoListActivity> toDoListActivities;
+    private List<ToDoListDate> toDoListDates;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

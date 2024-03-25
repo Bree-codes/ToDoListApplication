@@ -29,21 +29,21 @@ public class ToDoListController {
        return toDoListService.createToDoList(toDoListRequest,user_id);
     }
 
-    @PutMapping("update/{userId}/{activityId}")
+    @PutMapping("update/{activityId}")
     public ResponseEntity<ModelResponse> updateToDoListActivity(
-            @PathVariable Long userId, @PathVariable Long activityId,
+            @PathVariable Long activityId,
             @RequestBody ToDoListRequest updatedActivity)
     {
         log.info("User updated TODO List");
-       return toDoListService.updateToDoListActivity(userId, activityId, updatedActivity);
+       return toDoListService.updateToDoListActivity(activityId, updatedActivity);
     }
 
-    @DeleteMapping ("delete/{userId}/{activityId}")
+    @DeleteMapping ("delete/{activityId}")
     public ResponseEntity<ModelResponse> deleteToDoListActivity(
-            @PathVariable Long userId,@PathVariable Long activityId)
+            @PathVariable Long activityId)
     {
         log.info("User deleting item from the List");
-        return toDoListService.deleteToDoListActivity(userId, activityId);
+        return toDoListService.deleteToDoListActivity(activityId);
     }
 
     @GetMapping("{userId}")

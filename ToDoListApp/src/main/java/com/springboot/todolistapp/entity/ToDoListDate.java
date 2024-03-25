@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +25,10 @@ public class ToDoListDate {
 
     @OneToMany(mappedBy = "toDoListDate", fetch = FetchType.EAGER)
     private List<ToDoListActivity> toDoListActivity;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_fk")
+    @JsonIgnore
+    private User user;
 
 }

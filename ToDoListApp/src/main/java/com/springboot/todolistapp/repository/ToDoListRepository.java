@@ -13,6 +13,4 @@ import java.util.List;
 public interface ToDoListRepository extends JpaRepository<ToDoListActivity,Long> {
 
     //List<ToDoListActivity> findByUserId(Long userId);
-
-    List<ToDoListActivity> findToDoListActivitiesByUser(User user);
 }

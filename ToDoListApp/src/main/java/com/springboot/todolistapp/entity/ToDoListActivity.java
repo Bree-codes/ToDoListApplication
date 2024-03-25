@@ -27,12 +27,8 @@ public class ToDoListActivity {
 
     private String status;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_fk")
-    @JsonIgnore
-    private User user;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "date_fk")
     private ToDoListDate toDoListDate;
 
