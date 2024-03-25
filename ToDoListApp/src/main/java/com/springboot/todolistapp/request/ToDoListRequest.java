@@ -28,15 +28,5 @@ public class ToDoListRequest {
 
     private Time endTime;
 
-    @JsonIgnore
-    private String date = date();
-
-    private String date() {
-        LocalDate time = LocalDate.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
-
-        return time.format(formatter);
-    }
 
 }

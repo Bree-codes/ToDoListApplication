@@ -49,6 +49,8 @@ public class ToDoListService {
         date.setUser(user);
         dateRepository.save(date);
 
+
+
         ModelResponse modelResponse = new ModelResponse();
 
         modelResponse.setDate(new Date());
@@ -112,9 +114,6 @@ public class ToDoListService {
         return null;
     }
 
-    public String generateDate(){
-
-    }
 
 }
 
