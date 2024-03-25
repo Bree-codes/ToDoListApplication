@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,9 +40,11 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Token> tokens;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<ToDoListActivity> toDoListActivities;
 
     @Override

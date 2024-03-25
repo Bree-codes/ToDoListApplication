@@ -13,8 +13,8 @@ public interface ToDoListRepository extends JpaRepository<ToDoListActivity,Long>
 
     //List<ToDoListActivity> findByUserId(Long userId);
 
-    @Query("SELECT t.endTime, t.startTime, t.dateFk, t.id, t.activityName, t.status " +
+   /* @Query("SELECT t.endTime, t.startTime, t.dateFk, t.id, t.activityName, t.status " +
             "FROM ToDoListApplication.TodolistActivity t WHERE t.userFk = :userId")
     List<ToDoListActivity> findActivityDetailsByUser(@Param("userId") Long userId);
-
+*/
 }

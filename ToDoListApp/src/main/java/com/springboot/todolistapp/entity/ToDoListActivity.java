@@ -24,7 +24,6 @@ public class ToDoListActivity {
 
     private String activityName;
 
-    //@JsonIgnore
     private String status;
 
     @ManyToOne()
