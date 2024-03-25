@@ -38,7 +38,7 @@ public class ToDoListController {
        return toDoListService.updateToDoListActivity(userId, activityId, updatedActivity);
     }
 
-    @DeleteMapping ("delete/{userId},{activityId}")
+    @DeleteMapping ("delete/{userId}/{activityId}")
     public ResponseEntity<ModelResponse> deleteToDoListActivity(
             @PathVariable Long userId,@PathVariable Long activityId)
     {
