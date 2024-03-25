@@ -133,6 +133,10 @@ public class ToDoListService {
     public List<ToDoListActivity> getToDoListActivitiesByUserId(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         log.info("Getting the user.");
+
+        /*Getting the todolist.*/
+        List<ToDoListActivity> toDoListActivities = toDoListRepository.findToDoListActivitiesByUser(user);
+
         return null;
     }
 
