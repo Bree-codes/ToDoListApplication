@@ -10,6 +10,7 @@ import com.springboot.todolistapp.repository.ToDoListRepository;
 import com.springboot.todolistapp.repository.UserRepository;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ToDoListService {
 
@@ -129,7 +131,8 @@ public class ToDoListService {
     }
 
     public List<ToDoListActivity> getToDoListActivitiesByUserId(Long userId) {
-        return toDoListRepository.findByUser( userRepository.findById(userId).orElseThrow());
+        log.info("Getting the user.");
+        return toDoListRepository.findActivityDetailsByUser(userId);
     }
 
 }
