@@ -49,7 +49,13 @@ public class ToDoListService {
         date.setUser(user);
         dateRepository.save(date);
 
+        ToDoListActivity toDoListActivity = new ToDoListActivity();
+        toDoListActivity.setToDoListDate(date);
+        toDoListActivity.setEndTime(toDoListRequest.getEndTime());
+        toDoListActivity.setStartTime(toDoListRequest.getStartTime());
+        toDoListActivity.setActivityName(toDoListRequest.getActivityName());
 
+        toDoListRepository.save(toDoListActivity);
 
         ModelResponse modelResponse = new ModelResponse();
 
