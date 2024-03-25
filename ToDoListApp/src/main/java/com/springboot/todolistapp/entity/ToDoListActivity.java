@@ -32,9 +32,8 @@ public class ToDoListActivity {
     @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "date_fk")
-    @JsonIgnore
     private ToDoListDate toDoListDate;
 
     @PrePersist

@@ -22,7 +22,7 @@ public class ToDoListDate {
     @Column(unique = true)
     private String date;
 
-    @OneToMany(mappedBy = "toDoListDate")
+    @OneToMany(mappedBy = "toDoListDate", fetch = FetchType.EAGER)
     private List<ToDoListActivity> toDoListActivity;
 
 }
