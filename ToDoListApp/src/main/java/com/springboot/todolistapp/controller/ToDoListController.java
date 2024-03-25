@@ -22,7 +22,7 @@ public class ToDoListController {
     @PostMapping("/create/{user_id}")
     public ResponseEntity<ModelResponse> createToDoList(
             @PathVariable Long user_id,
-            @RequestBody List<ToDoListRequest> toDoListRequest) {
+            @RequestBody ToDoListRequest toDoListRequest) {
 
         log.info("User created a TODO List");
 

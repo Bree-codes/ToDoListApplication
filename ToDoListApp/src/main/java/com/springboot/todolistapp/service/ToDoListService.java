@@ -13,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,37 +27,27 @@ public class ToDoListService {
     private final UserRepository userRepository;
     private final DateRepository dateRepository;
     @Autowired
-    public ToDoListService(ToDoListRepository toDoListRepository, UserRepository userRepository, DateRepository dateRepository) {
+    public ToDoListService(ToDoListRepository toDoListRepository,
+                           UserRepository userRepository,
+                           DateRepository dateRepository) {
         this.toDoListRepository = toDoListRepository;
         this.userRepository = userRepository;
         this.dateRepository = dateRepository;
     }
 
 
-    public ResponseEntity<ModelResponse> createToDoList(List<ToDoListRequest> toDoListRequest,Long user_id){
-
-       List<ToDoListActivity> toDoListActivityList = new ArrayList<>();
+    public ResponseEntity<ModelResponse> createToDoList(ToDoListRequest toDoListRequest, Long user_id){
 
         ToDoListDate date = new ToDoListDate();
 
-        date.setDate(toDoListRequest.get(0).getDate());
-
         /*getting the user.*/
-        User user = userRepository.findById(user_id).orElseThrow();
+        User user = userRepository.findById(user_id).orElseThrow(
+                () -> new UsernameNotFoundException("User not found")
+        );
 
 
-       toDoListRequest.forEach((activity)->{
-           ToDoListActivity toDoListActivity = new ToDoListActivity();
-           toDoListActivity.setActivityName(activity.getActivityName());
-           toDoListActivity.setStartTime(activity.getStartTime());
-           toDoListActivity.setEndTime(activity.getEndTime());
-           toDoListActivity.setToDoListDate(date);
-          toDoListActivityList.add(toDoListActivity);
-               });
-
+        date.setUser(user);
         dateRepository.save(date);
-        toDoListRepository.saveAll(toDoListActivityList);
-
 
         ModelResponse modelResponse = new ModelResponse();
 
@@ -120,6 +110,10 @@ public class ToDoListService {
 
         /*Getting the todolist.*/
         return null;
+    }
+
+    public String generateDate(){
+
     }
 
 }

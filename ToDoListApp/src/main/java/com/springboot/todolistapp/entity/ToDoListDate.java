@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -30,5 +32,13 @@ public class ToDoListDate {
     @JoinColumn(name = "user_fk")
     @JsonIgnore
     private User user;
+
+    {
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy");
+
+        date = dateTime.format(dateTimeFormatter);
+    }
 
 }
