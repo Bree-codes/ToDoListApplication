@@ -119,6 +119,10 @@ public class ToDoListService {
         log.info("Getting the user.");
 
         /*Getting the todolist.*/
+        List<String> toDoListDates = dateRepository.findDatesByUser(user).orElseThrow();
+
+
+
         return null;
     }
 

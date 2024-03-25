@@ -26,7 +26,8 @@ public class ToDoListDate {
     @Column(unique = true)
     private String date;
 
-    @OneToMany(mappedBy = "toDoListDate", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "toDoListDate")
+    @JsonIgnore
     private List<ToDoListActivity> toDoListActivity;
 
     @ManyToOne()
