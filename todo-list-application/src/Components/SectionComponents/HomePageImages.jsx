@@ -30,7 +30,7 @@ const HomePageImages = () => {
         <Carousel interval={1000}>
             {images.map((value, index) => (
                 <Carousel.Item key={index}>
-                    <img src={value} className="d-block w-100" height={650} alt={"Motivation quote image"} />
+                    <img src={value} className="d-block w-100" height={509} alt={"Motivation quote image"} />
                 </Carousel.Item>
             ))}
         </Carousel>
