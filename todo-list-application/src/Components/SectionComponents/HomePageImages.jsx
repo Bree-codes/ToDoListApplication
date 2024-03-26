@@ -1,4 +1,4 @@
-import {Carousel, CarouselItem, Image} from "react-bootstrap";
+import {Carousel} from "react-bootstrap";
 import motivation1 from './../images/motivation1.jpeg'
 import motivation2 from './../images/motivation2.jpeg'
 import motivation3 from './../images/motivation3.jpeg'
@@ -27,10 +27,10 @@ const HomePageImages = () => {
         motivation14,motivation15,motivation16];
 
     return (
-        <Carousel interval={500}>
+        <Carousel interval={1000}>
             {images.map((value, index) => (
                 <Carousel.Item key={index}>
-                    <img src={value} className="d-block w-100" height={527} alt={"Motivation quote image"} />
+                    <img src={value} className="d-block w-100" height={650} alt={"Motivation quote image"} />
                 </Carousel.Item>
             ))}
         </Carousel>
