@@ -1,10 +1,10 @@
-import Home from "./Components/RoutedPages/Home.jsx";
 import {Container} from "react-bootstrap";
+import Home from "./Components/RoutedPages/Home.jsx";
 
 function App() {
     return (
-        <Container fluid={'lg'}>
-            <Home></Home>
+        <Container fluid>
+            <Home/>
         </Container>
     );
 }
