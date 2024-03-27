@@ -1,10 +1,10 @@
 import {Container} from "react-bootstrap";
-import Home from "./Components/RoutedPages/Home.jsx";
+import AppRoutes from "./Components/Routing/AppRoutes.jsx";
 
 function App() {
     return (
         <Container fluid>
-            <Home/>
+           <AppRoutes />
         </Container>
     );
 }
