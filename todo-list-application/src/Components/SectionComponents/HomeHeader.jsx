@@ -21,13 +21,13 @@ export default function HomeHeader() {
                                       onMouseOver={() => setSingUpBg("lime")}
                                       onMouseLeave={() => setSingUpBg("transparent")}
                                       style={{justifyContent:"center", color:"white", background:singUpBg,
-                                          borderRadius:20,
+                                          borderRadius:20, zIndex:2, float:"-moz-initial",
                                       fontSize: 20, fontFamily: "serif"}}>SING UP</Nav.Link>
                             <Nav.Link href="#action2" className={"p-1 m-1 mb-2"}
                                       onMouseLeave={() => setSingInBg("transparent")}
                                       onMouseOver={() => setSingInBg("lime")}
                                       style={{justifyContent:"center", color:"white",background:singInBg,
-                                          borderRadius:20,
+                                          borderRadius:20, zIndex:2,
                                       fontFamily:"serif", fontSize: 20}}>SING IN</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
