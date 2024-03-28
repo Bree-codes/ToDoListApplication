@@ -27,11 +27,18 @@ export default function SingUpPage() {
             return;
         }
 
-        register(username, email, password);
-        setEmail('');
-        setUsername('');
-        setConfirmPassword('');
-        setPassword('');
+        register(username, email, password).then((res) => {
+                setEmail('');
+                setUsername('');
+                setConfirmPassword('');
+                setPassword('');
+
+                localStorage.setItem("user", res.data);
+            }
+        ).catch((error) =>{
+            setAlert(error.response.data.message);
+        })
+
     }
 
     const handlePasswords = (e) => {
