@@ -1,8 +1,27 @@
 
 .container{
+    display: flex;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
     background-color: wheat;
+    background-image: url("./../images/singPage.jpeg");
+    background-size: cover;
+    background-blend-mode: multiply;
+    height: 100vh;
 }
 
+.section{
+    background-color: rgba(225,225,225,0.4);
+    height: 70%;
+    padding: 20px 20px 20px 20px;
+    border-radius: 10px;
+}
+
+.group{
+    padding: 5px 5px;
+    margin: 2px 2px;
+}
 
 
 @keyframes rotate {
