@@ -6,3 +6,7 @@ const openAPI = axios.create({
         Authorization:""
     }
 })
+
+export async function register() {
+
+}
