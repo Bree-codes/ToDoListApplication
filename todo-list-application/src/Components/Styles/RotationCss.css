@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 
 .container{
     display: flex;
@@ -30,6 +32,13 @@
     margin: 5px 5px;
 }
 
+
+.label{
+    color: -moz-default-background-color;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: "Noticia Text", serif;
+}
 
 @keyframes rotate {
     from {
