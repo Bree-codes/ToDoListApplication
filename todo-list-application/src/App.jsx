@@ -1,10 +1,10 @@
 import {Container} from "react-bootstrap";
-import AppRoutes from "./Components/Routing/AppRoutes.jsx";
+import SingUpPage from "./Components/RoutedPages/SingUpPage.jsx";
 
 function App() {
     return (
         <Container fluid>
-           <AppRoutes />
+            <SingUpPage />
         </Container>
     );
 }
