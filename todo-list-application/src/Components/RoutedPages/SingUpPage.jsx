@@ -1,6 +1,6 @@
 import './../Styles/RotationCss.css'
 import {Alert, Button, Container, Form} from "react-bootstrap";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {register} from "../BackendSources.js";
 
 export default function SingUpPage() {
@@ -10,13 +10,28 @@ export default function SingUpPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     const [alert, setAlert] = useState('');
+    let strength = false, match = false;
 
-    const handleRegister = (e) =>{
+    const handleRegister = (e) => {
         e.preventDefault();
+        console.log(username);
+        if (username === ''){
+            setAlert("Username can not be empty");
+            return;
+        }
+        if(email === '') {
+            setAlert("email can not be null");
+            return;
+        }
+        if(!(strength && match)) {
+            setAlert("check on you password please.");
+            return;
+        }
 
-        if(username.match(''))
-            setAlert("Username can not be empty")
-
+        setEmail('');
+        setUsername('');
+        setConfirmPassword('');
+        setPassword('');
     }
 
     const handlePasswords = (e) => {
@@ -27,6 +42,7 @@ export default function SingUpPage() {
         if (checkMatch()) {
             setAlert('');
             if (checkStrength(confirmPassword)) {
+                match = true;
                 setAlert('');
             }
         }
@@ -40,6 +56,7 @@ export default function SingUpPage() {
         if (checkStrength(password)) {
             setAlert('');
             if (checkMatch()) {
+                strength = true;
                 setAlert('');
             }
         }
@@ -77,25 +94,29 @@ export default function SingUpPage() {
                    <Form.Group className={"group"}>
                        <Form.Label className={"star label"}>Username</Form.Label>
                        <Form.Control type={"text"} placeholder={"e.g Red-Stevo"} autoComplete={"false"}
-                       onChange={(e) => setUsername(e.target.value)}/>
+                       onChange={(e) => setUsername(e.target.value)}
+                       value={username}/>
                    </Form.Group>
 
                     <Form.Group className={"group"}>
                         <Form.Label className={"star label"}>Email</Form.Label>
                         <Form.Control type={"email"} placeholder={"breecodes@gmail.com"} autoComplete={"false"}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}/>
                     </Form.Group>
 
                     <Form.Group className={"group"}>
                         <Form.Label className={"star label"} >Password</Form.Label>
                         <Form.Control type={"password"} autoComplete={"false"}
-                        onChange={handlePasswordStrength}/>
+                        onChange={handlePasswordStrength}
+                        value={password}/>
                     </Form.Group>
 
                     <Form.Group className={"group"}>
                         <Form.Label className={"star label"} >Confirm Password</Form.Label>
                         <Form.Control type={"password"} autoComplete={"false"}
-                          onChange={handlePasswords}/>
+                          onChange={handlePasswords}
+                            value={confirmPassword}/>
                     </Form.Group>
                         <Button type={"submit"}>Register</Button>
                 </Form>
