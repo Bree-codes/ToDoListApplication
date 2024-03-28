@@ -4,17 +4,16 @@ import {useState} from "react";
 import {register} from "../BackendSources.js";
 
 export default function SingUpPage() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [username, setUsername] = useState("   ");
+    const [email, setEmail] = useState("   ");
+    const [password, setPassword] = useState("   ");
+    const [confirmPassword, setConfirmPassword] = useState("  ");
     const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     const [alert, setAlert] = useState('');
-    let strength = false, match = false;
+
 
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log(username);
         if (username === ''){
             setAlert("Username can not be empty");
             return;
@@ -23,11 +22,12 @@ export default function SingUpPage() {
             setAlert("email can not be null");
             return;
         }
-        if(!(strength && match)) {
+        if(!checkStrength(password) && !checkMatch()) {
             setAlert("check on you password please.");
             return;
         }
 
+        register(username, email, password);
         setEmail('');
         setUsername('');
         setConfirmPassword('');
@@ -42,7 +42,6 @@ export default function SingUpPage() {
         if (checkMatch()) {
             setAlert('');
             if (checkStrength(confirmPassword)) {
-                match = true;
                 setAlert('');
             }
         }
@@ -56,7 +55,6 @@ export default function SingUpPage() {
         if (checkStrength(password)) {
             setAlert('');
             if (checkMatch()) {
-                strength = true;
                 setAlert('');
             }
         }
