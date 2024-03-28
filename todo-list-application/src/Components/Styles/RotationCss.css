@@ -1,4 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
+.container{
+    display: flex;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: wheat;
+    background-image: url("./../images/singPage.jpeg");
+    background-size: cover;
+    background-blend-mode: multiply;
+    height: 100vh;
+}
+
+.section{
+    background-color: rgba(225,225,225,0.4);
+    height: max-content;
+    padding: 20px 20px 20px 20px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.group{
+    padding: 5px 5px;
+    margin: 2px 2px;
+}
+
+.star::after{
+    content: '*';
+    color: darkred;
+    margin: 5px 5px;
+}
+
+
+.label{
+    color: -moz-default-background-color;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: "Noticia Text", serif;
+}
+
+.alert{
+    max-width: 20em;
+}
 
 
 @keyframes rotate {
