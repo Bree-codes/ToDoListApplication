@@ -9,7 +9,7 @@ export default function HomeFooter() {
     return (
         <Container style={{height: "137px", display: "flex", flexDirection: "column", alignItems: "center"}}>
             <div style={{height: "50%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <img src={ack} alt={"footer Logo"} style={{width: "auto", height: "100%", maxWidth: "100%",
+                <img src={ack} alt={"footer Logo"} style={{width: "auto", height: "40%", maxWidth: "100%",
                     maxHeight: "100%", justifyContent: "center"}}/>
             </div>
             <div style={{height: "50%", display: "flex", width: "100%"}}>
@@ -23,7 +23,7 @@ export default function HomeFooter() {
                     <img src={bree} alt="bree" style={{width: "10%", height: "30%", margin:"10px"}}
                     onClick={() => window.location.href="https://github.com/Bree-codes/"}/>
                     <img src={email} alt="email" style={{width: "10%", height: "30%", margin:"10px"}}
-                         onClick={() => window.location.href="https://github.com/Bree-codes/"}/>
+                         onClick={() => window.location.href="brendamukami04@gmail.com"}/>
                 </div>
             </div>
         </Container>
