@@ -14,11 +14,8 @@ export default function SingUpPage() {
     const handleRegister = (e) =>{
         e.preventDefault();
 
-        if(checkPassword ){
-
-        }
-
-
+        if(username.match(''))
+            setAlert("Username can not be empty")
 
     }
 
@@ -27,8 +24,11 @@ export default function SingUpPage() {
 
         setConfirmPassword(e.target.value);
 
-        if(checkMatch() && checkStrength(confirmPassword)){
+        if (checkMatch()) {
             setAlert('');
+            if (checkStrength(confirmPassword)) {
+                setAlert('');
+            }
         }
     }
 
@@ -37,8 +37,11 @@ export default function SingUpPage() {
 
         setPassword(e.target.value);
 
-        if( checkMatch() && checkStrength(password)){
+        if (checkStrength(password)) {
             setAlert('');
+            if (checkMatch()) {
+                setAlert('');
+            }
         }
     }
 
