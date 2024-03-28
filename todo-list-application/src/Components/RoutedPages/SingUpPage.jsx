@@ -4,10 +4,10 @@ import {useState} from "react";
 import {register} from "../BackendSources.js";
 
 export default function SingUpPage() {
-    const [username, setUsername] = useState("   ");
-    const [email, setEmail] = useState("   ");
-    const [password, setPassword] = useState("   ");
-    const [confirmPassword, setConfirmPassword] = useState("  ");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     const [alert, setAlert] = useState('');
 
