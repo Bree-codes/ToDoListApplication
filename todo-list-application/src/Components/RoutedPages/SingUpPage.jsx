@@ -1,40 +1,67 @@
 import './../Styles/RotationCss.css'
 import {Alert, Button, Container, Form} from "react-bootstrap";
 import {useRef, useState} from "react";
+import {register} from "../BackendSources.js";
 
 export default function SingUpPage() {
-    const [username, setUsername] = useState(' ');
-    const [email, setEmail] = useState(' ');
-    const [password, setPassword] = useState(' ');
-    const [confirmPassword, setConfirmPassword] = useState(' ');
-    const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{7,}$/
-    const [passwordStrengthAlert, setPasswordStrengthAlert] = useState('');
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+    const [alert, setAlert] = useState('');
+
+    const handleRegister = (e) =>{
+        e.preventDefault();
+
+        if(checkPassword ){
+
+        }
 
 
-    const handleRegister = () =>{
 
     }
 
-    const handlePasswords = () => {
+    const handlePasswords = (e) => {
+        e.preventDefault();
 
+        setConfirmPassword(e.target.value);
 
-
+        if(checkMatch() && checkStrength(confirmPassword)){
+            setAlert('');
+        }
     }
 
-    const handlePasswordStrength = (e) =>{
+    const handlePasswordStrength = (e) => {
+        e.preventDefault();
 
-        //set the entered password
         setPassword(e.target.value);
 
-        //verify the password strength
-        if(!PASSWORD_REGEX.test(password) && password !== ''){
-            setPasswordStrengthAlert("Password must have at least 8 characters :- an upper case letter, " +
-                "a lower case letter, a number and a special character");
-        }
-        else {
-            setPasswordStrengthAlert('');
+        if( checkMatch() && checkStrength(password)){
+            setAlert('');
         }
     }
+
+    const checkMatch = () => {
+        if(password.match(confirmPassword)){
+            return true;
+        } else {
+            setAlert("Passwords does not match");
+            return false;
+        }
+    }
+
+    const checkStrength = (pass) =>{
+        if(PASSWORD_REGEX.test(pass)){
+            setAlert('');
+            return true;
+        }else {
+            setAlert("A password must contain at least 9 characters :- a least : - 1 Upper case letter" +
+                "1 lower case letter, 1 number and a special character");
+            return false;
+        }
+    }
+
 
     return (
         <Container className={"container"}>
@@ -42,7 +69,7 @@ export default function SingUpPage() {
                 <Form onSubmit={handleRegister}>
                     <Form.Label className={"label"}>Register</Form.Label>
 
-                    {passwordStrengthAlert && <Alert className={"alert"}>{passwordStrengthAlert}</Alert>}
+                    {alert && <Alert className={"alert"}>{alert}</Alert>}
 
                    <Form.Group className={"group"}>
                        <Form.Label className={"star label"}>Username</Form.Label>

@@ -7,6 +7,14 @@ const openAPI = axios.create({
     }
 })
 
-export async function register() {
+export async function register(username, email, password) {
 
+    const user = {
+        username:username,
+        email:email,
+        password:password
+    }
+
+    //send the registration request
+    return await openAPI.post("/register", user);
 }
