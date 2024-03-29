@@ -142,6 +142,7 @@ public class ToDoListService {
         //convert the string dates into Date class objects.
         toDoListDates.forEach((date) -> dateTimes.add(LocalDateTime.parse(date)));
 
+        log.info("sorting the dates");
         //sort the dates
         Collections.sort(dateTimes);
 
@@ -154,6 +155,7 @@ public class ToDoListService {
         dateTimes.forEach((date) -> sortedToDoListDates
                 .add(date.format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"))));
 
+        log.info("dates retrieved successfully");
         return sortedToDoListDates;
     }
 
