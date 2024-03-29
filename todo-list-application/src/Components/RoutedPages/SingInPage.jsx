@@ -1,10 +1,9 @@
-import {Container} from "react-bootstrap";
-
+import './../Styles/Singin.css';
 
 export default function SingInPage() {
     return (
-        <Container className={"sing-in"} fluid>
-
-        </Container>
+        <div className="singin" >
+            <h1>Hello steve</h1>
+        </div>
     );
 }

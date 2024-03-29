@@ -4,7 +4,7 @@ import {useState} from "react";
 export default function HomeHeader() {
 
     const [singUpBg,setSingUpBg] = useState("transparent");
-   const  [singInBg, setSingInBg] = useState("transparent")
+    const  [singInBg, setSingInBg] = useState("transparent")
 
 
     return (
@@ -23,7 +23,7 @@ export default function HomeHeader() {
                                       style={{justifyContent:"center", color:"white", background:singUpBg,
                                           borderRadius:20, zIndex:2, float:"-moz-initial",
                                       fontSize: 20, fontFamily: "serif"}}>SING UP</Nav.Link>
-                            <Nav.Link href="/signin" className={"p-1 m-1 mb-2 ps-2 ms-2"}
+                            <Nav.Link href="/singin" className={"p-1 m-1 mb-2 ps-2 ms-2"}
                                       onMouseLeave={() => setSingInBg("transparent")}
                                       onMouseOver={() => setSingInBg("lime")}
                                       style={{justifyContent:"center", color:"white",background:singInBg,

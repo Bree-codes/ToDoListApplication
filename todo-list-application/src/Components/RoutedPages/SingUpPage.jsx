@@ -93,7 +93,7 @@ export default function SingUpPage() {
         <Container className={"container"}>
             <div className="section">
                 <Form onSubmit={handleRegister}>
-                    <Form.Label className={"label"}>Register</Form.Label>
+                    <Form.Label className={"label"}>Sing Up</Form.Label>
 
                     {alert && <Alert className={"alert"}>{alert}</Alert>}
 
