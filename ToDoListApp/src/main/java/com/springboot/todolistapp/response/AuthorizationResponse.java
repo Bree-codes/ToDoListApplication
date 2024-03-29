@@ -12,10 +12,12 @@ import org.springframework.http.HttpStatus;
 public class AuthorizationResponse {
 
     private Long id;
+
     private HttpStatus status;
+
     private String message;
+
     private String jwt;
+
     private String username;
-
-
 }
