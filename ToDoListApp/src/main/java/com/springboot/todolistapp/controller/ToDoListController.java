@@ -1,6 +1,5 @@
 package com.springboot.todolistapp.controller;
 
-import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
 import com.springboot.todolistapp.service.ToDoListService;
@@ -48,7 +47,7 @@ public class ToDoListController {
     }
 
     @GetMapping("get/{userId}")
-    public ResponseEntity<List<String>> getToDoListActivitiesByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<String>> getTodoListDates(@PathVariable Long userId) {
         log.info("Requesting to get the user activities");
 
         return ResponseEntity.ok(toDoListService.getTodoDates(userId));
