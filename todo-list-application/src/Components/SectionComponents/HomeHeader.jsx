@@ -17,7 +17,7 @@ export default function HomeHeader() {
                             className="my-2 my-lg-0"
                             style={{ maxHeight: '100px', justifyContent:"center"}}
                             navbarScroll>
-                            <Nav.Link href="#action1" className={"p-1 m-1 ps-2 ms-2"}
+                            <Nav.Link href="register" className={"p-1 m-1 ps-2 ms-2"}
                                       onMouseOver={() => setSingUpBg("lime")}
                                       onMouseLeave={() => setSingUpBg("transparent")}
                                       style={{justifyContent:"center", color:"white", background:singUpBg,
