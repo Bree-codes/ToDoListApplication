@@ -1,6 +1,7 @@
 package com.springboot.todolistapp.service;
 
 import com.springboot.todolistapp.CustomExceptions.ActivityNotFoundException;
+import com.springboot.todolistapp.CustomExceptions.DateConversionException;
 import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.entity.ToDoListDate;
 import com.springboot.todolistapp.entity.User;
@@ -17,8 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -133,14 +134,26 @@ public class ToDoListService {
         log.info("Getting the user.");
         User user = userRepository.findById(userId).orElse(null);
 
+        //date formatter oobject
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+
+
         /*Getting the todolist.*/
         List<String> toDoListDates = dateRepository.findDatesByUser(user).orElseThrow();
 
         //List to hold dates for sorting
-        List<LocalDateTime> dateTimes = new ArrayList<>();
+        List<Date> dateTimes = new ArrayList<>();
 
         //convert the string dates into Date class objects.
-        toDoListDates.forEach((date) -> dateTimes.add(LocalDateTime.parse(date)));
+        toDoListDates.forEach((date) -> {
+            try {
+                dateTimes.add(dateFormat.parse(date));
+
+            } catch (ParseException e) {
+                log.error(e+"");
+                throw new DateConversionException("Invalid date passed");
+            }
+        });
 
         log.info("sorting the dates");
         //sort the dates
@@ -153,7 +166,7 @@ public class ToDoListService {
         List<String> sortedToDoListDates = toDoListDates;
 
         dateTimes.forEach((date) -> sortedToDoListDates
-                .add(date.format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"))));
+                .add(dateFormat.format(date)));
 
         log.info("dates retrieved successfully");
         return sortedToDoListDates;
