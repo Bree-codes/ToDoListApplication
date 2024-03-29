@@ -27,13 +27,14 @@ export default function SingUpPage() {
             return;
         }
 
-        register(username, email, password).then((res) => {
+        register(username, email, password).then((response) => {
                 setEmail('');
                 setUsername('');
                 setConfirmPassword('');
                 setPassword('');
 
-                localStorage.setItem("user", res.data);
+                localStorage.setItem("user", response.data.toString());
+
             }
         ).catch((error) =>{
             setAlert(error.response.data.message);
