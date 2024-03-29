@@ -79,9 +79,7 @@ public class AuthenticationService{
     private void revokeAllTokenByUser(User user) {
         List<Token> validTokenListByUser = tokenRepository.findAllTokensByUser(Math.toIntExact(user.getId()));
         if(!validTokenListByUser.isEmpty()){
-            validTokenListByUser.forEach(t->{
-                t.setIsLoggedOut(true);
-            });
+            validTokenListByUser.forEach(t-> t.setIsLoggedOut(true));
         }
 
         tokenRepository.saveAll(validTokenListByUser);
