@@ -1,5 +1,5 @@
 import '../Styles/singUp.css'
-import {Alert, Button, Container, Form} from "react-bootstrap";
+import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import {register} from "../BackendSources.js";
 
@@ -90,7 +90,7 @@ export default function SingUpPage() {
 
 
     return (
-        <Container className={"container"}>
+        <div className="contain">
             <div className="section">
                 <Form onSubmit={handleRegister}>
                     <Form.Label className={"label"}>Sing Up</Form.Label>
@@ -127,6 +127,6 @@ export default function SingUpPage() {
                         <Button type={"submit"}>Register</Button>
                 </Form>
             </div>
-        </Container>
+        </div>
     );
 }

@@ -1,6 +1,14 @@
 
 .singin{
     background-image: url("./../images/singPage.jpeg");
+    background-size: cover;
     height: 100vh;
     width: 100%;
+    display: flex;
+    -ms-flex-align: center;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
