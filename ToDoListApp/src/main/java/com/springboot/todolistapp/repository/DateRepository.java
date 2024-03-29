@@ -17,6 +17,6 @@ public interface DateRepository extends JpaRepository<ToDoListDate , Long> {
     Optional<ToDoListDate> findByDate(String date);
 
     @Transactional
-    @Query("select date from ToDoListDate  where User = :user")
+    @Query("select t.date from ToDoListDate t where t.user = :user")
     Optional<List<String>> findDatesByUser(User user);
 }

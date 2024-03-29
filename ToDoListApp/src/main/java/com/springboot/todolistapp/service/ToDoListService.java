@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -128,13 +130,20 @@ public class ToDoListService {
     }
 
     public List<ToDoListActivity> getToDoListActivitiesByUserId(Long userId) {
-        User user = userRepository.findById(userId).orElse(null);
+
         log.info("Getting the user.");
+        User user = userRepository.findById(userId).orElse(null);
 
         /*Getting the todolist.*/
         List<String> toDoListDates = dateRepository.findDatesByUser(user).orElseThrow();
 
+        //List to hold dates for sorting
+        List<LocalDateTime> dateTimes = new ArrayList<>();
 
+        //convert the string dates into Date class objects.
+        toDoListDates.forEach((date) ->{
+            dateTimes.add(LocalDateTime.parse(date));
+        });
 
         return null;
     }
