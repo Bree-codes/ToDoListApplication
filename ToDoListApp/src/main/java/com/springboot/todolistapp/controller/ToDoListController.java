@@ -1,6 +1,5 @@
 package com.springboot.todolistapp.controller;
 
-import com.springboot.todolistapp.entity.ToDoListActivity;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
 import com.springboot.todolistapp.service.ToDoListService;
@@ -13,8 +12,9 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/ToDoList")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/todoList")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class ToDoListController {
 
     private final ToDoListService toDoListService;
@@ -46,11 +46,11 @@ public class ToDoListController {
         return toDoListService.deleteToDoListActivity(activityId);
     }
 
-    @GetMapping("{userId}")
-    public ResponseEntity<List<ToDoListActivity>> getToDoListActivitiesByUserId(@PathVariable Long userId) {
+    @GetMapping("get/{userId}")
+    public ResponseEntity<List<String>> getTodoListDates(@PathVariable Long userId) {
         log.info("Requesting to get the user activities");
 
-        return ResponseEntity.ok(toDoListService.getToDoListActivitiesByUserId(userId));
+        return ResponseEntity.ok(toDoListService.getTodoDates(userId));
     }
 }
 
