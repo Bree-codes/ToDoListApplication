@@ -124,7 +124,7 @@ export default function SingUpPage() {
                           onChange={handlePasswords}
                             value={confirmPassword}/>
                     </Form.Group>
-                        <Button type={"submit"}>Register</Button>
+                        <Button type={"submit"} className="button">Singup</Button>
                 </Form>
             </div>
         </div>

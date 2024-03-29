@@ -41,6 +41,11 @@
     max-width: 20em;
 }
 
+.button{
+    margin: 2px 2px;
+    background: linear-gradient(purple, blue);
+    padding: 12px 4px;
+}
 
 @keyframes rotate {
     from {
