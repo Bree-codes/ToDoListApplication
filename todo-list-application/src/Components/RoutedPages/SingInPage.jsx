@@ -1,4 +1,3 @@
-import './../Styles/Singin.css';
 import {Form} from "react-bootstrap";
 import './../Styles/singUp.css'
 
