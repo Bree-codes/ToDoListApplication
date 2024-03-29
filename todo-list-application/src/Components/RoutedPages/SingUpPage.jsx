@@ -1,7 +1,7 @@
 import '../Styles/singUp.css'
 import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
-import {register} from "../BackendSources.js";
+import {singup} from "../BackendSources.js";
 
 export default function SingUpPage() {
     const [username, setUsername] = useState("");
@@ -27,7 +27,7 @@ export default function SingUpPage() {
             return;
         }
 
-        register(username, email, password).then((response) => {
+        singup(username, email, password).then((response) => {
                 setEmail('');
                 setUsername('');
                 setConfirmPassword('');

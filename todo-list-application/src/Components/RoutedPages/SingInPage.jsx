@@ -1,17 +1,30 @@
 import {Button, Form} from "react-bootstrap";
 import './../Styles/singUp.css'
 import {useState} from "react";
+import {singin} from "../BackendSources.js";
 
 export default function SingInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
 
+    const handleSingIn = (e) =>{
+        e.preventDefault();
+
+        singin(username, password).then((response) =>{
+
+            setUsername('');
+            setPassword('');
+
+            localStorage.setItem("user", response.toString());
+        });
+    }
+
 
     return (
         <div className="contain" >
             <div className="section">
-                <Form>
+                <Form onSubmit={handleSingIn}>
                     <Form.Label className='label' >Sing In</Form.Label>
 
                     <Form.Group className='group'>
