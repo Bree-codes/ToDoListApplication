@@ -26,17 +26,13 @@ public class ToDoListDate {
     @Column(unique = true)
     private String date;
 
-    @OneToMany(mappedBy = "toDoListDate")
-    @JsonIgnore
-    private List<ToDoListActivity> toDoListActivity;
-
     @ManyToOne()
     @JoinColumn(name = "user_fk")
     @JsonIgnore
     private User user;
 
-    {
-        date = LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy"));
-    }
+    @OneToMany(mappedBy = "toDoListDate")
+    @JsonIgnore
+    private List<ToDoListActivity> toDoListActivity;
 
 }

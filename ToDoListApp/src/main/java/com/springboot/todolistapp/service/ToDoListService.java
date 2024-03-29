@@ -38,18 +38,23 @@ public class ToDoListService {
 
     public ResponseEntity<ModelResponse> createToDoList(ToDoListRequest toDoListRequest, Long user_id){
 
-        ToDoListDate toDoListDate = new ToDoListDate();
-
         /*getting the user.*/
         User user = userRepository.findById(user_id).orElseThrow(
                 () -> new UsernameNotFoundException("User not found")
         );
 
-        if(dateRepository.findByDate(toDoListDate.getDate()).orElse(null) == null) {
+        //the date of creation of the todoList
+        ToDoListDate toDoListDate = dateRepository.findByDate(toDoListRequest.getDate()).orElse(null);
+
+        /*check if the existing another activity assigned for that day*/
+        if( toDoListDate == null) {
+
+            toDoListDate = new ToDoListDate();
+
             toDoListDate.setUser(user);
+            toDoListDate.setDate(toDoListRequest.getDate());
+
             dateRepository.save(toDoListDate);
-        }else {
-            toDoListDate = dateRepository.findByDate(toDoListDate.getDate()).orElseThrow();
         }
 
         ToDoListActivity toDoListActivity = new ToDoListActivity();
