@@ -1,4 +1,4 @@
-import './../Styles/RotationCss.css'
+import '../Styles/singUp.css'
 import {Alert, Button, Container, Form} from "react-bootstrap";
 import {useState} from "react";
 import {register} from "../BackendSources.js";
