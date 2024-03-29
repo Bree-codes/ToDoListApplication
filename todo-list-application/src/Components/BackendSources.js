@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const openAPI = axios.create({
-    baseURL:"https://localhost:8080/api/v1"
+    baseURL:"http://localhost:8080/api/v1"
 });
 
 export async function register(username, email, password) {

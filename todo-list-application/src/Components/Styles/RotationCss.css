@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
 .container{
     display: flex;
     justify-content: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: wheat;
+    background-color: white;
     background-image: url("./../images/singPage.jpeg");
     background-size: cover;
     background-blend-mode: multiply;
@@ -32,7 +31,6 @@
     margin: 5px 5px;
 }
 
-
 .label{
     color: -moz-default-background-color;
     font-size: 20px;
@@ -54,3 +52,4 @@
         transform: rotate(360deg);
     }
 }
+
