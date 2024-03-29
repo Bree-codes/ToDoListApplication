@@ -1,4 +1,4 @@
-import './../Styles/homestles.css'
+import '../Styles/home.css'
 import HomePageImages from "../SectionComponents/HomePageImages.jsx";
 import HomeHeader from "../SectionComponents/HomeHeader.jsx";
 import HomeFooter from "../SectionComponents/HomeFooter.jsx";

@@ -1,5 +1,6 @@
 
 .home{
+    container: unset;
     background-image: url('./../images/home.svg');
     width: auto;
     height: 782px;

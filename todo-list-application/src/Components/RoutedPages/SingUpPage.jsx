@@ -1,7 +1,7 @@
-import './../Styles/RotationCss.css'
-import {Alert, Button, Container, Form} from "react-bootstrap";
+import '../Styles/singUp.css'
+import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
-import {register} from "../BackendSources.js";
+import {singup} from "../BackendSources.js";
 
 export default function SingUpPage() {
     const [username, setUsername] = useState("");
@@ -27,13 +27,14 @@ export default function SingUpPage() {
             return;
         }
 
-        register(username, email, password).then((res) => {
+        singup(username, email, password).then((response) => {
                 setEmail('');
                 setUsername('');
                 setConfirmPassword('');
                 setPassword('');
 
-                localStorage.setItem("user", res.data);
+                localStorage.setItem("user", response.data.toString());
+
             }
         ).catch((error) =>{
             setAlert(error.response.data.message);
@@ -89,10 +90,10 @@ export default function SingUpPage() {
 
 
     return (
-        <Container className={"container"}>
+        <div className="contain">
             <div className="section">
                 <Form onSubmit={handleRegister}>
-                    <Form.Label className={"label"}>Register</Form.Label>
+                    <Form.Label className={"label"}>Sing Up</Form.Label>
 
                     {alert && <Alert className={"alert"}>{alert}</Alert>}
 
@@ -123,9 +124,9 @@ export default function SingUpPage() {
                           onChange={handlePasswords}
                             value={confirmPassword}/>
                     </Form.Group>
-                        <Button type={"submit"}>Register</Button>
+                        <Button type={"submit"} className="button">Singup</Button>
                 </Form>
             </div>
-        </Container>
+        </div>
     );
 }

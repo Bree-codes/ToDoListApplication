@@ -94,6 +94,7 @@ public class AuthenticationService{
                         loginRequest.getPassword()
                 )
         );
+        
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
