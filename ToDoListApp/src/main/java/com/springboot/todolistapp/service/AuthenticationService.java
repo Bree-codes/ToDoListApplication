@@ -46,7 +46,7 @@ public class AuthenticationService{
         user.setEmail(registrationRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
 
-        /*before saving lets confirm the user does not exist.*/
+        /*before saving let's confirm the user does not exist.*/
         userRepository.findByEmail(registrationRequest.getEmail()).ifPresent(
                 (user1) -> {
                     throw new UserAlreadyExistException("The Email Your Entered Already Exist");
