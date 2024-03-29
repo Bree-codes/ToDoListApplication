@@ -16,7 +16,7 @@ export default function SingInPage() {
             setUsername('');
             setPassword('');
 
-            localStorage.setItem("user", response.toString());
+            localStorage.setItem("user", response.data.value);
         });
     }
 
