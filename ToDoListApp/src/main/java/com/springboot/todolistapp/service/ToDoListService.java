@@ -18,9 +18,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -129,7 +128,7 @@ public class ToDoListService {
 
     }
 
-    public List<ToDoListActivity> getToDoListActivitiesByUserId(Long userId) {
+    public List<String> getTodoDates(Long userId) {
 
         log.info("Getting the user.");
         User user = userRepository.findById(userId).orElse(null);
@@ -141,11 +140,21 @@ public class ToDoListService {
         List<LocalDateTime> dateTimes = new ArrayList<>();
 
         //convert the string dates into Date class objects.
-        toDoListDates.forEach((date) ->{
-            dateTimes.add(LocalDateTime.parse(date));
-        });
+        toDoListDates.forEach((date) -> dateTimes.add(LocalDateTime.parse(date)));
 
-        return null;
+        //sort the dates
+        Collections.sort(dateTimes);
+
+        //clear the toDoListDates list.
+        toDoListDates = new ArrayList<>();
+
+        //list to hold new formatted dates.
+        List<String> sortedToDoListDates = toDoListDates;
+
+        dateTimes.forEach((date) -> sortedToDoListDates
+                .add(date.format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"))));
+
+        return sortedToDoListDates;
     }
 
 
