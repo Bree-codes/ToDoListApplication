@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 
@@ -28,5 +29,10 @@ public class ToDoListRequest {
 
     private Time endTime;
 
+    @JsonIgnore
+    private String date;
 
+    {
+        date = LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"));
+    }
 }

@@ -13,8 +13,9 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/ToDoList")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/todoList")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class ToDoListController {
 
     private final ToDoListService toDoListService;
@@ -46,7 +47,7 @@ public class ToDoListController {
         return toDoListService.deleteToDoListActivity(activityId);
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("get/{userId}")
     public ResponseEntity<List<ToDoListActivity>> getToDoListActivitiesByUserId(@PathVariable Long userId) {
         log.info("Requesting to get the user activities");
 
