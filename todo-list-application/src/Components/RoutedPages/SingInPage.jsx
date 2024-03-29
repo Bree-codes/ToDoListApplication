@@ -1,9 +1,10 @@
+import {Container} from "react-bootstrap";
 
 
 export default function SingInPage() {
     return (
-        <div className={"sing-in"}>
+        <Container className={"sing-in"} fluid>
 
-        </div>
+        </Container>
     );
 }
