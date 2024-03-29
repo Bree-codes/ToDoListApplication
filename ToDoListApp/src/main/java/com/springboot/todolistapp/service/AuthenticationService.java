@@ -46,12 +46,20 @@ public class AuthenticationService{
         user.setEmail(registrationRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
 
-        /*before saving let's confirm the user does not exist.*/
+        /*before saving, let's confirm the user does not exist.*/
         userRepository.findByEmail(registrationRequest.getEmail()).ifPresent(
                 (user1) -> {
                     throw new UserAlreadyExistException("The Email Your Entered Already Exist");
                 }
         );
+
+        /*Check if the username is already in user by another user*/
+        userRepository.findByUsername(registrationRequest.getUsername()).ifPresent(
+                (user1) ->{
+                    throw  new UserAlreadyExistException("Username you entered is Already in use.");
+                }
+        );
+
         userRepository.save(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
