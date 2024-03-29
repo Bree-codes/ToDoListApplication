@@ -9,6 +9,7 @@ import com.springboot.todolistapp.repository.ToDoListRepository;
 import com.springboot.todolistapp.repository.UserRepository;
 import com.springboot.todolistapp.request.ToDoListRequest;
 import com.springboot.todolistapp.response.ModelResponse;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,14 @@ public class ToDoListService {
     private final ToDoListRepository toDoListRepository;
     private final UserRepository userRepository;
     private final DateRepository dateRepository;
+
+    private ModelResponse modelResponse;
+
+    @PostConstruct
+    public void init(){
+        modelResponse = new ModelResponse();
+    }
+
     @Autowired
     public ToDoListService(ToDoListRepository toDoListRepository,
                            UserRepository userRepository,
@@ -57,19 +66,20 @@ public class ToDoListService {
             dateRepository.save(toDoListDate);
         }
 
+
         ToDoListActivity toDoListActivity = new ToDoListActivity();
+
         toDoListActivity.setToDoListDate(toDoListDate);
         toDoListActivity.setEndTime(toDoListRequest.getEndTime());
         toDoListActivity.setStartTime(toDoListRequest.getStartTime());
         toDoListActivity.setActivityName(toDoListRequest.getActivityName());
 
+        //saving the new activity
         toDoListRepository.save(toDoListActivity);
-
-        ModelResponse modelResponse = new ModelResponse();
 
         modelResponse.setDate(new Date());
         modelResponse.setStatus(HttpStatus.CREATED);
-        modelResponse.setMessage("Your TODO List has been Created Successfully!");
+        modelResponse.setMessage("Your TODOList has been created successfully!");
 
         return new ResponseEntity<>(modelResponse, HttpStatus.CREATED);
     }
@@ -91,8 +101,6 @@ public class ToDoListService {
         // Save the updated todo list activity
         toDoListRepository.save(todoActivity);
 
-        ModelResponse modelResponse = new ModelResponse();
-
         modelResponse.setDate(new Date());
         modelResponse.setStatus(HttpStatus.OK);
         modelResponse.setMessage("Your TODO List has been Updated Successfully!");
@@ -111,7 +119,6 @@ public class ToDoListService {
         //delete the activity
         toDoListRepository.delete(todoActivity);
 
-        ModelResponse modelResponse = new ModelResponse();
         modelResponse.setDate(new Date());
         modelResponse.setStatus(HttpStatus.OK);
         modelResponse.setMessage("Activity Deleted Successfully!");
