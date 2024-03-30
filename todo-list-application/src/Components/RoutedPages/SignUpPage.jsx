@@ -3,7 +3,7 @@ import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import {singup} from "../BackendSources.js";
 
-export default function SingUpPage() {
+export default function SignUpPage() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

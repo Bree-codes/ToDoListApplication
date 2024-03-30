@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "../RoutedPages/Home.jsx";
-import SingUpPage from "../RoutedPages/SingUpPage.jsx";
-import SingInPage from "../RoutedPages/SingInPage.jsx";
+import SignUpPage from "../RoutedPages/SignUpPage.jsx";
+import SignInPage from "../RoutedPages/SignInPage.jsx";
 
 
 export  default function AppRoutes() {
@@ -10,8 +10,8 @@ export  default function AppRoutes() {
             <Routes>
                 <Route path={"/"}>
                     <Route index element={<Home/>}/>
-                    <Route path={"/singup"} element={<SingUpPage />} />
-                    <Route path={"/singin"} element={<SingInPage />} />
+                    <Route path={"/singup"} element={<SignUpPage />} />
+                    <Route path={"/singin"} element={<SignInPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

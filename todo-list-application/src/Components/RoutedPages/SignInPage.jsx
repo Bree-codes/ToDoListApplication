@@ -3,7 +3,7 @@ import './../Styles/singUp.css'
 import {useState} from "react";
 import {singin} from "../BackendSources.js";
 
-export default function SingInPage() {
+export default function SignInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState('');
