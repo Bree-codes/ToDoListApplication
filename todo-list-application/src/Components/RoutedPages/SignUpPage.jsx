@@ -93,7 +93,7 @@ export default function SignUpPage() {
         <div className="contain">
             <div className="section">
                 <Form onSubmit={handleRegister}>
-                    <Form.Label className={"label"}>Sing Up</Form.Label>
+                    <Form.Label className={"label"}>Sign Up</Form.Label>
 
                     {alert && <Alert className={"alert"}>{alert}</Alert>}
 
@@ -124,7 +124,7 @@ export default function SignUpPage() {
                           onChange={handlePasswords}
                             value={confirmPassword}/>
                     </Form.Group>
-                        <Button type={"submit"} className="button">Singup</Button>
+                        <Button type={"submit"} className="button">Signup</Button>
                 </Form>
             </div>
         </div>
