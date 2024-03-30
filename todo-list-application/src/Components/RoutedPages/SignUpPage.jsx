@@ -3,7 +3,7 @@ import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import {singup} from "../BackendSources.js";
 
-export default function SingUpPage() {
+export default function SignUpPage() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -93,7 +93,7 @@ export default function SingUpPage() {
         <div className="contain">
             <div className="section">
                 <Form onSubmit={handleRegister}>
-                    <Form.Label className={"label"}>Sing Up</Form.Label>
+                    <Form.Label className={"label"}>Sign Up</Form.Label>
 
                     {alert && <Alert className={"alert"}>{alert}</Alert>}
 
@@ -124,7 +124,7 @@ export default function SingUpPage() {
                           onChange={handlePasswords}
                             value={confirmPassword}/>
                     </Form.Group>
-                        <Button type={"submit"} className="button">Singup</Button>
+                        <Button type={"submit"} className="button">Signup</Button>
                 </Form>
             </div>
         </div>
