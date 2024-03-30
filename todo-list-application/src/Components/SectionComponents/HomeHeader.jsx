@@ -17,17 +17,17 @@ export default function HomeHeader() {
                             className="my-2 my-lg-0"
                             style={{ maxHeight: '100px', justifyContent:"center"}}
                             navbarScroll>
-                            <Nav.Link href="/singup" className={"p-1 m-1 ps-2 ms-2"}
+                            <Nav.Link href="/singup" className={"p-1 m-1 ps-4 ms-2 px-3"}
                                       onMouseOver={() => setSingUpBg("lime")}
                                       onMouseLeave={() => setSingUpBg("transparent")}
                                       style={{justifyContent:"center", color:"white", background:singUpBg,
-                                          borderRadius:20, zIndex:2, float:"-moz-initial",
+                                          borderRadius:20, zIndex:2, float:"-moz-initial", display:"flex",
                                       fontSize: 20, fontFamily: "serif"}}>SING UP</Nav.Link>
-                            <Nav.Link href="/singin" className={"p-1 m-1 mb-2 ps-2 ms-2"}
+                            <Nav.Link href="/singin" className={"p-1 m-1 mb-2 ps-4 ms-2 px-3"}
                                       onMouseLeave={() => setSingInBg("transparent")}
                                       onMouseOver={() => setSingInBg("lime")}
                                       style={{justifyContent:"center", color:"white",background:singInBg,
-                                          borderRadius:20, zIndex:2,
+                                          borderRadius:20, zIndex:2,display:"flex",
                                       fontFamily:"serif", fontSize: 20}}>SING IN</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
