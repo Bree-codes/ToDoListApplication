@@ -30,7 +30,7 @@ export default function SingInPage() {
         <div className="contain" >
             <div className="section">
                 <Form onSubmit={handleSingIn}>
-                    <Form.Label className='label' >Sing In</Form.Label>
+                    <Form.Label className='label' >Sign In</Form.Label>
                     {alert && <Alert className="alert">{alert}</Alert>}
                     <Form.Group className='group'>
                         <Form.Label className='label' >Username</Form.Label>
@@ -48,7 +48,7 @@ export default function SingInPage() {
                             setAlert("");}}/>
                     </Form.Group>
 
-                    <Button type={'submit'} className={"button"}>Singin</Button>
+                    <Button type={'submit'} className={"button"}>Signin</Button>
 
                 </Form>
             </div>
