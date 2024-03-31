@@ -7,6 +7,7 @@ export default function SignInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState('');
+    const history = History;
 
     const handleSingIn = (e) =>{
         e.preventDefault();
