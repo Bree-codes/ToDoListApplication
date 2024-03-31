@@ -19,7 +19,7 @@ export default function SignUpPage() {
             return;
         }
         if(email === '') {
-            setAlert("email can not be null");
+            setAlert("email can not be empty");
             return;
         }
         if(!checkStrength(password) && !checkMatch()) {

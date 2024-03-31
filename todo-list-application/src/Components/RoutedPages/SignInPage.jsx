@@ -2,11 +2,13 @@ import {Alert, Button, Form} from "react-bootstrap";
 import './../Styles/singUp.css'
 import {useState} from "react";
 import {singin} from "../BackendSources.js";
+import {Navigate} from "react-router";
 
 export default function SignInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState('');
+    const navigate = Navigate;
 
     const handleSingIn = (e) =>{
         e.preventDefault();
@@ -17,9 +19,13 @@ export default function SignInPage() {
             setPassword('');
 
             localStorage.setItem("user", response.data.value);
+
+            //navigate to the next page.
+            navigate({to: "/user/main"});
+
         }).catch((error) =>
         {
-            if(error.response.status === 401){
+            if(error.status === 401){
                 setAlert("Incorrect Username or Password");
             }
         });
