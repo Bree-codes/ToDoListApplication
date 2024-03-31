@@ -18,6 +18,10 @@ export default function SignInPage() {
             setPassword('');
 
             localStorage.setItem("user", response.data.value);
+
+            //navigate to the next page.
+            history.push("/user/main");
+
         }).catch((error) =>
         {
             if(error.response.status === 401){
