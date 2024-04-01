@@ -9,6 +9,7 @@ export default function SignInPage() {
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState('');
     const navigate = Navigate;
+    const coookie = Cookie
 
     const handleSingIn = (e) =>{
         e.preventDefault();
@@ -18,7 +19,9 @@ export default function SignInPage() {
             setUsername('');
             setPassword('');
 
-            localStorage.setItem("user", response.data.value);
+            sessionStorage.setItem("username", response.data.username);
+            sessionStorage.setItem('jwt', response.data.jwt);
+            sessionStorage.setItem('id', response.data.id)
 
             //navigate to the next page.
             navigate({to: "/user/main"});
