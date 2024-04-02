@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.response;
 
+import jakarta.servlet.http.Cookie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class AuthorizationResponse {
 
     private String message;
 
-    private String jwt;
+    private Cookie jwt;
 
     private String username;
 }
