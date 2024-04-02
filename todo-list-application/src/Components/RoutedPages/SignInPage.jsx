@@ -1,14 +1,23 @@
 import {Alert, Button, Form} from "react-bootstrap";
 import './../Styles/singUp.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {singin} from "../BackendSources.js";
-import {Navigate} from "react-router";
+import {useNavigate} from "react-router";
 
 export default function SignInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState('');
-    const navigate = Navigate;
+    const navigate = useNavigate();
+
+
+
+    useEffect(() => {
+        if(sessionStorage.getItem("isLoggedIn"))
+            navigate("/user/main");
+
+        console.log("is logged in")
+    }, []);
 
     const handleSingIn = (e) =>{
         e.preventDefault();
@@ -18,10 +27,13 @@ export default function SignInPage() {
             setUsername('');
             setPassword('');
 
-            localStorage.setItem("user", response.data.value);
+            sessionStorage.setItem("username", response.data.username);
+            sessionStorage.setItem('jwt', response.data.jwt);
+            sessionStorage.setItem('id', response.data.id);
+            sessionStorage.setItem("isLoggedIn", "true");
 
             //navigate to the next page.
-            navigate({to: "/user/main"});
+            navigate("/user/main");
 
         }).catch((error) =>
         {

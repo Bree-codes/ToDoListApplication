@@ -35,7 +35,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<String> logout(@RequestParam Long id){
+    public ResponseEntity<String> logout(@RequestParam long id){
         log.warn("login out user.");
         authenticationService.logout(id);
         return new ResponseEntity<>("Log Out Successful", HttpStatus.OK);
