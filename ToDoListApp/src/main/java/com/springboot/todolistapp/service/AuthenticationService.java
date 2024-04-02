@@ -10,7 +10,9 @@ import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -64,9 +66,7 @@ public class AuthenticationService{
         );
 
 
-        Cookie cookie = new Cookie("auth_token", "3");
-
-        cookie.setAttribute("token", jwtService.generateToken(user));
+        Cookie cookie = getCookie(user);
 
         userRepository.save(user);
 
@@ -76,8 +76,11 @@ public class AuthenticationService{
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
-
         saveToken(user, cookie.getAttribute("token"));
+
+
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
+
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
@@ -104,9 +107,7 @@ public class AuthenticationService{
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
 
-        Cookie cookie = new Cookie("auth_token", "3");
-
-        cookie.setAttribute("token", jwtService.generateToken(user));
+        Cookie cookie = getCookie(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
         authorizationResponse.setUsername(user.getUsername());
@@ -119,9 +120,28 @@ public class AuthenticationService{
         revokeAllTokenByUser(user);
         saveToken(user, cookie.getAttribute("token"));
 
-
-
         return authorizationResponse;
+    }
+
+    private Cookie getCookie(User user) {
+        Cookie cookie = new Cookie("auth_token", "3");
+
+        cookie.setAttribute("token", jwtService.generateToken(user));
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(60*1000*60);
+
+
+        String jwt = jwtService.generateToken(user);
+
+        ResponseCookie.from("auth_cookie")
+                .httpOnly(true)
+                .maxAge(1000*60*60*24)
+                .value(jwt)
+                .build();
+
+
+
+        return cookie;
     }
 
     private void saveToken(User user, String jwt) {
