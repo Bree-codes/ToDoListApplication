@@ -1,5 +1,17 @@
+import {useEffect} from "react";
+import {Auth} from "../SectionComponents/Auth.js";
+import {useNavigate} from "react-router";
 
-const MyComponent = () => {
+const MainPage = () => {
+const navigate = useNavigate();
+
+    useEffect(() => {
+            if(!Auth()){
+                navigate('/signin');
+            }
+
+    }, []);
+
     return (
         <div>
             <h1>The Main Page</h1>
@@ -7,4 +19,4 @@ const MyComponent = () => {
     );
 };
 
-export default MyComponent;
+export default MainPage;
