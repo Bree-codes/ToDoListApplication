@@ -3,6 +3,7 @@ import Home from "../RoutedPages/Home.jsx";
 import SignUpPage from "../RoutedPages/SignUpPage.jsx";
 import SignInPage from "../RoutedPages/SignInPage.jsx";
 import MainPage from "../RoutedPages/MainPage.jsx";
+import ProtectedRoutes from "./ProtectedRoutes.jsx";
 
 
 export  default function AppRoutes() {
@@ -13,7 +14,7 @@ export  default function AppRoutes() {
                     <Route index element={<Home/>}/>
                     <Route path={"/singup"} element={ <SignUpPage /> } />
                     <Route path={"/singin"} element={ <SignInPage /> } />
-                    <Route path={"/user/main"} element={ <MainPage /> }/>
+                    <ProtectedRoutes path={"/user/main"} element={ <MainPage /> }/>
                 </Route>
             </Routes>
         </BrowserRouter>

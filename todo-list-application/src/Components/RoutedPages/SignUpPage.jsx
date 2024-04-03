@@ -2,6 +2,8 @@ import '../Styles/singUp.css'
 import {Alert, Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import {singup} from "../BackendSources.js";
+import {useNavigate} from "react-router";
+
 
 export default function SignUpPage() {
     const [username, setUsername] = useState("");
@@ -10,7 +12,7 @@ export default function SignUpPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     const [alert, setAlert] = useState('');
-
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -28,12 +30,17 @@ export default function SignUpPage() {
         }
 
         singup(username, email, password).then((response) => {
-                setEmail('');
-                setUsername('');
-                setConfirmPassword('');
-                setPassword('');
+            setEmail('');
+            setUsername('');
+            setConfirmPassword('');
+            setPassword('');
 
-                localStorage.setItem("user", response.data.toString());
+            sessionStorage.setItem("username", response.data.username);
+            sessionStorage.setItem('id', response.data.id);
+            sessionStorage.setItem("isLoggedIn", "true");
+
+            //navigate to the next page.
+            navigate("/user/main");
 
             }
         ).catch((error) =>{
