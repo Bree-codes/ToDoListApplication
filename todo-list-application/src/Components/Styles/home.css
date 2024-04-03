@@ -6,3 +6,19 @@
     height: 782px;
     background-size: cover;
 }
+
+.error {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.alert{
+    font-weight: lighter;
+    font-size: 40px;
+    font-family: "Noticia Text", serif;
+    border: none;
+}

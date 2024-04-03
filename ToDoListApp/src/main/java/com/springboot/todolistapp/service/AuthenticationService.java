@@ -8,8 +8,10 @@ import com.springboot.todolistapp.repository.UserRepository;
 import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,16 +64,19 @@ public class AuthenticationService{
                 }
         );
 
+
+        Cookie cookie = getCookie(user);
+
         userRepository.save(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
-        authorizationResponse.setJwt(jwtService.generateToken(user));
+
+        authorizationResponse.setJwt(cookie);
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
-
-        saveToken(user, authorizationResponse.getJwt());
+        saveToken(user, cookie.getAttribute("token"));
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
@@ -97,20 +102,42 @@ public class AuthenticationService{
         
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
+
+        Cookie cookie = getCookie(user);
+
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
         authorizationResponse.setUsername(user.getUsername());
-        authorizationResponse.setJwt(jwtService.generateToken(user));
+        authorizationResponse.setJwt(cookie);
         authorizationResponse.setMessage("Login successful");
         authorizationResponse.setStatus(HttpStatus.OK);
         authorizationResponse.setId(user.getId());
 
 
         revokeAllTokenByUser(user);
-        saveToken(user, authorizationResponse.getJwt());
-
-
+        saveToken(user, cookie.getAttribute("token"));
 
         return authorizationResponse;
+    }
+
+    private Cookie getCookie(User user) {
+        Cookie cookie = new Cookie("auth_token", "3");
+
+        cookie.setAttribute("token", jwtService.generateToken(user));
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(60*1000*60);
+
+
+        String jwt = jwtService.generateToken(user);
+
+        ResponseCookie.from("auth_cookie")
+                .httpOnly(true)
+                .maxAge(1000*60*60*24)
+                .value(jwt)
+                .build();
+
+
+
+        return cookie;
     }
 
     private void saveToken(User user, String jwt) {
