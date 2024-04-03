@@ -28,7 +28,6 @@ export default function SignInPage() {
             setPassword('');
 
             sessionStorage.setItem("username", response.data.username);
-            sessionStorage.setItem('jwt', response.data.jwt);
             sessionStorage.setItem('id', response.data.id);
             sessionStorage.setItem("isLoggedIn", "true");
 
