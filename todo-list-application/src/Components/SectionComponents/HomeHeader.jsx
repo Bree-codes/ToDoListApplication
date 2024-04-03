@@ -17,13 +17,13 @@ export default function HomeHeader() {
                             className="my-2 my-lg-0"
                             style={{ maxHeight: '100px', justifyContent:"center"}}
                             navbarScroll>
-                            <Nav.Link href="/singup" className={"p-1 m-1 ps-4 ms-2 px-3"}
+                            <Nav.Link href="/signup" className={"p-1 m-1 ps-4 ms-2 px-3"}
                                       onMouseOver={() => setSignUpBg("lime")}
                                       onMouseLeave={() => setSignUpBg("transparent")}
                                       style={{justifyContent:"center", color:"white", background:signUpBg,
                                           borderRadius:20, zIndex:2, float:"-moz-initial", display:"flex",
                                       fontSize: 20, fontFamily: "serif"}}>SIGN UP</Nav.Link>
-                            <Nav.Link href="/singin" className={"p-1 m-1 mb-2 ps-4 ms-2 px-3"}
+                            <Nav.Link href="/signin" className={"p-1 m-1 mb-2 ps-4 ms-2 px-3"}
                                       onMouseLeave={() => setSignInBg("transparent")}
                                       onMouseOver={() => setSignInBg("lime")}
                                       style={{justifyContent:"center", color:"white",background:signInBg,

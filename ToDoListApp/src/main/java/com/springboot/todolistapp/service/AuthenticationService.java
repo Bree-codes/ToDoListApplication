@@ -10,7 +10,6 @@ import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -71,16 +70,13 @@ public class AuthenticationService{
         userRepository.save(user);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
+
         authorizationResponse.setJwt(cookie);
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
         saveToken(user, cookie.getAttribute("token"));
-
-
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
-
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
