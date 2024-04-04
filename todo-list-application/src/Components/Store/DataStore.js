@@ -3,6 +3,6 @@ import {AddActivityStore} from "./AddActivityStore.js";
 
 export  default configureStore({
     reducer:{
-        activity:AddActivityStore
+        activity:AddActivityStore.reducer
     }
 });
