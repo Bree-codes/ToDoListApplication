@@ -19,3 +19,32 @@
     border: ghostwhite;
 
 }
+
+
+.hours, .minutes {
+    margin:3px 3px;
+    padding: 3px 3px;
+    width: 35%;
+}
+
+
+.activity-name, .hours, .minutes {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+}
+
+.label{
+    color: -moz-default-background-color;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: "Noticia Text", serif;
+}
+
+
+
+
+
+
+
+
