@@ -19,14 +19,14 @@ public class ToDoListController {
 
     private final ToDoListService toDoListService;
 
-    @PostMapping("/create/{user_id}")
+    @PostMapping("/create/{userId}")
     public ResponseEntity<ModelResponse> createToDoList(
-            @PathVariable Long user_id,
+            @PathVariable Long userId,
             @RequestBody ToDoListRequest toDoListRequest) {
 
         log.info("User created a TODO List");
 
-       return toDoListService.createToDoList(toDoListRequest,user_id);
+       return toDoListService.createToDoList(toDoListRequest,userId);
     }
 
     @PutMapping("update/{activityId}")
