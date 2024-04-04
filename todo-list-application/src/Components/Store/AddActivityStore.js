@@ -12,4 +12,12 @@ export const AddActivityStore = createSlice({
         setStartTime:(state, value) => {state.startTime = value.payload},
         setEndTime:(state, value) => {state.endTime = value.payload}
     }
-})
+});
+
+export const {
+    setActivityName
+    , setStartTime
+    , setEndTime
+} = AddActivityStore.actions;
+
+export default AddActivityStore.reducer;
