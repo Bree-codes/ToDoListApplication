@@ -9,8 +9,8 @@
 }
 
 .activity {
-    margin-top: 40px;
-    margin-right: 80px;
+    margin-top: 30px;
+    margin-right: 30px;
     padding: 15px 15px;
     background: rgba(255,250,100,0.3);
     width: 60%;
@@ -34,17 +34,39 @@
     border-radius: 5px;
 }
 
-.label{
+.label, .done, .add{
     color: -moz-default-background-color;
     font-size: 20px;
     font-weight: lighter;
     font-family: "Noticia Text", serif;
 }
 
+.buttons {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    animation: rotate 180s;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(2880deg);
+    }
+}
 
 
-
-
-
-
+.add, .done {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 5px;
+    background: rgba(0, 0, 80, 0.3);
+}
 
