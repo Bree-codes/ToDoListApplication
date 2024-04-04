@@ -9,8 +9,7 @@ const navigate = useNavigate();
             if(!Auth()){
                 navigate('/signin');
             }
-
-    }, []);
+    }, [navigate]);
 
     return (
         <div>
