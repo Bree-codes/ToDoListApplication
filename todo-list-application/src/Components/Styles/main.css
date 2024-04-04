@@ -14,7 +14,8 @@
     padding: 10px 10px;
     background: white;
     width: 60%;
-    height: 15%;
+    height: max-content;
     border-radius: 20px;
     border: ghostwhite;
+
 }
