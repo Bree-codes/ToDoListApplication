@@ -1,0 +1,20 @@
+.main-container{
+    display: flex;
+    justify-content: end;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    height: 100vh;
+    background-image: url("./../images/main.jpg");
+    background-size: cover;
+}
+
+.activity {
+    margin-top: 180px;
+    margin-right: 120px;
+    padding: 10px 10px;
+    background: white;
+    width: 60%;
+    height: 15%;
+    border-radius: 20px;
+    border: ghostwhite;
+}

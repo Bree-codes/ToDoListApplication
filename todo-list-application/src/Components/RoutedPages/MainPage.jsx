@@ -1,6 +1,8 @@
 import {useEffect} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
+import './../Styles/main.css'
+import {ActivityField} from "../SectionComponents/ActivityField.jsx";
 
 const MainPage = () => {
 const navigate = useNavigate();
@@ -12,8 +14,8 @@ const navigate = useNavigate();
     }, [navigate]);
 
     return (
-        <div>
-            <h1>The Main Page</h1>
+        <div className={"main-container"}>
+            <ActivityField />
         </div>
     );
 };
