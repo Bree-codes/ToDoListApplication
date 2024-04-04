@@ -28,12 +28,11 @@ export async function singin(username, password){
 
 
 const secureAPI = axios.create({
-    baseURL:"/api/v1/todoList",
+    baseURL:"http://localhost:8080/api/v1/todoList",
     withCredentials:true
-})
+});
 
 
 export async function addActivity(toDoListRequest, userId){
-
     return await secureAPI.post("/create/"+userId, toDoListRequest);
 }

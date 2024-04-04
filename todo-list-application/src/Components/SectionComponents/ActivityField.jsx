@@ -8,7 +8,8 @@ import {useState} from "react";
 
 export const ActivityField = () => {
     const activity = useSelector(state => state.activity.activityName);
-    const activityValues = useSelector((state) => state.activity)
+    const startTime = useSelector((state) => state.activity.startTime);
+    const endTime = useSelector((state) => state.activity.endTime);
     const dispatch = useDispatch();
     const [error, setError] = useState();
 
@@ -16,7 +17,13 @@ export const ActivityField = () => {
         e.preventDefault();
         const userId = sessionStorage.getItem('id');
 
-        addActivity(activityValues, userId).then(res =>{
+        const request = {
+            activityName : activity,
+            startTime:startTime,
+            endTime:endTime
+        }
+
+        addActivity(request, userId).then(res =>{
             console.log(res.data.message)
         }).catch(error => {
             setError(error.response.message);
@@ -27,7 +34,6 @@ export const ActivityField = () => {
     const handleDone = (e) => {
         e.preventDefault();
     }
-
 
 
     return (
