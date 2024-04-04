@@ -1,0 +1,50 @@
+.main-container{
+    display: flex;
+    justify-content: end;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    height: 100vh;
+    background-image: url("./../images/main.jpg");
+    background-size: cover;
+}
+
+.activity {
+    margin-top: 40px;
+    margin-right: 80px;
+    padding: 15px 15px;
+    background: rgba(255,250,100,0.3);
+    width: 60%;
+    height: max-content;
+    border-radius: 20px;
+    border: ghostwhite;
+
+}
+
+
+.hours, .minutes {
+    margin:3px 3px;
+    padding: 3px 3px;
+    width: 35%;
+}
+
+
+.activity-name, .hours, .minutes {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+}
+
+.label{
+    color: -moz-default-background-color;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: "Noticia Text", serif;
+}
+
+
+
+
+
+
+
+
