@@ -25,3 +25,15 @@ export async function singin(username, password){
     }
     return await (openAPI.post('/login', LoginRequest));
 }
+
+
+const secureAPI = axios.create({
+    baseURL:"/api/v1/todoList",
+    withCredentials:true
+})
+
+
+export async function addActivity(toDoListRequest, userId){
+
+    return await secureAPI.post("/create/"+userId, toDoListRequest);
+}
