@@ -18,14 +18,17 @@ export const ActivityField = () =>{
         <div className={'activity'}>
             <Form>
                 <Row>
-                    <Col sm className={'m-2'}>
-                        <Form.Control placeholder="activity-name:- e.g. cleaning" />
+                    <Col sm className={'m-2 '}>
+                        <label htmlFor="activity">Activity: </label>
+                        <Form.Control id='activity' placeholder="activity-name"/>
                     </Col>
-                    <Col sm className={'m-2'}>
-                        <TimeInput />
+                    <Col sm className={'m-4 '}>
+                        <label htmlFor="start">Start: </label>
+                        <TimeInput id={'start'}/>
                     </Col>
-                    <Col sm className={'m-2'}>
-                        <TimeInput />
+                    <Col sm className={'m-4'}>
+                        <label htmlFor="end">End: </label>
+                        <TimeInput id={"end"}/>
                     </Col>
                 </Row>
             </Form>

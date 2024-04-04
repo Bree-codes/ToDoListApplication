@@ -10,9 +10,9 @@
 
 .activity {
     margin-top: 180px;
-    margin-right: 120px;
-    padding: 10px 10px;
-    background: white;
+    margin-right: 80px;
+    padding: 15px 15px;
+    background: rgba(255,250,100,0.3);
     width: 60%;
     height: max-content;
     border-radius: 20px;

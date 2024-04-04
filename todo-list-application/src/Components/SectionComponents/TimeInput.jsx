@@ -1,24 +1,22 @@
-export const TimeInput = (props) =>{
+export const TimeInput = () =>{
 
 
     return (
-        <div>
-            <label htmlFor="hour">Hour: </label>
-            <select id="hour">
+        <>
+            <select id="hour" className={'hours'}>
                 {Array.from({length: 24}, (_, i) => (
                     <option key={i} value={i}>
                         {i}
                     </option>
                 ))}
             </select>
-            <label htmlFor="minute">Minute: </label>
-            <select id="minute">
+            <select id="minute" className={'minutes'}>
                 {Array.from({length: 60}, (_, i) => (
                     <option key={i} value={i}>
                         {i}
                     </option>
                 ))}
             </select>
-        </div>
+        </>
     );
 }
