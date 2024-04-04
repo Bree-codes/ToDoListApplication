@@ -1,12 +1,25 @@
 import './../Styles/main.css'
+import {useState} from "react";
 
-// eslint-disable-next-line no-unused-vars,react/prop-types
-export const TimeInput = () =>{
+s
+// eslint-disable-next-line react/prop-types
+export const TimeInput = ({onChange}) =>{
 
+    const [hours, setHours] = useState();
+    const [minutes, setMinutes] = useState();
+
+    const handleHours = (e) => {
+
+    }
+
+    const handleMinutes = (e) => {
+
+    }
 
     return (
         <>
-            <select id="hour" className={'hours'} >
+            <select id="hour" className={'hours'}
+            onChange={e => onChange}>
                 {Array.from({length: 24}, (_, i) => (
                     <option key={i} value={i} className={"bg-dark"}>
                         {i}
