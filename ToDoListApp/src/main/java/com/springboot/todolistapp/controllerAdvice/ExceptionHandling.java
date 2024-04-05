@@ -17,11 +17,6 @@ import java.util.Date;
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandling {
-
-    {
-        log.info("in the controller advice.");
-    }
-
     private final ExceptionModel exceptionModel;
 
     @Autowired

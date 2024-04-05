@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="AddressBook" />
+        <module name="SequencePrimaryKeyGenerator" />
+        <module name="LombokAnnotations" />
+        <module name="EntityRelationship" />
+        <module name="springjpaRepository" />
+        <module name="springJPA" />
+        <module name="ToDoListApp" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AddressBook" options="-parameters" />
+      <module name="EntityRelationship" options="-parameters" />
+      <module name="LombokAnnotations" options="-parameters" />
+      <module name="SequencePrimaryKeyGenerator" options="-parameters" />
+      <module name="ToDoListApp" options="-parameters" />
+      <module name="springJPA" options="-parameters" />
+      <module name="springjpaRepository" options="-parameters" />
+    </option>
+  </component>
+</project>

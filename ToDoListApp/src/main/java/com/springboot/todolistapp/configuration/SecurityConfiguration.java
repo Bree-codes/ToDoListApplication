@@ -30,12 +30,17 @@ public class SecurityConfiguration {
     @Autowired
     public SecurityConfiguration(UserDetailsServiceImpl userDetailsServiceImpl, JwtAuthenticationFilter jwtAuthenticationFilter, CustomLogoutHandler logoutHandler) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
+
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+
         this.logoutHandler = logoutHandler;
+
     }
 
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+
         return httpSecurity.
                 csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
