@@ -70,9 +70,12 @@ public class JwtService {
     }
 
     public Boolean isValid(String jwt, UserDetails userDetails){
+
         String username = (extractUserName(jwt));
+
         boolean isTokenValid = tokenRepository.findByToken(jwt).
                 map(t -> !t.getIsLoggedOut()).orElse(false);
+
         return (username.equals(userDetails.getUsername()) && !isExpired(jwt)) && isTokenValid;
     }
 
