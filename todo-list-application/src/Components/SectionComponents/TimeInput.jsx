@@ -2,6 +2,7 @@ import './../Styles/main.css'
 import {useState} from "react";
 
 
+
 // eslint-disable-next-line react/prop-types
 export const TimeInput = ({onChange}) =>{
 
@@ -11,13 +12,13 @@ export const TimeInput = ({onChange}) =>{
     const handleHours = (e) => {
         setHours(e.target.value);
         setHours(e.target.value);
-        onChange(hours+":"+minutes+":00");
+        onChange(`${hours}:${minutes}:00`);
     }
 
     const handleMinutes = (e) => {
         setMinutes(e.target.value);
         setMinutes(e.target.value);
-        onChange(hours+":"+minutes+":00");
+        onChange(`${hours}:${minutes}:00`);
     }
 
     return (
