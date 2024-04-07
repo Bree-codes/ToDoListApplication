@@ -3,10 +3,19 @@
     justify-content: end;
     -ms-flex-align: start;
     align-items: flex-start;
-    height: 100vh;
+     min-height: 100vh;
     background-image: url("./../images/main.jpg");
     background-size: cover;
 }
+
+.input-page {
+    display: flex;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 
 .activity {
     margin-top: 30px;
