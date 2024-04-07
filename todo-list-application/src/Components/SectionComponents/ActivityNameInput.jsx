@@ -21,7 +21,7 @@ export const  ActivityNameInput = ({dispatch, disable}) => {
             <Form.Control id='activity' placeholder="activity-name" className={'activity-name'}
                           onChange={(e) =>
                           {return setActivityField(() => {return (e.target.value)})} }
-                          value={activityName} disable={disable}/>
+                          value={activityName} disabled={disable}/>
         </>
     );
 }
