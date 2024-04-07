@@ -41,7 +41,7 @@ export const ActivityField = ({handleAdding}) => {
     return (
         <div className={'activity'}>
             {error && <Alert>{error}</Alert>}
-            <Form>
+            <Form >
                 <Row>
                     <Col lg className={'m-2 '}>
                          <ActivityNameInput dispatch={dispatch} />
