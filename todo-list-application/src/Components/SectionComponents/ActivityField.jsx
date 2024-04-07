@@ -29,6 +29,8 @@ export const ActivityField = ({handleAdding}) => {
         addActivity(request, userId).then(res =>{
             res.status;
             handleAdding();
+
+            setEditable(() => true);
         }).catch(error => {
             setError(error.response.message);
         });
