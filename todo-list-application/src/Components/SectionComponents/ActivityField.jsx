@@ -1,10 +1,11 @@
 import {Alert, Col, Form, Row} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {setActivityName, setEndTime, setStartTime} from "../Store/AddActivityStore.js";
+import {setEndTime, setStartTime} from "../Store/AddActivityStore.js";
 import {TimeInput} from "./TimeInput.jsx";
 import './../Styles/main.css'
 import {addActivity} from "../BackendSources.js";
 import {useState} from "react";
+import {ActivityNameInput} from "./ActivityNameInput.jsx";
 
 // eslint-disable-next-line react/prop-types
 export const ActivityField = ({handleAdding}) => {
@@ -43,10 +44,7 @@ export const ActivityField = ({handleAdding}) => {
             <Form>
                 <Row>
                     <Col lg className={'m-2 '}>
-                        <label htmlFor="activity" className={'label'}>Activity: </label>
-                        <Form.Control id='activity' placeholder="activity-name" className={'activity-name'}
-                          onChange={e => dispatch(setActivityName(e.target.value)) }
-                        value={activity}/>
+                         <ActivityNameInput dispatch={dispatch} />
                     </Col>
                     <Col lg className={'m-3 '}>
                         <label htmlFor="start" className={'label'}>Start: </label> <br/>
