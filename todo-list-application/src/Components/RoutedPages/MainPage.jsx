@@ -21,7 +21,7 @@ const MainPage = () => {
     }, [navigate]);
 
     const handleAdding = (num) => {
-        if(num == 1) {
+        if(num === 1) {
             setSection((prev) => {
                 return [
                     ...prev,
