@@ -17,18 +17,23 @@ export const ActivityField = ({handleAdding}) => {
     const [editable, setEditable] = useState(false);
 
     const handleAdd = (e) => {
+        addField(e, 1);
+    }
+
+    function addField(e,num) {
         e.preventDefault();
         const userId = sessionStorage.getItem('id');
 
         const request = {
-            activityName : activity,
-            startTime:startTime,
-            endTime:endTime
+            activityName: activity,
+            startTime: startTime,
+            endTime: endTime
         }
 
-        addActivity(request, userId).then(res =>{
+        addActivity(request, userId).then(res => {
             res.status;
-            handleAdding();
+
+            handleAdding(num);
 
             setEditable(() => true);
         }).catch(error => {
@@ -36,8 +41,9 @@ export const ActivityField = ({handleAdding}) => {
         });
     }
 
+
     const handleDone = (e) => {
-        e.preventDefault();
+        addField(e, 0)
     }
 
 
