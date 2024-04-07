@@ -6,7 +6,8 @@ import './../Styles/main.css'
 import {addActivity} from "../BackendSources.js";
 import {useState} from "react";
 
-export const ActivityField = () => {
+// eslint-disable-next-line react/prop-types
+export const ActivityField = ({handleAdding}) => {
     const activity = useSelector(state => state.activity.activityName);
     const startTime = useSelector((state) => state.activity.startTime);
     const endTime = useSelector((state) => state.activity.endTime);
@@ -24,11 +25,11 @@ export const ActivityField = () => {
         }
 
         addActivity(request, userId).then(res =>{
-            console.log(res.data.message)
+            res.status;
+            handleAdding();
         }).catch(error => {
             setError(error.response.message);
-        })
-
+        });
     }
 
     const handleDone = (e) => {

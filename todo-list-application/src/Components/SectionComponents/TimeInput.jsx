@@ -1,5 +1,5 @@
 import './../Styles/main.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 
@@ -10,29 +10,33 @@ export const TimeInput = ({onChange}) =>{
     const [minutes, setMinutes] = useState("00");
 
     const handleHours = (e) => {
-        setHours(e.target.value);
-        setHours(e.target.value);
-        onChange(`${hours}:${minutes}:00`);
+        setHours(() => {return e.target.value});
+        return hours;
     }
 
     const handleMinutes = (e) => {
-        setMinutes(e.target.value);
-        setMinutes(e.target.value);
-        onChange(`${hours}:${minutes}:00`);
+        setMinutes(() => {return e.target.value});
+        return minutes;
     }
+
+
+    useEffect(() => {
+        onChange(`${hours}:${minutes}:00`);
+    }, [hours, minutes]);
 
     return (
         <>
             <select id="hour" className={'hours'}
-            onChange={handleHours} value={hours}>
+                    value={hours} onChange={handleHours} >
                 {Array.from({length: 24}, (_, i) => (
                     <option key={i} value={i} className={"bg-dark"}>
                         {i}
                     </option>
                 ))}
             </select>
+
             <select id="minute" className={'minutes'}
-            onChange={handleMinutes} value={minutes}>
+                    value={minutes} onChange={handleMinutes} >
                 {Array.from({length: 60}, (_, i) => (
                     <option key={i} value={i} className={"bg-dark"}>
                         {i}

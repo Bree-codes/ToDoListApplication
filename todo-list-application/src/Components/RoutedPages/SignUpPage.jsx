@@ -1,6 +1,6 @@
 import '../Styles/singUp.css'
 import {Alert, Button, Form} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {singup} from "../BackendSources.js";
 import {useNavigate} from "react-router";
 
@@ -49,10 +49,7 @@ export default function SignUpPage() {
 
     }
 
-    const handlePasswords = (e) => {
-        e.preventDefault();
-
-        setConfirmPassword(e.target.value);
+    const handlePasswords = () => {
 
         if (checkMatch()) {
             setAlert('');
@@ -62,18 +59,6 @@ export default function SignUpPage() {
         }
     }
 
-    const handlePasswordStrength = (e) => {
-        e.preventDefault();
-
-        setPassword(e.target.value);
-
-        if (checkStrength(password)) {
-            setAlert('');
-            if (checkMatch()) {
-                setAlert('');
-            }
-        }
-    }
 
     const checkMatch = () => {
         if(password.match(confirmPassword)){
@@ -94,6 +79,10 @@ export default function SignUpPage() {
             return false;
         }
     }
+
+    useEffect(() => {
+        handlePasswords();
+    }, [password, confirmPassword]);
 
 
     return (
@@ -121,14 +110,16 @@ export default function SignUpPage() {
                     <Form.Group className={"group"}>
                         <Form.Label className={"star label"} >Password</Form.Label>
                         <Form.Control type={"password"} autoComplete={"false"}
-                        onChange={handlePasswordStrength}
+                        onChange={(e) =>
+                        {return setPassword(() => {return e.target.value})}}
                         value={password}/>
                     </Form.Group>
 
                     <Form.Group className={"group"}>
                         <Form.Label className={"star label"} >Confirm Password</Form.Label>
                         <Form.Control type={"password"} autoComplete={"false"}
-                          onChange={handlePasswords}
+                          onChange={(e) =>
+                          {return setConfirmPassword(() => {return e.target.value})}}
                             value={confirmPassword}/>
                     </Form.Group>
                         <Button type={"submit"} className="button">Signup</Button>
