@@ -22,6 +22,7 @@ export const ActivityField = ({handleAdding}) => {
 
     function addField(e,num) {
         e.preventDefault();
+
         const userId = sessionStorage.getItem('id');
 
         const request = {
@@ -36,6 +37,7 @@ export const ActivityField = ({handleAdding}) => {
             handleAdding(num);
 
             setEditable(() => true);
+
         }).catch(error => {
             setError(error.response.message);
         });

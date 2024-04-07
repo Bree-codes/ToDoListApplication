@@ -32,7 +32,7 @@ const MainPage = () => {
         }else{
             setSection((pre) => {
                 return [...pre]
-            })
+            });
 
         }
     }
