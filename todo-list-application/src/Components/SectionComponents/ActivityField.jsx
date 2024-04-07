@@ -14,6 +14,7 @@ export const ActivityField = ({handleAdding}) => {
     const endTime = useSelector((state) => state.activity.endTime);
     const dispatch = useDispatch();
     const [error, setError] = useState();
+    const [editable, setEditable] = useState(false);
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -44,23 +45,23 @@ export const ActivityField = ({handleAdding}) => {
             <Form >
                 <Row>
                     <Col lg className={'m-2 '}>
-                         <ActivityNameInput dispatch={dispatch} />
+                         <ActivityNameInput dispatch={dispatch} disable={editable}/>
                     </Col>
                     <Col lg className={'m-3 '}>
                         <label htmlFor="start" className={'label'}>Start: </label> <br/>
-                        <TimeInput id={'start'}  onChange={(value) => dispatch(setStartTime(value))}/>
+                        <TimeInput id={'start'}  onChange={(value) => dispatch(setStartTime(value))} disable={editable}/>
                     </Col>
                     <Col lg className={'m-3'}>
                         <label htmlFor="end" className={'label'}>End: </label> <br/>
-                        <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} />
+                        <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
                     </Col>
                 </Row>
                 <Row className={'buttons'}>
                     <Col xs={2} className={'m-3 column'} >
-                        <button className={'add'} onClick={handleAdd}>Add</button>
+                        <button className={'add'} onClick={handleAdd} disabled={editable}>Add</button>
                     </Col>
                     <Col xs={2} className={'m-3 column'}>
-                        <button className={'done'} onChange={handleDone}>Done</button>
+                        <button className={'done'} onChange={handleDone} disabled={editable}>Done</button>
                     </Col>
                 </Row>
             </Form>

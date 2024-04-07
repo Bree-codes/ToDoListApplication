@@ -6,7 +6,7 @@ import {setActivityName} from "../Store/AddActivityStore.js";
 
 
 // eslint-disable-next-line react/prop-types
-export const  ActivityNameInput = ({dispatch}) => {
+export const  ActivityNameInput = ({dispatch, disable}) => {
 
     const [activityName, setActivityField] = useState('');
 
@@ -21,7 +21,7 @@ export const  ActivityNameInput = ({dispatch}) => {
             <Form.Control id='activity' placeholder="activity-name" className={'activity-name'}
                           onChange={(e) =>
                           {return setActivityField(() => {return (e.target.value)})} }
-                          value={activityName}/>
+                          value={activityName} disable={disable}/>
         </>
     );
 }

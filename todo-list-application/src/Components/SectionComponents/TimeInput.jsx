@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 
 // eslint-disable-next-line react/prop-types
-export const TimeInput = ({onChange}) =>{
+export const TimeInput = ({onChange, disable}) =>{
 
     const [hours, setHours] = useState("00");
     const [minutes, setMinutes] = useState("00");
@@ -27,7 +27,8 @@ export const TimeInput = ({onChange}) =>{
     return (
         <>
             <select id="hour" className={'hours'}
-                    value={hours} onChange={handleHours} >
+                    value={hours} onChange={handleHours}
+                    disabled={disable}>
                 {Array.from({length: 24}, (_, i) => (
                     <option key={i} value={i} className={"bg-dark"}>
                         {i}
@@ -36,7 +37,8 @@ export const TimeInput = ({onChange}) =>{
             </select>
 
             <select id="minute" className={'minutes'}
-                    value={minutes} onChange={handleMinutes} >
+                    value={minutes} onChange={handleMinutes}
+                    disabled={disable}>
                 {Array.from({length: 60}, (_, i) => (
                     <option key={i} value={i} className={"bg-dark"}>
                         {i}
