@@ -4,6 +4,7 @@ import {setDates} from "../Store/TodoDates.js";
 import {useDispatch, useSelector} from "react-redux";
 import {Alert} from "react-bootstrap";
 import {TodoViewCard} from "../SectionComponents/TodoViewCard.jsx";
+import './../Styles/viewPage.css'
 
 export const  ViewPage = () => {
     const userId = sessionStorage.getItem('id');

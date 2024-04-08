@@ -1,0 +1,6 @@
+
+.todo-cards {
+    background-image: url("./../images/viewPagebg.jpeg");
+    background-size: cover;
+    min-height: 100vh;
+}
