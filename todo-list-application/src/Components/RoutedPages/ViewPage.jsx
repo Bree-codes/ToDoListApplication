@@ -3,6 +3,7 @@ import {getDate} from "../BackendSources.js";
 import {setDates} from "../Store/TodoDates.js";
 import {useDispatch, useSelector} from "react-redux";
 import {Alert} from "react-bootstrap";
+import {TodoViewCard} from "../SectionComponents/TodoViewCard.jsx";
 
 export const  ViewPage = () => {
     const userId = sessionStorage.getItem('id');
@@ -27,10 +28,10 @@ export const  ViewPage = () => {
     return(
         <div>
             {error && <Alert>{error}</Alert>}
-            {todoLists.map(date =>{
+            {todoLists.map(date => {
                 return(
                     // eslint-disable-next-line react/jsx-key
-                    <h1>{date}</h1>
+                        <TodoViewCard date={date}/>
                 )
             }) }
         </div>
