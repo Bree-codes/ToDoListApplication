@@ -11,6 +11,7 @@ export const  ViewPage = () => {
     const [error, setError] = useState('');
     const todoLists = useSelector(state => state.datesList.dates);
 
+    /*Load the todo list from the server when the page loads.*/
     useEffect(() => {
 
         getDate(userId).then((res) =>{
@@ -26,14 +27,14 @@ export const  ViewPage = () => {
 
 
     return(
-        <div>
+        <div className={"todo-cards"}>
             {error && <Alert>{error}</Alert>}
-            {todoLists.map(date => {
+            {todoLists ? todoLists.map(date => {
                 return(
                     // eslint-disable-next-line react/jsx-key
                         <TodoViewCard date={date}/>
                 )
-            }) }
+            }) : <h1 className={"no-list"}>Create Your First Todo List</h1>}
         </div>
     )
 }
