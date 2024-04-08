@@ -1,0 +1,22 @@
+
+.todo-cards {
+    background: rgba(0,0,0,0.6);
+    min-height: 100vh;
+    border-radius: 20px;
+    padding: 30px 30px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    min-height: 100vh;
+    border-radius: 15px;
+    z-index: 2;
+}
+
+.date {
+    color: white;
+}

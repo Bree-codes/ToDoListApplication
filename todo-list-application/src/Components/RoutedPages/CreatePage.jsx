@@ -5,7 +5,7 @@ import './../Styles/main.css'
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
 import {Stack} from "react-bootstrap";
 
-const MainPage = () => {
+const CreatePage = () => {
     const navigate = useNavigate();
     const [section, setSection] = useState([]);
 
@@ -33,7 +33,7 @@ const MainPage = () => {
             setSection((pre) => {
                 return [...pre]
             });
-
+            navigate("/user/todo/view");
         }
     }
 
@@ -50,4 +50,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default CreatePage;
