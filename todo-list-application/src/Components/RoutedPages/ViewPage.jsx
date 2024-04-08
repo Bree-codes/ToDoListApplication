@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {getDate} from "../BackendSources.js";
 import {setDates} from "../Store/TodoDates.js";
 import {useDispatch, useSelector} from "react-redux";
-import {Alert} from "react-bootstrap";
+import {Alert, Stack} from "react-bootstrap";
 import {TodoViewCard} from "../SectionComponents/TodoViewCard.jsx";
 import './../Styles/viewPage.css'
 
@@ -30,12 +30,20 @@ export const  ViewPage = () => {
     return(
         <div className={"todo-cards"}>
             {error && <Alert>{error}</Alert>}
-            {todoLists ? todoLists.map(date => {
+            <Stack direction={"vertical"} className={'cards'} gap={3}>
+
+                {todoLists ? todoLists.map((date, index) => {
                 return(
-                    // eslint-disable-next-line react/jsx-key
-                        <TodoViewCard date={date}/>
-                )
+                    <>
+                        <TodoViewCard date={date} key={index}/>
+                        <TodoViewCard date={date} key={index}/>
+                        <TodoViewCard date={date} key={index}/>
+                        <TodoViewCard date={date} key={index}/>
+                        <TodoViewCard date={date} key={index}/>
+                    </>
+                );
             }) : <h1 className={"no-list"}>Create Your First Todo List</h1>}
+            </Stack>
         </div>
     )
 }
