@@ -55,7 +55,7 @@ public class ToDoListService {
         );
 
         //the date of creation of the todoList
-        ToDoListDate toDoListDate = dateRepository.findByDate(toDoListRequest.getDate()).orElse(null);
+        ToDoListDate toDoListDate = dateRepository.findByDateAndUser(toDoListRequest.getDate(), user).orElse(null);
 
         /*check if the existing another activity assigned for that day*/
         if( toDoListDate == null) {

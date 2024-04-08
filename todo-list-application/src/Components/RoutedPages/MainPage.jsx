@@ -20,14 +20,21 @@ const MainPage = () => {
             }
     }, [navigate]);
 
-    const handleAdding = () => {
-        setSection((prev) => {
-            return [
-                ...prev, // Spread the previous array elements
-                // eslint-disable-next-line react/jsx-key
-                <ActivityField key={section.length+1} handleAdding={handleAdding} />
-            ];
-        });
+    const handleAdding = (num) => {
+        if(num === 1) {
+            setSection((prev) => {
+                return [
+                    ...prev,
+                    // eslint-disable-next-line react/jsx-key
+                    <ActivityField key={section.length + 1} handleAdding={handleAdding}/>
+                ];
+            });
+        }else{
+            setSection((pre) => {
+                return [...pre]
+            });
+
+        }
     }
 
 

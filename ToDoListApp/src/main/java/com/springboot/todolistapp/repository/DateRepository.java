@@ -14,8 +14,10 @@ import java.util.Optional;
 @Repository
 public interface DateRepository extends JpaRepository<ToDoListDate , Long> {
 
-    Optional<ToDoListDate> findByDate(String date);
+    Optional<ToDoListDate> findByDateAndUser(String date, User user);
 
     @Query("select t.date from ToDoListDate t where t.user = :user")
     Optional<List<String>> findDatesByUser(User user);
+
+
 }
