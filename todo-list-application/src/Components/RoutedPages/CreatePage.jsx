@@ -33,8 +33,7 @@ const CreatePage = () => {
             setSection((pre) => {
                 return [...pre]
             });
-
-
+            navigate("/user/todo/view");
         }
     }
 
