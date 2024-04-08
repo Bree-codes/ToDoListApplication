@@ -4,7 +4,7 @@ import {setEndTime, setStartTime} from "../Store/AddActivityStore.js";
 import {TimeInput} from "./TimeInput.jsx";
 import './../Styles/main.css'
 import {addActivity} from "../BackendSources.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ActivityNameInput} from "./ActivityNameInput.jsx";
 
 // eslint-disable-next-line react/prop-types
@@ -13,11 +13,16 @@ export const ActivityField = ({handleAdding}) => {
     const startTime = useSelector((state) => state.activity.startTime);
     const endTime = useSelector((state) => state.activity.endTime);
     const dispatch = useDispatch();
-    const [error, setError] = useState();
+    const [error, setError] = useState('');
     const [editable, setEditable] = useState(false);
 
     const handleAdd = (e) => {
         addField(e, 1);
+    }
+
+
+    const handleDone = (e) => {
+        addField(e, 0)
     }
 
     function addField(e,num) {
@@ -43,10 +48,10 @@ export const ActivityField = ({handleAdding}) => {
         });
     }
 
+    useEffect(() => {
+        setError('');
+    }, [activity, startTime,endTime]);
 
-    const handleDone = (e) => {
-        addField(e, 0)
-    }
 
 
     return (
@@ -71,7 +76,7 @@ export const ActivityField = ({handleAdding}) => {
                         <button className={'add'} onClick={handleAdd} disabled={editable}>Add</button>
                     </Col>
                     <Col xs={2} className={'m-3 column'}>
-                        <button className={'done'} onChange={handleDone} disabled={editable}>Done</button>
+                        <button className={'done'} onClick={handleDone} disabled={editable}>Done</button>
                     </Col>
                 </Row>
             </Form>
