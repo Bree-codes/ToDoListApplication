@@ -45,6 +45,7 @@ export const ActivityField = ({handleAdding}) => {
 
         }).catch(error => {
             setError(error.response.message);
+
         });
     }
 
