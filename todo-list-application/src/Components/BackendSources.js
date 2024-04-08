@@ -36,3 +36,7 @@ const secureAPI = axios.create({
 export async function addActivity(toDoListRequest, userId){
     return await secureAPI.post("/create/"+userId, toDoListRequest);
 }
+
+export async function getDate(userId){
+    return await (secureAPI.get(`get/${userId}`));
+}
