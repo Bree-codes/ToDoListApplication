@@ -8,11 +8,12 @@ export const  ViewPage = () => {
     const userId = sessionStorage.getItem('id');
     const dispatch = useDispatch();
     const [error, setError] = useState('');
-    const todoLists = useSelector(state => {state.datesList.dates});
+    const todoLists = useSelector(state => state.datesList.dates);
 
     useEffect(() => {
-        getDate(userId).then((res) =>{
 
+        getDate(userId).then((res) =>{
+            console.log(res.status);
             dispatch(setDates(res.data));
 
         }).catch(error => {
@@ -21,7 +22,6 @@ export const  ViewPage = () => {
         });
 
     }, []);
-
 
 
     return(
