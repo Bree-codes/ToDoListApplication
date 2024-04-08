@@ -38,5 +38,5 @@ export async function addActivity(toDoListRequest, userId){
 }
 
 export async function getDate(userId){
-    return await (secureAPI.get(`get/${userId}`));
+    return await (secureAPI.get(`/get/${userId}`));
 }

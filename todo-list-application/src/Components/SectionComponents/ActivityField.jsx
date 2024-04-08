@@ -9,6 +9,7 @@ import {ActivityNameInput} from "./ActivityNameInput.jsx";
 
 // eslint-disable-next-line react/prop-types
 export const ActivityField = ({handleAdding}) => {
+
     const activity = useSelector(state => state.activity.activityName);
     const startTime = useSelector((state) => state.activity.startTime);
     const endTime = useSelector((state) => state.activity.endTime);

@@ -4,7 +4,7 @@ import {createSlice} from "@reduxjs/toolkit";
 export const TodoDates = createSlice({
     name:"userTodoDates",
     initialState: {
-        dates:['']
+        dates:[]
     },
     reducers:{
         setDates: (state, dates) =>{state.dates = dates.payload}
