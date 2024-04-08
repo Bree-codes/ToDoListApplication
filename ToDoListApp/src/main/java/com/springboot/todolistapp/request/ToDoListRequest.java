@@ -27,6 +27,6 @@ public class ToDoListRequest {
     private String date;
 
     {
-        date = LocalDate.ofYearDay(2024, 96).format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"));
+        date = LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy"));
     }
 }
