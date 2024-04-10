@@ -18,7 +18,7 @@ public class AuthorizationResponse {
 
     private String message;
 
-    private Cookie jwt;
+    private String jwt;
 
     private String username;
 }
