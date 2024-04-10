@@ -11,6 +11,7 @@ import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -23,25 +24,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationService{
 
     private final UserRepository userRepository;
+
     private final JwtService jwtService;
+
     private final PasswordEncoder passwordEncoder;
+
     private final AuthenticationManager authenticationManager;
+
     private final TokenRepository tokenRepository;
 
-    @Autowired
-    public AuthenticationService(UserRepository userRepository, JwtService jwtService,
-                                 PasswordEncoder passwordEncoder,
-                                 AuthenticationManager authenticationManager,
-                                 TokenRepository tokenRepository) {
-        this.userRepository = userRepository;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.tokenRepository = tokenRepository;
-    }
+    private final RefreshTokenService refreshTokenService;
+
 
     public ResponseEntity<AuthorizationResponse> registerUser(
             RegistrationRequest registrationRequest, HttpServletResponse response) {
@@ -131,16 +128,19 @@ public class AuthenticationService{
         return authorizationResponse;
     }
 
+    /*
+    * This method is used by both the registration and the login
+    * method to generate  refresh token http only cookie */
     private Cookie getCookie(User user) {
 
+        //setting the refresh token to the cookie
+        Cookie cookie = new Cookie("auth_token", refreshTokenService.generateRefreshToken(user));
 
-        Cookie cookie = new Cookie("auth_token", "3");
-
+        //setting cookie properties.
         cookie.setHttpOnly(true);
         cookie.setMaxAge(1000*60*60*24*14);
         cookie.setSecure(false);
         cookie.setPath("/todo/app");
-
 
         return cookie;
     }
