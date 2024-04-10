@@ -68,7 +68,10 @@ public class AuthenticationService{
         );
 
 
+        //getting the refresh token cookie
         Cookie cookie = getCookie(user);
+
+        //setting the cookie to the response
 
         userRepository.save(user);
 
@@ -97,18 +100,18 @@ public class AuthenticationService{
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-
                         loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
+                        loginRequest.getPassword())
         );
-        
+
+        /*getting the user*/
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
         //adding the http only cookie
         Cookie cookie = getCookie(user);
         response.addCookie(cookie);
 
+        /*user response*/
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
         authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setUsername(user.getUsername());
@@ -117,6 +120,7 @@ public class AuthenticationService{
         authorizationResponse.setId(user.getId());
 
 
+        /*This will ensure only one access token is available for a given user.*/
         revokeAllTokenByUser(user);
         saveToken(user, authorizationResponse.getJwt());
 
@@ -126,9 +130,8 @@ public class AuthenticationService{
     private Cookie getCookie(User user) {
         Cookie cookie = new Cookie("auth_token", "3");
 
-        cookie.setAttribute("token", jwtService.generateToken(user));
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(60*1000*60);
+        cookie.setMaxAge(1000*60*60*24*14);
 
 
         String jwt = jwtService.generateToken(user);
