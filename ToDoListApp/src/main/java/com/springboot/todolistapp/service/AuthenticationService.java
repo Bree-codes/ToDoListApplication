@@ -9,6 +9,7 @@ import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,7 +74,7 @@ public class AuthenticationService{
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
 
-        authorizationResponse.setJwt();
+
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
@@ -92,7 +93,7 @@ public class AuthenticationService{
         tokenRepository.saveAll(validTokenListByUser);
     }
 
-    public AuthorizationResponse authenticate( LoginRequest loginRequest) {
+    public AuthorizationResponse authenticate(LoginRequest loginRequest, HttpServletResponse response) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -104,19 +105,20 @@ public class AuthenticationService{
         
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
-
+        //adding the http only cookie
         Cookie cookie = getCookie(user);
+        response.addCookie(cookie);
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
+        authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setUsername(user.getUsername());
-        authorizationResponse.setJwt(cookie);
         authorizationResponse.setMessage("Login successful");
         authorizationResponse.setStatus(HttpStatus.OK);
         authorizationResponse.setId(user.getId());
 
 
         revokeAllTokenByUser(user);
-        saveToken(user, cookie.getAttribute("token"));
+        saveToken(user, authorizationResponse.getJwt());
 
         return authorizationResponse;
     }

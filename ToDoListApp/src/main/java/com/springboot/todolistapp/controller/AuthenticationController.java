@@ -33,8 +33,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthorizationResponse> login(@RequestBody LoginRequest loginRequest){
-        return ResponseEntity.ok(authenticationService.authenticate(loginRequest));
+    public ResponseEntity<AuthorizationResponse> login(
+            @RequestBody LoginRequest loginRequest, HttpServletResponse response){
+        return ResponseEntity.ok(authenticationService.authenticate(loginRequest , response));
     }
 
     @GetMapping("/logout")
