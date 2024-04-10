@@ -20,6 +20,6 @@ public class RefreshTokenTable {
     private Date expirationDate;
 
     @OneToOne()
-    @JoinColumn(name = 'user_fk')
+    @JoinColumn(name = "user_fk")
     private User user;
 }
