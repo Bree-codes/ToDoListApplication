@@ -4,6 +4,7 @@ import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import com.springboot.todolistapp.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpCookie;
@@ -25,9 +26,10 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthorizationResponse> registerUser(@RequestBody RegistrationRequest registrationRequest){
+    public ResponseEntity<AuthorizationResponse> registerUser(
+            @RequestBody RegistrationRequest registrationRequest, HttpServletResponse response){
         log.info("Registration Request");
-        return authenticationService.registerUser(registrationRequest);
+        return authenticationService.registerUser(registrationRequest, response);
     }
 
     @PostMapping("/login")

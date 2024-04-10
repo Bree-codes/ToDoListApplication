@@ -9,6 +9,7 @@ import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -41,7 +42,8 @@ public class AuthenticationService{
         this.tokenRepository = tokenRepository;
     }
 
-    public ResponseEntity<AuthorizationResponse> registerUser(RegistrationRequest registrationRequest) {
+    public ResponseEntity<AuthorizationResponse> registerUser(
+            RegistrationRequest registrationRequest, HttpServletResponse response) {
 
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
@@ -71,7 +73,7 @@ public class AuthenticationService{
 
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
 
-        authorizationResponse.setJwt(cookie);
+        authorizationResponse.setJwt();
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
