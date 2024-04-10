@@ -47,6 +47,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<ToDoListDate> toDoListDates;
 
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    private RefreshTokenTable refreshTokenTable;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

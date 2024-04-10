@@ -9,9 +9,9 @@ import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
 import jakarta.servlet.http.Cookie;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,27 +21,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationService{
 
     private final UserRepository userRepository;
+
     private final JwtService jwtService;
+
     private final PasswordEncoder passwordEncoder;
+
     private final AuthenticationManager authenticationManager;
+
     private final TokenRepository tokenRepository;
 
-    @Autowired
-    public AuthenticationService(UserRepository userRepository, JwtService jwtService,
-                                 PasswordEncoder passwordEncoder,
-                                 AuthenticationManager authenticationManager,
-                                 TokenRepository tokenRepository) {
-        this.userRepository = userRepository;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.tokenRepository = tokenRepository;
-    }
+    private final RefreshTokenService refreshTokenService;
 
-    public ResponseEntity<AuthorizationResponse> registerUser(RegistrationRequest registrationRequest) {
+
+    public ResponseEntity<AuthorizationResponse> registerUser(
+            RegistrationRequest registrationRequest, HttpServletResponse response) {
 
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
@@ -65,18 +62,25 @@ public class AuthenticationService{
         );
 
 
+        //getting the refresh token cookie
         Cookie cookie = getCookie(user);
 
+        //setting the cookie to the response
+        response.addCookie(cookie);
+
+        //adding the new user to the database
         userRepository.save(user);
 
+        //preparing the user response.
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
-
-        authorizationResponse.setJwt(cookie);
+        authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
-        saveToken(user, cookie.getAttribute("token"));
+
+        //saving the access token to the database.
+        saveToken(user, authorizationResponse.getJwt());
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
@@ -90,52 +94,50 @@ public class AuthenticationService{
         tokenRepository.saveAll(validTokenListByUser);
     }
 
-    public AuthorizationResponse authenticate( LoginRequest loginRequest) {
+    public AuthorizationResponse authenticate(LoginRequest loginRequest, HttpServletResponse response) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-
                         loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
+                        loginRequest.getPassword())
         );
-        
+
+        /*getting the user*/
         User user =  userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
 
-
+        //adding the http only cookie
         Cookie cookie = getCookie(user);
+        response.addCookie(cookie);
 
+        /*user response*/
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
+        authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setUsername(user.getUsername());
-        authorizationResponse.setJwt(cookie);
         authorizationResponse.setMessage("Login successful");
         authorizationResponse.setStatus(HttpStatus.OK);
         authorizationResponse.setId(user.getId());
 
 
+        /*This will ensure only one access token is available for a given user.*/
         revokeAllTokenByUser(user);
-        saveToken(user, cookie.getAttribute("token"));
+        saveToken(user, authorizationResponse.getJwt());
 
         return authorizationResponse;
     }
 
+    /*
+    * This method is used by both the registration and the login
+    * method to generate  refresh token http only cookie */
     private Cookie getCookie(User user) {
-        Cookie cookie = new Cookie("auth_token", "3");
 
-        cookie.setAttribute("token", jwtService.generateToken(user));
+        //setting the refresh token to the cookie
+        Cookie cookie = new Cookie("auth_token", refreshTokenService.generateRefreshToken(user));
+
+        //setting cookie properties.
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(60*1000*60);
-
-
-        String jwt = jwtService.generateToken(user);
-
-        ResponseCookie.from("auth_cookie")
-                .httpOnly(true)
-                .maxAge(1000*60*60*24)
-                .value(jwt)
-                .build();
-
-
+        cookie.setMaxAge(1000*60*60*24*14);
+        cookie.setSecure(false);
+        cookie.setPath("/todo/app");
 
         return cookie;
     }
