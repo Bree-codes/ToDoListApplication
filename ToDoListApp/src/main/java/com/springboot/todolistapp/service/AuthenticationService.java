@@ -132,20 +132,14 @@ public class AuthenticationService{
     }
 
     private Cookie getCookie(User user) {
+
+
         Cookie cookie = new Cookie("auth_token", "3");
 
         cookie.setHttpOnly(true);
         cookie.setMaxAge(1000*60*60*24*14);
-
-
-        String jwt = jwtService.generateToken(user);
-
-        ResponseCookie.from("auth_cookie")
-                .httpOnly(true)
-                .maxAge(1000*60*60*24)
-                .value(jwt)
-                .build();
-
+        cookie.setSecure(false);
+        cookie.setPath("/todo/app");
 
 
         return cookie;
