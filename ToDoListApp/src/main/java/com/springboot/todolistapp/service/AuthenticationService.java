@@ -72,17 +72,21 @@ public class AuthenticationService{
         Cookie cookie = getCookie(user);
 
         //setting the cookie to the response
+        response.addCookie(cookie);
 
+        //adding the new user to the database
         userRepository.save(user);
 
+        //preparing the user response.
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
-
-
+        authorizationResponse.setJwt(jwtService.generateToken(user));
         authorizationResponse.setId(user.getId());
         authorizationResponse.setUsername(user.getUsername());
         authorizationResponse.setMessage("Registration Successful");
         authorizationResponse.setStatus(HttpStatus.OK);
-        saveToken(user, cookie.getAttribute("token"));
+
+        //saving the access token to the database.
+        saveToken(user, authorizationResponse.getJwt());
 
         return new ResponseEntity<>(authorizationResponse,HttpStatus.OK);
     }
