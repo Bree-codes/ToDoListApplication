@@ -75,6 +75,7 @@ public class JwtService {
 
     public Boolean isValid(String jwt, UserDetails userDetails, HttpServletResponse response, HttpServletRequest request){
 
+        log.warn("checking jwt validity");
         String username = (extractUserName(jwt));
 
         boolean isTokenValid = tokenRepository.findByToken(jwt).
