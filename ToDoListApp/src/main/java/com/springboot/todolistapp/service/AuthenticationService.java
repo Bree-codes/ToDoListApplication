@@ -1,6 +1,8 @@
 package com.springboot.todolistapp.service;
 
+import com.springboot.todolistapp.CustomExceptions.ExpiredCookieException;
 import com.springboot.todolistapp.CustomExceptions.UserAlreadyExistException;
+import com.springboot.todolistapp.entity.RefreshTokenTable;
 import com.springboot.todolistapp.entity.Token;
 import com.springboot.todolistapp.entity.User;
 import com.springboot.todolistapp.repository.TokenRepository;
@@ -13,6 +15,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService{
@@ -164,8 +168,36 @@ public class AuthenticationService{
         /*check where the request contains a refresh token.*/
 
 
+            String cookie = request.getHeader("cookie");
 
-        return null;
+            if(cookie == null || !cookie.startsWith("auth_token=")){
+                throw new ExpiredCookieException("Empty Cookie Exception");
+            }
+
+            String uuid = cookie.substring(11);
+
+            if(refreshTokenService.isValid(uuid)){
+
+                //getting detail using the cookie.
+                RefreshTokenTable refreshTokenTable = refreshTokenService.findByRefreshToken(uuid).orElseThrow();
+
+                //getting the user for jwt generation
+                User user = refreshTokenTable.getUser();
+
+                //logging out expired tokens.
+                revokeAllTokenByUser(user);
+
+                //generating the new access token and passing it to the user response.
+                RefreshResponseModel refreshResponseModel = new RefreshResponseModel();
+                refreshResponseModel.setAccessToken(jwtService.generateToken(user));
+
+                //generating a new cookie
+                response.addCookie(getCookie(user));
+
+                return new ResponseEntity<>(refreshResponseModel, HttpStatus.OK);
+            }
+
+        throw new ExpiredCookieException("Invalid Cookie Exception");
     }
 }
 

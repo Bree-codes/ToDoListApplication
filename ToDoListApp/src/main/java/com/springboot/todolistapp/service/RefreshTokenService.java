@@ -54,7 +54,6 @@ public class RefreshTokenService {
         if(refreshTokenTable == null || refreshTokenTable.getExpirationDate().compareTo(new Date()) < 0){
             return false;
         }
-
         return true;
     }
 

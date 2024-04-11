@@ -78,23 +78,6 @@ public class JwtService {
 
         return (username.equals(userDetails.getUsername())  && isTokenValid && isExpired(jwt));
 
-        /*if(isExpired(jwt)){
-            String cookie = request.getHeader("cookie");
-
-            if(cookie == null || !cookie.startsWith("auth_token=")){
-                throw new ExpiredCookieException("Empty Cookie Exception");
-            }
-
-            String uuid = cookie.substring(11);
-
-            if(refreshTokenService.isValid(uuid)){
-                //here we throw a specif exception to trigger token refreshing.
-                log.info("token up for refreshing.");
-                throw new AccessTokenExpired("refresh");
-            }
-            return false;
-        }
-        return true;*/
     }
 
 }
