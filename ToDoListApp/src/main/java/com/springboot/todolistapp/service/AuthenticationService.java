@@ -8,7 +8,9 @@ import com.springboot.todolistapp.repository.UserRepository;
 import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
+import com.springboot.todolistapp.response.RefreshResponseModel;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -155,6 +157,15 @@ public class AuthenticationService{
 
         User user = userRepository.findById(id).orElseThrow();
         revokeAllTokenByUser(user);
+    }
+
+    public ResponseEntity<RefreshResponseModel> refresh(HttpServletRequest request, HttpServletResponse response) {
+
+        /*check where the request contains a refresh token.*/
+
+
+
+        return null;
     }
 }
 
