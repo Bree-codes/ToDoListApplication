@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.controllerAdvice;
 
+import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
 import com.springboot.todolistapp.CustomExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.Model.ExceptionModel;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +56,15 @@ public class ExceptionHandling {
         exceptionModel.setMessage(notFoundException.getMessage());
 
         return new ResponseEntity<>(exceptionModel,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AccessTokenExpired.class)
+    public ResponseEntity<ExceptionModel> handleAccessTokenExpired(AccessTokenExpired e){
+        exceptionModel.setStatus(HttpStatus.BAD_REQUEST);
+        exceptionModel.setMessage(e.getMessage());
+        exceptionModel.setDate(new Date());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
 
 }

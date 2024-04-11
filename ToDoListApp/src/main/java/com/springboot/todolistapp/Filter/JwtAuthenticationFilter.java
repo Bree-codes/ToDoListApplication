@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.Filter;
 
+import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
 import com.springboot.todolistapp.service.JwtService;
 import com.springboot.todolistapp.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
@@ -72,10 +73,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
 
-        } catch (Exception e) {
+        } catch (AccessTokenExpired e) {
             log.warn("security exception");
-
             handlerExceptionResolver.resolveException(request, response, null, e);
+        }catch (Exception e){
+            log.error(e+"");
         }
     }
 }
