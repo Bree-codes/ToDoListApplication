@@ -59,10 +59,6 @@ public class SecurityConfiguration {
                 .userDetailsService(userDetailsServiceImpl)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults())
-                .exceptionHandling(
-                        e -> e.accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(403))
-                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                )
                 .logout(
                         l ->l.logoutUrl("/logout")
                                 .addLogoutHandler(logoutHandler)
