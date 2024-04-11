@@ -40,13 +40,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.authenticate(loginRequest , response));
     }
 
-    @GetMapping("/logout")
-    public ResponseEntity<String> logout(@RequestParam long id){
-        log.warn("login out user.");
-        authenticationService.logout(id);
-        return new ResponseEntity<>("Log Out Successful", HttpStatus.OK);
-    }
-
     @PostMapping("/refresh")
     public ResponseEntity<RefreshResponseModel> refreshToken(HttpServletResponse response, HttpServletRequest request){
         return authenticationService.refresh(request, response);

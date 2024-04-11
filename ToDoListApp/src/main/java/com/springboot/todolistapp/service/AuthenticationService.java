@@ -157,11 +157,6 @@ public class AuthenticationService{
         tokenRepository.save(token);
     }
 
-    public void logout(Long id) {
-
-        User user = userRepository.findById(id).orElseThrow();
-        revokeAllTokenByUser(user);
-    }
 
     public ResponseEntity<RefreshResponseModel> refresh(HttpServletRequest request, HttpServletResponse response) {
 
