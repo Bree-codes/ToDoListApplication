@@ -1,6 +1,8 @@
 package com.springboot.todolistapp.service;
 
 import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
+import com.springboot.todolistapp.CustomExceptions.ExpiredCookieException;
+import com.springboot.todolistapp.CustomExceptions.InvalidToken;
 import com.springboot.todolistapp.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -79,14 +81,14 @@ public class JwtService {
                 map(t -> !t.getIsLoggedOut()).orElse(false);
 
         if(!(username.equals(userDetails.getUsername())  && isTokenValid)){
-            return false;
+            throw new InvalidToken("Bad Token Exception");
         }
 
         if(isExpired(jwt)){
             String cookie = request.getHeader("cookie");
 
             if(cookie == null || !cookie.startsWith("auth_token=")){
-                return false;
+                throw new ExpiredCookieException("Empty Cookie Exception");
             }
 
             String uuid = cookie.substring(11);
