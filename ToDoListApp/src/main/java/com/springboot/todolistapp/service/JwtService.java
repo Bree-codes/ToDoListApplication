@@ -1,5 +1,6 @@
 package com.springboot.todolistapp.service;
 
+import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
 import com.springboot.todolistapp.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -92,8 +93,8 @@ public class JwtService {
 
             if(refreshTokenService.isValid(uuid)){
                 //here we throw a specif exception to trigger token refreshing.
-                log.info("token viable for refreshing.");
-                return true;
+                log.info("token up for refreshing.");
+                throw new AccessTokenExpired("refresh");
             }
             return false;
         }
