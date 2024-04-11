@@ -134,7 +134,7 @@ public class AuthenticationService{
 
         //setting cookie properties.
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(1000*60*60*24*14);
+        cookie.setMaxAge(60*60*24*14);
         cookie.setSecure(false);
         cookie.setPath("/todo/app");
 
