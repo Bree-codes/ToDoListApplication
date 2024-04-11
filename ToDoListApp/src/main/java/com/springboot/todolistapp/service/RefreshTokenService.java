@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -47,8 +48,17 @@ public class RefreshTokenService {
 
     public boolean isValid(String uuid) {
 
+        RefreshTokenTable refreshTokenTable = findByRefreshToken(uuid).orElse(null);
 
+        /*Checking whether the passed token exist or is expired.*/
+        if(refreshTokenTable == null || refreshTokenTable.getExpirationDate().compareTo(new Date()) < 0){
+            return false;
+        }
 
-        return false;
+        return true;
+    }
+
+    public Optional<RefreshTokenTable> findByRefreshToken(String uuid){
+        return refreshTokenRepository.findByRefreshToken(uuid);
     }
 }
