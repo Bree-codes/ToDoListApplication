@@ -5,6 +5,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,15 +18,13 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
+@RequiredArgsConstructor
 public class JwtService {
 
     private final TokenRepository tokenRepository;
 
-    @Autowired
-    public JwtService( TokenRepository tokenRepository) {
+    private final RefreshTokenService refreshTokenService;
 
-        this.tokenRepository = tokenRepository;
-    }
 
     @Value("${service.secretKey}")
     private String secretKey;
@@ -65,18 +66,35 @@ public class JwtService {
     }
 
     private Boolean isExpired(String jwt){
-        return extractExpirationDate(jwt).after(new Date());
-
+        return (extractExpirationDate(jwt).compareTo(new Date(System.currentTimeMillis())) < 0);
     }
 
-    public Boolean isValid(String jwt, UserDetails userDetails){
+    public Boolean isValid(String jwt, UserDetails userDetails, HttpServletResponse response, HttpServletRequest request){
 
         String username = (extractUserName(jwt));
 
         boolean isTokenValid = tokenRepository.findByToken(jwt).
                 map(t -> !t.getIsLoggedOut()).orElse(false);
 
-        return (username.equals(userDetails.getUsername()) && !isExpired(jwt)) && isTokenValid;
+        if(!(username.equals(userDetails.getUsername())  && isTokenValid)){
+            return false;
+        }
+
+        if(isExpired(jwt)){
+            String cookie = request.getHeader("cookie");
+
+            if(cookie == null || !cookie.startsWith("auth_token=")){
+                return false;
+            }
+
+            String uuid = cookie.substring(11);
+
+            if(refreshTokenService.isValid(uuid)){
+
+            }
+            return false;
+        }
+        return true;
     }
 
 }

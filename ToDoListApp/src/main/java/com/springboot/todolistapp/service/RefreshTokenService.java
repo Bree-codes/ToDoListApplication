@@ -45,4 +45,10 @@ public class RefreshTokenService {
         refreshTokenRepository.save(refreshTokenTable);
     }
 
+    public boolean isValid(String uuid) {
+
+
+
+        return false;
+    }
 }
