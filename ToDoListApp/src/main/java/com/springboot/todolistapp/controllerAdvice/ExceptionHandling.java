@@ -63,12 +63,10 @@ public class ExceptionHandling {
     public ResponseEntity<ExceptionModel> handleAccessTokenExpired(ExpiredJwtException e){
 
         exceptionModel.setDate(new Date());
-        exceptionModel.setStatus(HttpStatus.BAD_REQUEST);
+        exceptionModel.setStatus(HttpStatus.UNAUTHORIZED);
         exceptionModel.setMessage("access_token_expired");
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
-
-
 
 }
