@@ -8,7 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class JwtService {
 
@@ -90,6 +91,8 @@ public class JwtService {
             String uuid = cookie.substring(11);
 
             if(refreshTokenService.isValid(uuid)){
+                //here we throw a specif exception to trigger token refreshing.
+                log.info("token viable for refreshing.");
                 return true;
             }
             return false;
