@@ -1,15 +1,10 @@
 package com.springboot.todolistapp.service;
 
-import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
-import com.springboot.todolistapp.CustomExceptions.ExpiredCookieException;
-import com.springboot.todolistapp.CustomExceptions.InvalidToken;
 import com.springboot.todolistapp.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,7 +68,7 @@ public class JwtService {
         return (extractExpirationDate(jwt).compareTo(new Date(System.currentTimeMillis())) < 0);
     }
 
-    public Boolean isValid(String jwt, UserDetails userDetails, HttpServletResponse response, HttpServletRequest request){
+    public Boolean isValid(String jwt, UserDetails userDetails){
 
         log.warn("checking jwt validity");
         String username = (extractUserName(jwt));
@@ -81,11 +76,9 @@ public class JwtService {
         boolean isTokenValid = tokenRepository.findByToken(jwt).
                 map(t -> !t.getIsLoggedOut()).orElse(false);
 
-        if(!(username.equals(userDetails.getUsername())  && isTokenValid)){
-            throw new InvalidToken("Bad Token Exception");
-        }
+        return (username.equals(userDetails.getUsername())  && isTokenValid && isExpired(jwt));
 
-        if(isExpired(jwt)){
+        /*if(isExpired(jwt)){
             String cookie = request.getHeader("cookie");
 
             if(cookie == null || !cookie.startsWith("auth_token=")){
@@ -101,7 +94,7 @@ public class JwtService {
             }
             return false;
         }
-        return true;
+        return true;*/
     }
 
 }
