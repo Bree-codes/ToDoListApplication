@@ -61,15 +61,14 @@ public class AuthenticationService{
                 }
         );
 
+        //adding the new user to the database
+        userRepository.save(user);
 
         //getting the refresh token cookie
         Cookie cookie = getCookie(user);
 
         //setting the cookie to the response
         response.addCookie(cookie);
-
-        //adding the new user to the database
-        userRepository.save(user);
 
         //preparing the user response.
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
