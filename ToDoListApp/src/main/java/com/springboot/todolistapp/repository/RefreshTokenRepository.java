@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface RefreshTokenRepository extends CrudRepository<RefreshTokenTable, Long> {
 
     Optional<List<RefreshTokenTable>> findByUser(User user);
+
+    Optional<RefreshTokenTable> findByRefreshToken(String refreshToken);
 }

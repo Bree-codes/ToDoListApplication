@@ -1,7 +1,9 @@
 package com.springboot.todolistapp.controllerAdvice;
 
+import com.springboot.todolistapp.CustomExceptions.AccessTokenExpired;
 import com.springboot.todolistapp.CustomExceptions.UserAlreadyExistException;
 import com.springboot.todolistapp.Model.ExceptionModel;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +58,16 @@ public class ExceptionHandling {
 
         return new ResponseEntity<>(exceptionModel,HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ExceptionModel> handleAccessTokenExpired(ExpiredJwtException e){
+
+        exceptionModel.setDate(new Date());
+        exceptionModel.setStatus(HttpStatus.UNAUTHORIZED);
+        exceptionModel.setMessage("access_token_expired");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
 
 }

@@ -28,7 +28,11 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomLogoutHandler logoutHandler;
     @Autowired
-    public SecurityConfiguration(UserDetailsServiceImpl userDetailsServiceImpl, JwtAuthenticationFilter jwtAuthenticationFilter, CustomLogoutHandler logoutHandler) {
+    public SecurityConfiguration(
+            UserDetailsServiceImpl userDetailsServiceImpl,
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            CustomLogoutHandler logoutHandler) {
+
         this.userDetailsServiceImpl = userDetailsServiceImpl;
 
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -42,12 +46,15 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/api/v1/register/**","/api/v1/login/**", "api/v1/logout/**", "/**")
+                        req -> req.requestMatchers("/api/v1/register/**",
+                                        "/api/v1/login/**",
+                                        "api/v1/logout/**",
+                                        "/api/v1/refresh/**")
                                 .permitAll()
                                 .anyRequest()
-                                .authenticated()
-                )
+                                .authenticated())
                 .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsServiceImpl)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

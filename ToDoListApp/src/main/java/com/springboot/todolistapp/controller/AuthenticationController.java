@@ -3,7 +3,9 @@ package com.springboot.todolistapp.controller;
 import com.springboot.todolistapp.request.LoginRequest;
 import com.springboot.todolistapp.request.RegistrationRequest;
 import com.springboot.todolistapp.response.AuthorizationResponse;
+import com.springboot.todolistapp.response.RefreshResponseModel;
 import com.springboot.todolistapp.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,11 @@ public class AuthenticationController {
         log.warn("login out user.");
         authenticationService.logout(id);
         return new ResponseEntity<>("Log Out Successful", HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<RefreshResponseModel> refreshToken(HttpServletResponse response, HttpServletRequest request){
+        return authenticationService.refresh(request, response);
     }
 
 }
