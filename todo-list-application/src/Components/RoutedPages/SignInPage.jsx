@@ -1,6 +1,6 @@
 import {Alert, Button, Form} from "react-bootstrap";
 import './../Styles/singUp.css'
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {singin} from "../BackendSources.js";
 import {useNavigate} from "react-router";
 
