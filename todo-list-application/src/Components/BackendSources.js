@@ -29,7 +29,10 @@ export async function singin(username, password){
 
 const secureAPI = axios.create({
     baseURL:"http://localhost:8080/api/v1/todoList",
-    withCredentials:true
+    withCredentials:true,
+    headers:{
+        Authorization:`Bearer ${sessionStorage.getItem("token")}`
+    }
 });
 
 

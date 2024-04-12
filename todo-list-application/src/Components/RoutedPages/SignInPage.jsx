@@ -30,6 +30,7 @@ export default function SignInPage() {
             sessionStorage.setItem("username", response.data.username);
             sessionStorage.setItem('id', response.data.id);
             sessionStorage.setItem("isLoggedIn", "true");
+            sessionStorage.setItem("token", response.data.jwt);
 
             //navigate to the next page.
             navigate("/user/main");
