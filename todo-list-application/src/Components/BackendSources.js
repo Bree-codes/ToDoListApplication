@@ -28,15 +28,22 @@ export async function singin(username, password){
 
 
 const secureAPI = axios.create({
-    baseURL:"http://localhost:8080/api/v1/todoList",
-    withCredentials:true
+    baseURL:"http://localhost:8080/api/v1",
+    withCredentials:true,
+    headers:{
+        Authorization:`Bearer ${sessionStorage.getItem("token")}`
+    }
 });
 
 
 export async function addActivity(toDoListRequest, userId){
-    return await secureAPI.post("/create/"+userId, toDoListRequest);
+    return await secureAPI.post("/todoList/create/"+userId, toDoListRequest);
 }
 
 export async function getDate(userId){
-    return await (secureAPI.get(`/get/${userId}`));
+    return await (secureAPI.get(`/todoList/get/${userId}`));
+}
+
+export async function logout(){
+    return await secureAPI.get("/logout");
 }
