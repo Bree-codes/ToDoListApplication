@@ -12,13 +12,13 @@ export default function SignInPage() {
 
 
 
-    useEffect(() => {
+  /*  useEffect(() => {
         if(sessionStorage.getItem("isLoggedIn"))
             navigate("/user/main");
 
         console.log("is logged in")
     }, []);
-
+*/
     const handleSingIn = (e) =>{
         e.preventDefault();
 
@@ -32,14 +32,15 @@ export default function SignInPage() {
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("token", response.data.jwt);
 
+            console.log("The Token : ", response.data.jwt);
+
             //navigate to the next page.
             navigate("/user/main");
 
         }).catch((error) =>
         {
-            if(error.status === 401){
-                setAlert("Incorrect Username or Password");
-            }
+            console.error(error)
+            setAlert("Incorrect Username or Password");
         });
     }
 
