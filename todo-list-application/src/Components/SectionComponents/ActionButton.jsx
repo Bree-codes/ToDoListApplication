@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import {Overlay, Tooltip} from "react-bootstrap";
+import {Button, Overlay, Tooltip} from "react-bootstrap";
 
 export const  ActionButton = () => {
 
@@ -8,13 +8,13 @@ export const  ActionButton = () => {
 
         return (
             <>
-                <button ref={target} onClick={() => setShow(!show)}> : </button>
-                <Overlay target={target.current} show={show} placement="right">
-                    {(props) => (
-                        <Tooltip id="overlay-example" {...props}>
-                            My Tooltip
-                        </Tooltip>
-                    )}
-                </Overlay>
+                <Button ref={target} onClick={() => setShow(!show)} className={"mx-md-0 ma-lg-3"}> : </Button>
+                    <Overlay target={target.current} show={show} placement="bottom-start">
+                            {(props) => (
+                                <Tooltip {...props}>
+                                        My Tooltip
+                                </Tooltip>
+                            )}
+                    </Overlay>
             </>);
 }
