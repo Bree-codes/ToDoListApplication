@@ -1,5 +1,6 @@
 import './../Styles/main.css'
 import {useEffect, useState} from "react";
+import {Form, InputGroup} from "react-bootstrap";
 
 
 
@@ -26,25 +27,37 @@ export const TimeInput = ({onChange, disable}) =>{
 
     return (
         <>
-            <select id="hour" className={'hours'}
-                    value={hours} onChange={handleHours}
-                    disabled={disable}>
+            <div>
+                <Form>
+                    <InputGroup>
+                        <Form.Control  value={`${hours}`} onChange={handleHours}/>
+                        <Form.Control  value={`${minutes}`} onChange={handleMinutes}/>
+                    </InputGroup>
+                </Form>
+            </div>
+            <div>
+            <select className={'time-selector'}
+                    onChange={handleHours}
+                    disabled={disable}
+                    value={hours}>
                 {Array.from({length: 24}, (_, i) => (
-                    <option key={i} value={i} className={"bg-dark"}>
+                    <option key={i} value={i}>
                         {i}
                     </option>
                 ))}
             </select>
 
-            <select id="minute" className={'minutes'}
-                    value={minutes} onChange={handleMinutes}
-                    disabled={disable}>
+            <select className={'time-selector'}
+                onChange={handleMinutes}
+                disabled={disable}
+                value={minutes}>
                 {Array.from({length: 60}, (_, i) => (
-                    <option key={i} value={i} className={"bg-dark"}>
+                    <option key={i} value={i}>
                         {i}
                     </option>
                 ))}
             </select>
+            </div>
         </>
     );
 }
