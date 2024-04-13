@@ -15,13 +15,8 @@ export const  ActivityNameInput = ({dispatch, disable}) => {
 
     }, [activityName]);
 
-    return(
-        <>
-            <label htmlFor="activity" className={'label'}>Activity: </label>
-            <Form.Control id='activity' placeholder="activity-name" className={'activity-name'}
+    return(<Form.Control id='activity' placeholder="activity-name"
                           onChange={(e) =>
                           {return setActivityField(() => {return (e.target.value)})} }
-                          value={activityName} disabled={disable}/>
-        </>
-    );
+                          value={activityName} disabled={disable}/>);
 }

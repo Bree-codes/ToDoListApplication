@@ -3,7 +3,7 @@ import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import './../Styles/main.css'
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Stack} from "react-bootstrap";
+import {Col, Row, Stack} from "react-bootstrap";
 
 const CreatePage = () => {
     const navigate = useNavigate();
@@ -39,13 +39,17 @@ const CreatePage = () => {
 
 
     return (
-        <div className={"main-container"}>
-            <Stack className={"input-page"}>
+        <div>
+            <Row>
+                <Col className={"col-md-4"}>
+
+                </Col>
+            <Stack className={"col-md-8"}>
                 {section.map((sec) => {
                     return(sec);
                 })}
             </Stack>
-
+            </Row>
         </div>
     );
 };

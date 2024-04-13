@@ -57,28 +57,18 @@ export const ActivityField = ({handleAdding}) => {
 
 
     return (
-        <div className={'activity'}>
+        <div>
             {error && <Alert>{error}</Alert>}
             <Form >
                 <Row>
-                    <Col lg className={'m-2 '}>
+                    <Col>
                          <ActivityNameInput dispatch={dispatch} disable={editable}/>
                     </Col>
-                    <Col lg className={'m-3 '}>
-                        <label htmlFor="start" className={'label'}>Start: </label> <br/>
+                    <Col>
                         <TimeInput id={'start'}  onChange={(value) => dispatch(setStartTime(value))} disable={editable}/>
                     </Col>
-                    <Col lg className={'m-3'}>
-                        <label htmlFor="end" className={'label'}>End: </label> <br/>
+                    <Col>
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
-                    </Col>
-                </Row>
-                <Row className={'buttons'}>
-                    <Col xs={2} className={'m-3 column'} >
-                        <button className={'add'} onClick={handleAdd} disabled={editable}>Add</button>
-                    </Col>
-                    <Col xs={2} className={'m-3 column'}>
-                        <button className={'done'} onClick={handleDone} disabled={editable}>Done</button>
                     </Col>
                 </Row>
             </Form>
