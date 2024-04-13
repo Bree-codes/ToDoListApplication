@@ -6,6 +6,7 @@ import './../Styles/main.css'
 import {addActivity} from "../BackendSources.js";
 import {useEffect, useState} from "react";
 import {ActivityNameInput} from "./ActivityNameInput.jsx";
+import {ActionButton} from "./ActionButton.jsx";
 
 // eslint-disable-next-line react/prop-types
 export const ActivityField = ({handleAdding}) => {
@@ -69,6 +70,9 @@ export const ActivityField = ({handleAdding}) => {
                     </Col>
                     <Col>
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
+                    </Col>
+                    <Col>
+                        <ActionButton />
                     </Col>
                 </Row>
             </Form>
