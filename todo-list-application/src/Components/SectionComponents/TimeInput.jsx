@@ -1,4 +1,3 @@
-import './../Styles/main.css'
 import {useEffect, useRef, useState} from "react";
 import {Col, Form, InputGroup, Overlay, Tooltip} from "react-bootstrap";
 

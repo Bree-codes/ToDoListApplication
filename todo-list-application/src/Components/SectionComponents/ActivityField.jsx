@@ -61,16 +61,16 @@ export const ActivityField = ({handleAdding}) => {
         <div>
             {error && <Alert>{error}</Alert>}
                 <Row>
-                    <Col>
+                    <Col className={"col-md-4"}>
                          <ActivityNameInput dispatch={dispatch} disable={editable}/>
                     </Col>
-                    <Col>
+                    <Col className={"col-md-3"}>
                         <TimeInput id={'start'}  onChange={(value) => dispatch(setStartTime(value))} disable={editable}/>
                     </Col>
-                    <Col>
+                    <Col className={"col-md-3"}>
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
                     </Col>
-                    <Col>
+                    <Col className={"col-md-2"}>
                         <ActionButton />
                     </Col>
                 </Row>
