@@ -15,7 +15,7 @@ export const  ActivityNameInput = ({dispatch, disable}) => {
 
     }, [activityName]);
 
-    return(<Form.Control id='activity' placeholder="activity-name"
+    return(<Form.Control placeholder="e.g. Go Shopping "
                           onChange={(e) =>
                           {return setActivityField(() => {return (e.target.value)})} }
                           value={activityName} disabled={disable}/>);
