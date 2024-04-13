@@ -1,6 +1,6 @@
 import './../Styles/main.css'
 import {useEffect, useRef, useState} from "react";
-import {Form, InputGroup, Overlay, Tooltip} from "react-bootstrap";
+import {Col, Form, InputGroup, Overlay, Tooltip} from "react-bootstrap";
 
 
 
@@ -32,48 +32,46 @@ export const TimeInput = ({onChange, disable}) =>{
     }, [hours, minutes]);
 
     return (
-        <>
             <div>
-                <Form>
                     <InputGroup>
-                        <Form.Control ref={hoursRef} onClick={() => setHoursInput(!hoursInput)}
-                            value={`${hours}`} onChange={handleHours} className={'hours-control'}/>
-                        <Overlay target={hoursRef.current} show={hoursInput} placement="bottom">
-                            {(props) => (
-                                <Tooltip {...props}>
-                                    <select className={'time-selector'}
-                                            onChange={handleHours}
-                                            disabled={disable}
-                                            value={hours}>
-                                        {Array.from({length: 24}, (_, i) => (
-                                            <option key={i} value={i}>
-                                                {i}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </Tooltip>)}
-                        </Overlay>
-                        <Form.Control ref={minutesRef} onClick={() => setMinutesInput(!minutesInput)}
-                            value={`${minutes}`} onChange={handleMinutes} className={'minutes-control'}/>
-                        <Overlay target={minutesRef.current} show={minutesInput} placement="bottom-end">
-                            {(props) => (
-                                <Tooltip  {...props}>
-                                    <select className={'time-selector'}
-                                            onChange={handleMinutes}
-                                            disabled={disable}
-                                            value={minutes}>
-                                        {Array.from({length: 60}, (_, i) => (
-                                            <option key={i} value={i}>
-                                                {i}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </Tooltip>)}
-                        </Overlay>
-                    </InputGroup>
-                </Form>
-            </div>
-        </>
-    );
+                        <Col className={"col-md-3"}>
+                            <Form.Control ref={hoursRef} onClick={() => setHoursInput(!hoursInput)}
+                                value={`${hours}`} onChange={handleHours} className={'hours-control'}/>
+                            <Overlay target={hoursRef.current} show={hoursInput} placement="bottom-start">
+                                {(props) => (
+                                    <Tooltip {...props}>
+                                        <select className={'time-selector'}
+                                                onChange={handleHours}
+                                                disabled={disable}
+                                                value={hours}>
+                                            {Array.from({length: 24}, (_, i) => (
+                                                <option key={i} value={i}>
+                                                    {i}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </Tooltip>)}
+                            </Overlay>
+                        </Col>
+                        <Col className={"col-md-3"}>
+                            <Form.Control ref={minutesRef} onClick={() => setMinutesInput(!minutesInput)}
+                                value={`${minutes}`} onChange={handleMinutes} className={'minutes-control'}/>
+                            <Overlay target={minutesRef.current} show={minutesInput} placement="bottom-end">
+                                {(props) => (
+                                    <Tooltip  {...props}>
+                                        <select className={'time-selector'}
+                                                onChange={handleMinutes}
+                                                disabled={disable}
+                                                value={minutes}>
+                                            {Array.from({length: 60}, (_, i) => (
+                                                <option key={i} value={i}>
+                                                    {i}
+                                                </option>))}
+                                        </select>
+                                    </Tooltip>)}
+                            </Overlay>
+                        </Col>
+                </InputGroup>
+            </div>);
 }
 

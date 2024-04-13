@@ -60,7 +60,6 @@ export const ActivityField = ({handleAdding}) => {
     return (
         <div>
             {error && <Alert>{error}</Alert>}
-            <Form >
                 <Row>
                     <Col>
                          <ActivityNameInput dispatch={dispatch} disable={editable}/>
@@ -75,7 +74,6 @@ export const ActivityField = ({handleAdding}) => {
                         <ActionButton />
                     </Col>
                 </Row>
-            </Form>
         </div>
     );
 };

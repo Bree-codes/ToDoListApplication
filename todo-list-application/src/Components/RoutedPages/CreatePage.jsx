@@ -41,10 +41,10 @@ const CreatePage = () => {
     return (
         <div>
             <Row>
-                <Col className={"col-md-4"}>
+                <Col className={"col-lg-4"}>
 
                 </Col>
-            <Stack className={"col-md-8"}>
+            <Stack className={"col-lg-8 col-md-12"}>
                 {section.map((sec) => {
                     return(sec);
                 })}

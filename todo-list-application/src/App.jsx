@@ -3,7 +3,7 @@ import AppRoutes from "./Components/Routing/AppRoutes.jsx";
 
 function App() {
     return (
-        <Container fluid>
+        <Container fluid={'xs'}>
             <AppRoutes />
         </Container>
     );
