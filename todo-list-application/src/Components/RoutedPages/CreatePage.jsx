@@ -22,6 +22,7 @@ const CreatePage = () => {
     const handleAdding = (num) => {
         if(num === 1) {
             setSection((prev) => {
+                console.log(section.length);
                 return [
                     ...prev,
                     // eslint-disable-next-line react/jsx-key
