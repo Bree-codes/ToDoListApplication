@@ -60,17 +60,17 @@ export const ActivityField = ({handleAdding}) => {
     return (
         <div>
             {error && <Alert>{error}</Alert>}
-                <Row className={"justify-content-center align-items-center"}>
-                    <Col className={"col-md-4 mx-0 px-4"}>
+                <Row>
+                    <Col className={"col-md-4"}>
                          <ActivityNameInput dispatch={dispatch} disable={editable} />
                     </Col>
-                    <Col className={"col-md-4 mx-0"}>
+                    <Col className={"col-md-3"}>
                         <TimeInput id={'start'} onChange={(value) => dispatch(setStartTime(value))} disable={editable} />
                     </Col>
-                    <Col className={"col-md-3 mx-0"}>
+                    <Col className={"col-md-3 "}>
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
                     </Col>
-                    <Col className={"col-md-1 mx-0"}>
+                    <Col className={"col-md-2 "}>
                         <ActionButton add={handleAdd} done={handleDone} />
                     </Col>
                 </Row>
