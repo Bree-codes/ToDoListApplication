@@ -1,4 +1,4 @@
-import {Alert, Col, Form, Row} from "react-bootstrap";
+import {Alert, Col, Row} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {setEndTime, setStartTime} from "../Store/AddActivityStore.js";
 import {TimeInput} from "./TimeInput.jsx";
@@ -61,17 +61,17 @@ export const ActivityField = ({handleAdding}) => {
         <div>
             {error && <Alert>{error}</Alert>}
                 <Row>
-                    <Col>
-                         <ActivityNameInput dispatch={dispatch} disable={editable}/>
+                    <Col className={"col-md-4"}>
+                         <ActivityNameInput dispatch={dispatch} disable={editable} />
                     </Col>
-                    <Col>
-                        <TimeInput id={'start'}  onChange={(value) => dispatch(setStartTime(value))} disable={editable}/>
+                    <Col className={"col-md-3"}>
+                        <TimeInput id={'start'} onChange={(value) => dispatch(setStartTime(value))} disable={editable} />
                     </Col>
-                    <Col>
+                    <Col className={"col-md-3 "}>
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
                     </Col>
-                    <Col>
-                        <ActionButton />
+                    <Col className={"col-md-2 "}>
+                        <ActionButton add={handleAdd} done={handleDone} />
                     </Col>
                 </Row>
         </div>
