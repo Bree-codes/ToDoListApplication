@@ -17,3 +17,9 @@
 }
 
 
+.input-header {
+    height: 30px;
+    margin-bottom: 30px;
+    background: darkslategrey;
+    border-radius: 5px;
+}

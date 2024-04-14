@@ -45,11 +45,11 @@ const CreatePage = () => {
                         Side bar
                 </Col>
                 <Col className={"col-12 col-md-8"}>
-                    <Row>
-                        <Col className={"col-lg-4"} >Activity</Col>
-                        <Col className={"col-lg-3"}>Start </Col>
-                        <Col className={"col-lg-3"}>Stop</Col>
-                        <Col className={"col-lg-1"}>Action</Col>
+                    <Row className={"input-header"}>
+                        <Col className={"col-lg-4"} >ACTIVITY</Col>
+                        <Col className={"col-lg-3"}>START </Col>
+                        <Col className={"col-lg-3"}>STOP</Col>
+                        <Col className={"col-lg-1"}>ACTION</Col>
                     </Row>
                 {section.map((sec) => {
                     return(sec);
