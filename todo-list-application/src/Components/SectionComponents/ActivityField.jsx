@@ -58,7 +58,7 @@ export const ActivityField = ({handleAdding}) => {
 
 
     return (
-        <div>
+        <div className={"input-field"}>
             {error && <Alert>{error}</Alert>}
                 <Row>
                     <Col className={"col-md-4"}>
