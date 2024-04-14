@@ -71,7 +71,7 @@ export const ActivityField = ({handleAdding}) => {
                         <TimeInput id={"end"} onChange={(value) => dispatch(setEndTime(value))} disable={editable}/>
                     </Col>
                     <Col className={"col-md-2 "}>
-                        <ActionButton add={handleAdd} done={handleDone} />
+                        <ActionButton add={handleAdd} done={handleDone} disable={editable}/>
                     </Col>
                 </Row>
         </div>
