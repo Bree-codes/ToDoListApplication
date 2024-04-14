@@ -39,16 +39,24 @@ const CreatePage = () => {
 
 
     return (
+        <>
             <Row className={"justify-content-center align-items-center"}>
-                <Col>
+                <Col className={"col-lg-4"}>
                         Side bar
                 </Col>
-                <Col className={"col-12 col-lg-8"}>
+                <Col className={"col-12 col-md-8"}>
+                    <Row>
+                        <Col className={"col-lg-4"} >Activity</Col>
+                        <Col className={"col-lg-3"}>Start </Col>
+                        <Col className={"col-lg-3"}>Stop</Col>
+                        <Col className={"col-lg-1"}>Action</Col>
+                    </Row>
                 {section.map((sec) => {
                     return(sec);
                 })}
                 </Col>
             </Row>
+        </>
     );
 };
 

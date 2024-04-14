@@ -30,9 +30,9 @@ export async function singin(username, password){
 const secureAPI = axios.create({
     baseURL:"http://localhost:8080/api/v1",
     withCredentials:true,
-    headers:{
+    /*headers:{
         Authorization:`Bearer ${sessionStorage.getItem("token")}`
-    }
+    }*/
 });
 
 
