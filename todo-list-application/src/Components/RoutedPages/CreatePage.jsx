@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Row} from "react-bootstrap";
+import {Col, Image, Row} from "react-bootstrap";
+import profileImage from './../images/profileImage.jpeg'
 
 const CreatePage = () => {
     const navigate = useNavigate();
@@ -41,10 +42,16 @@ const CreatePage = () => {
     return (
         <>
             <Row className={"justify-content-center align-items-center"}>
-                <Col className={"col-lg-4"}>
-                        Side bar
+                <Col className={"col-lg-4 side-bar"}>
+                        <div className={"side-bar-header"}>
+                            <div>
+                                <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
+                                <br />
+                                <span>{sessionStorage.getItem("username")}</span>
+                            </div>
+                        </div>
                 </Col>
-                <Col className={"col-12 col-md-8"}>
+                <Col className={"col-12 col-md-8 input-section"}>
                     <Row className={"input-header"}>
                         <Col className={"col-lg-4"} >ACTIVITY</Col>
                         <Col className={"col-lg-3"}>START </Col>

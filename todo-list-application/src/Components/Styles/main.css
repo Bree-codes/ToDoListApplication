@@ -21,5 +21,28 @@
     height: 30px;
     margin-bottom: 30px;
     background: darkslategrey;
-    border-radius: 5px;
+    z-index: 2;
+}
+
+.side-bar {
+    border-right: grey solid 0.5mm;
+    min-height: 100vh;
+    background: darkslategrey;
+}
+
+.input-section {
+    min-height: 100vh;
+}
+
+.side-bar-header {
+    display: flex;
+    max-height: 100px;
+    justify-content: end;
+    border-bottom: grey solid 1px;
+    padding-bottom: 20px;
+}
+.side-bar-image {
+    border-radius: 30px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
