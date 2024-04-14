@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
-import './../Styles/main.css'
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Row, Stack} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 
 const CreatePage = () => {
     const navigate = useNavigate();
@@ -39,18 +38,16 @@ const CreatePage = () => {
 
 
     return (
-        <div>
-            <Row>
-                <Col className={"col-lg-4"}>
-
+            <Row className={"justify-content-center align-items-center"}>
+                <Col>
+                        Side bar
                 </Col>
-            <Stack className={"col-lg-8 col-md-12"}>
+                <Col className={"col-12 col-lg-8"}>
                 {section.map((sec) => {
                     return(sec);
                 })}
-            </Stack>
+                </Col>
             </Row>
-        </div>
     );
 };
 
