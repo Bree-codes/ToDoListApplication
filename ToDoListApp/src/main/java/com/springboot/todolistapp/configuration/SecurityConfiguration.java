@@ -53,8 +53,7 @@ public class SecurityConfiguration {
                                         "api/v1/logout/**",
                                         "/api/v1/refresh/**")
                                 .permitAll()
-                                .anyRequest()
-                                .authenticated())
+                                .anyRequest().permitAll())
                 .sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsServiceImpl)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
