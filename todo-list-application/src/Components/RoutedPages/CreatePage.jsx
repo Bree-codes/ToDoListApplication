@@ -57,7 +57,7 @@ const CreatePage = () => {
                     </div>
                     {/* Sidebar content here */}
                 </Col>
-                <Col className="col-12 col-md-8 input-section">
+                <Col className="col-12 col-md-8 input-section content">
                     <Row className="input-header">
                         <Col className="col-lg-4">ACTIVITY</Col>
                         <Col className="col-lg-3">START</Col>
