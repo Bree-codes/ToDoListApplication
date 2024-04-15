@@ -44,37 +44,28 @@ const CreatePage = () => {
 
 
     return (
-        <div className="container">
-            <Row className={"justify-content-center align-items-center"}>
-                <Navbar expand="XXl" className="bg-body-tertiary">
-                    <Container className={""}>
-                        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link href="#home">Home</Nav.Link>
-                                <Nav.Link href="#link">Link</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-                <Col className="col-12 col-md-8 input-section content">
-                    <Row className="input-header">
-                        <Col className="col-lg-4">ACTIVITY</Col>
-                        <Col className="col-lg-3">START</Col>
-                        <Col className="col-lg-3">STOP</Col>
-                        <Col className="col-lg-1">ACTION</Col>
-                    </Row>
-                    {/* Main content here */}
-                    {/* Use enough content to enable scrolling */}
+        <Row >
+            <Col className={"col-lg-3 side-bar d-md-flex d-none"}>
+                <Col className={"side-bar-header"}>
                     <div>
-                        {section.map((sec) => {
-                            return(sec);
-                        })}
+                        <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
+                        <br />
+                        <span>{sessionStorage.getItem("username")}</span>
                     </div>
                 </Col>
-            </Row>
-        </div>
+            </Col>
+            <Col className={"col-12 col-md-9 input-section"}>
+                <Row className={"input-header"}>
+                    <Col className={"col-lg-4"} >ACTIVITY</Col>
+                    <Col className={"col-lg-3"}>START </Col>
+                    <Col className={"col-lg-3"}>STOP</Col>
+                    <Col className={"col-lg-1"}>ACTION</Col>
+                </Row>
+                {section.map((sec) => {
+                    return(sec);
+                })}
+            </Col>
+        </Row>
     );
 };
 
