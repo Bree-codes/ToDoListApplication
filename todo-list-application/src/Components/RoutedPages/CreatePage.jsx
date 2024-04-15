@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Image, Row} from "react-bootstrap";
+import {Col, Container, Image, Nav, Navbar, Row, ToggleButton} from "react-bootstrap";
 import profileImage from './../images/profileImage.jpeg'
 
 const CreatePage = () => {
@@ -46,18 +46,19 @@ const CreatePage = () => {
     return (
         <div className="container">
             <Row className={"justify-content-center align-items-center"}>
-                <Col className={`col-lg-4 side-bar ${showSidebar ? 'show' : ''}`}>
-                    <div className="side-bar-header">
-                        <div>
-                            <Image src={profileImage} height={50} width={50} className="side-bar-image"/>
-                            <br/>
-                            <span>{sessionStorage.getItem("username")}</span>
-                            </div>
-                        <span className="close-btn" onClick={toggleSidebar}>&times;</span>
-                    </div>
-                    {/* Sidebar content here */}
-                </Col>
-                <Col className="col-12 col-md-8 input-section content">
+                <Col className={"col-lg-2 "}>
+                <Navbar expand="md" className="bg-body-tertiary">
+                        <Navbar.Brand href="#home">Home</Navbar.Brand>
+                    <ToggleButton id={"side-bar"} value={"Profile"} >Todo Lists</ToggleButton>
+                        <Container id="side-bar">
+                            <Col className="me-auto">
+                                <Row href="#home">Home</Row>
+                                <Row href="#link">Link</Row>
+                            </Col>
+                        </Container>
+                </Navbar>
+            </Col>
+                <Col className="col-12 col-md-10 input-section content">
                     <Row className="input-header">
                         <Col className="col-lg-4">ACTIVITY</Col>
                         <Col className="col-lg-3">START</Col>
