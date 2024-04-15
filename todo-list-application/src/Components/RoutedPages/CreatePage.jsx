@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Container, Image, Nav, Navbar, Row, ToggleButton} from "react-bootstrap";
+import {Col, Container, Image, Nav, Navbar, Row} from "react-bootstrap";
 import profileImage from './../images/profileImage.jpeg'
 
 const CreatePage = () => {
@@ -46,19 +46,19 @@ const CreatePage = () => {
     return (
         <div className="container">
             <Row className={"justify-content-center align-items-center"}>
-                <Col className={"col-lg-2 "}>
-                <Navbar expand="md" className="bg-body-tertiary">
-                        <Navbar.Brand href="#home">Home</Navbar.Brand>
-                    <ToggleButton id={"side-bar"} value={"Profile"} >Todo Lists</ToggleButton>
-                        <Container id="side-bar">
-                            <Col className="me-auto">
-                                <Row href="#home">Home</Row>
-                                <Row href="#link">Link</Row>
-                            </Col>
-                        </Container>
+                <Navbar expand="XXl" className="bg-body-tertiary">
+                    <Container className={""}>
+                        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+                                <Nav.Link href="#home">Home</Nav.Link>
+                                <Nav.Link href="#link">Link</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
                 </Navbar>
-            </Col>
-                <Col className="col-12 col-md-10 input-section content">
+                <Col className="col-12 col-md-8 input-section content">
                     <Row className="input-header">
                         <Col className="col-lg-4">ACTIVITY</Col>
                         <Col className="col-lg-3">START</Col>
