@@ -15,13 +15,15 @@ export const SideBar = () => {
                 Launch
             </Button>
             <Offcanvas show={show} onHide={handleClose} responsive="lg">
-            <Offcanvas.Header className={"side-bar-header"} closeButton>
-                <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
-                <br />
-                <span>{sessionStorage.getItem("username")}</span>
+            <Offcanvas.Header  closeButton>
+                <div className={"side-bar-header"}>
+                    <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
+                    <br />
+                    <span>{sessionStorage.getItem("username")}</span>
+                </div>
             </Offcanvas.Header>
-            <Offcanvas.Body className={"side-bar"}>
-                <div>
+            <Offcanvas.Body >
+                <div className={"side-bar container-fluid"}>
                     <div className={"col-lg-4"}>ACTIVITY</div>
                     <div className={"col-lg-3"}>START</div>
                     <div className={"col-lg-3"}>STOP</div>
