@@ -2,8 +2,7 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Image, Row} from "react-bootstrap";
-import profileImage from './../images/profileImage.jpeg'
+import {Col, Row} from "react-bootstrap";
 import "./../Styles/main.css"
 import {SideBar} from "../SectionComponents/SideBar.jsx";
 
@@ -42,15 +41,8 @@ const CreatePage = () => {
 
     return (
         <Row className={"container-fluid"}>
-            <SideBar />
-            <Col className={"col-lg-3 side-bar d-lg-block d-none"}>
-                <Col className={"side-bar-header"}>
-                    <div>
-                        <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
-                        <br />
-                        <span>{sessionStorage.getItem("username")}</span>
-                    </div>
-                </Col>
+            <Col className={"col-lg-3"}>
+                <SideBar />
             </Col>
             <Col className={"col-12 col-lg-9 input-section"}>
                 <div></div>
