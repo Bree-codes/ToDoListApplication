@@ -2,13 +2,14 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Image, Row} from "react-bootstrap";
-import profileImage from './../images/profileImage.jpeg'
+import {Col, Row} from "react-bootstrap";
 import "./../Styles/main.css"
+import {SideBar} from "../SectionComponents/SideBar.jsx";
 
 const CreatePage = () => {
     const navigate = useNavigate();
     const [section, setSection] = useState([]);
+
 
     useEffect(() => {
             if(!Auth()){
@@ -41,16 +42,11 @@ const CreatePage = () => {
 
     return (
         <Row >
-            <Col className={"col-lg-3 side-bar d-md-flex d-none"}>
-                <Col className={"side-bar-header"}>
-                    <div>
-                        <Image src={profileImage} height={50} width={50} className={"side-bar-image"} />
-                        <br />
-                        <span>{sessionStorage.getItem("username")}</span>
-                    </div>
-                </Col>
+            <Col className={"col-lg-3 side-bar"}>
+                <SideBar />
             </Col>
             <Col className={"col-12 col-md-9 input-section"}>
+                <div></div>
                 <Row className={"input-header"}>
                     <Col className={"col-lg-4"} >ACTIVITY</Col>
                     <Col className={"col-lg-3"}>START </Col>
