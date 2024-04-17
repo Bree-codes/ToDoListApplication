@@ -24,6 +24,7 @@ export const SideBar = () => {
                 </Col>
             </Offcanvas.Header>
             <Offcanvas.Body>
+                the off canvas data.
             </Offcanvas.Body>
             </Offcanvas>
         </>
