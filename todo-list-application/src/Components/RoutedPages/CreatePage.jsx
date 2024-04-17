@@ -2,17 +2,13 @@ import {useEffect, useState} from "react";
 import {Auth} from "../SectionComponents/Auth.js";
 import {useNavigate} from "react-router";
 import {ActivityField} from "../SectionComponents/ActivityField.jsx";
-import {Col, Container, Image, Nav, Navbar, Row} from "react-bootstrap";
+import {Col, Image, Row} from "react-bootstrap";
 import profileImage from './../images/profileImage.jpeg'
+import "./../Styles/main.css"
 
 const CreatePage = () => {
     const navigate = useNavigate();
     const [section, setSection] = useState([]);
-    const [showSidebar, setShowSidebar] = useState(false);
-
-    const toggleSidebar = () => {
-        setShowSidebar(!showSidebar);
-    };
 
     useEffect(() => {
             if(!Auth()){
@@ -25,13 +21,13 @@ const CreatePage = () => {
     }, [navigate]);
 
     const handleAdding = (num) => {
+
         if(num === 1) {
             setSection((prev) => {
-                console.log(section.length);
                 return [
                     ...prev,
                     // eslint-disable-next-line react/jsx-key
-                    <ActivityField key={section.length + 1} handleAdding={handleAdding}/>
+                    <ActivityField handleAdding={handleAdding}/>
                 ];
             });
         }else{
@@ -61,8 +57,9 @@ const CreatePage = () => {
                     <Col className={"col-lg-3"}>STOP</Col>
                     <Col className={"col-lg-1"}>ACTION</Col>
                 </Row>
-                {section.map((sec) => {
-                    return(sec);
+                {section.map((sec, index) => {
+                    // eslint-disable-next-line react/jsx-key
+                    return(<div className={"fields-display"} key={index+1}>{sec}</div>);
                 })}
             </Col>
         </Row>
